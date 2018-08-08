@@ -5,4 +5,6 @@ secrets.js
 .DS_Store
 npm-debug.log
 yarn-error.log
-mobile/.expo
+mobile/.expo/packager-info.json
+mobile/.expo/settings.json
+
