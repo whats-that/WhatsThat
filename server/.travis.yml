@@ -22,6 +22,7 @@ before_script:
 # deploy:
   skip_cleanup: true # prevents travis from deleting the build
   provider: heroku
-  app: boilerplatesong # see README
+  app: whatsthat-capstone
+ # see README
   api_key:
-    secure: "jG729KAMXBAFjqWOhvLMuPl6K0nbkigM1FsGCwT2o2dxLXx/9im672gJzE4C4+Hq9W0leQzHVSD3U2LAAVDNIQZumsGj3OJfntw4R8MJSM9FoshwAOpjsulwt66SNlJgDiaL+W4qiCOqKrrlcXAFFEcMUgSWMiyt3RvoZQHx3j3c9Gyi3DDgKf+yF8P1GC2oounqLBIIqvY0RjyK0vTiMFGVyHWqNyhdzpErCw8J0QsOM6lv/e0RWeFjpgeWWHGgo4iNI/wK7Mt7/GyNneJdvF6nH/Kithf5L4gpeSJMew3zmheEfPR/eMRRykvjhHnaN9hizNEbfv5oY/E22O94Xltzn55Z6jWzFeu+lNbYujbXxCc6KVNIeT2/K5hCDW+/VfUFvtDflwFnPs571pbNc/tQM4y3l/NEsb36SeF+aqn7S9BjOajvnqpqycRQ0pa8bMbL6OyUCGgQciiiM0seDiJnarobwRZ3Bz642baMz90RhR/IY1AvEStjb1NRIUFaPHyy4HhenfyyjgL+ybE9/Z7wAMaTnXhGE97SihN4z3BcoO8ZCs+QuaXJBu1Q4uQk+zNrFQu7K4yjpM8gHkprnwJjecJTPwNSMHdtRbn99FWV4gsIYgU9od74uvPzccTNSU1T2c/QZH2qgsJe3nZ7K06gOz5O9ChCGYIlzqi/BLg=" # see README
+    secure: "" # see README
