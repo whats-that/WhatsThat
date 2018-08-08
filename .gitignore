@@ -7,4 +7,4 @@ npm-debug.log
 yarn-error.log
 mobile/.expo/packager-info.json
 mobile/.expo/settings.json
-
+mobile/.expo-tmp/*
