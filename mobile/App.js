@@ -7,11 +7,11 @@ import CameraButton from './Components/CameraButton';
 export default class App extends React.Component {
   render() {
     return (
-
-      <View style={styles.container}>
-        <Text>Welcome to WhatsThat!</Text>
-        <CameraButton />
-      </View>
+      <CameraView />
+      // <View style={styles.container}>
+      //   <Text>Welcome to WhatsThat!</Text>
+      //   <CameraButton />
+      // </View>
     );
   }
 }
