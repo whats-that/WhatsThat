@@ -2,16 +2,19 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CameraView from './Components/Camera';
 import CameraButton from './Components/CameraButton';
+import WikipediaWebView from './Components/WikipediaWebView';
 
 
 export default class App extends React.Component {
+
   render() {
     return (
-      <CameraView />
-      // <View style={styles.container}>
-      //   <Text>Welcome to WhatsThat!</Text>
-      //   <CameraButton />
-      // </View>
+
+       <View style={{height: 500}}>
+        <WikipediaWebView />
+        <CameraButton/>
+       </View>
+
     );
   }
 }
