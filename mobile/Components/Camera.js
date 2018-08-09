@@ -28,7 +28,7 @@ export default class CameraView extends React.Component {
 	}
 
 	async takePicture() {
-    console.log("inside takePicture")
+		console.log("inside takePicture");
 		if (this.camera) {
 			this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
 		}
@@ -48,7 +48,9 @@ export default class CameraView extends React.Component {
 			newPhotos: true
 		});
 	};
-
+  async usePicture () {
+    return
+  }
 	render() {
 		const { hasCameraPermission } = this.state;
 		if (hasCameraPermission === null) {
@@ -58,11 +60,27 @@ export default class CameraView extends React.Component {
 		} else {
 			if (this.state.previewImage) {
 				return (
-					<Image
-						source={{ uri: this.state.previewSource }}
-						resizeMode="cover"
-						style={{ flex: 1, width: undefined, height: undefined }}
-					/>
+					<View style={{ flex: 1 }}>
+						<Image
+							source={{ uri: this.state.previewSource }}
+							resizeMode="cover"
+							style={{ flex: 1, width: undefined, height: undefined }}
+						/>
+						<Button
+							title="back-btn"
+							onPress={() => this.setState({ previewImage: false })}
+							style={{ alignSelf: "flex-end" }}
+						>
+							Retake
+						</Button>
+						<Button
+							title="submit-btn"
+							onPress={this.usePicture}
+							style={{ alignSelf: "flex-end" }}
+						>
+							Submit
+						</Button>
+					</View>
 				);
 			} else {
 				return (
@@ -81,11 +99,10 @@ export default class CameraView extends React.Component {
 									flexDirection: "row"
 								}}
 							>
-								<TouchableOpacity
+								{/* <TouchableOpacity
 									style={{
 										flex: 0.1,
 										alignSelf: "flex-end",
-										alignItems: "center"
 									}}
 									onPress={() => {
 										this.setState({
@@ -102,14 +119,14 @@ export default class CameraView extends React.Component {
 										{" "}
 										Flip{" "}
 									</Text>
-								</TouchableOpacity>
+								</TouchableOpacity> */}
 							</View>
 							<View
 								style={{
 									flex: 1,
 									backgroundColor: "transparent",
-                  flexDirection: "row",
-                  alignSelf: "center",
+									flexDirection: "row",
+									alignSelf: "center"
 								}}
 							>
 								<TouchableOpacity

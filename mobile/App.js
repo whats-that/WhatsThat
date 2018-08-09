@@ -9,12 +9,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-
-       <View style={{height: 500}}>
-        <WikipediaWebView />
-        <CameraButton/>
-       </View>
-
+      <CameraView />
     );
   }
 }
