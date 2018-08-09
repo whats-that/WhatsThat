@@ -1,12 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CameraView from './Components/Camera';
+import CameraButton from './Components/CameraButton';
+
 
 export default class App extends React.Component {
   render() {
     return (
-      // <CameraView />
-      <Text>Here's some text. Commented out the cameraview component for commit</Text>
+
+      <View style={styles.container}>
+        <Text>Welcome to WhatsThat!</Text>
+        <CameraButton />
+      </View>
     );
   }
 }
