@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import { Text, View, TouchableOpacity, Image, Button } from "react-native";
 import { Camera, Permissions, FileSystem } from "expo";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -28,27 +28,25 @@ export default class CameraView extends React.Component {
 	}
 
 	async takePicture() {
+    console.log("inside takePicture")
 		if (this.camera) {
 			this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
 		}
 	}
 
 	onPictureSaved = async photo => {
-    console.warn("inside picturesaved");
-    let destinationUri = `photos/${Date.now()}.jpg`
-    const destinationPath = `${FileSystem.documentDirectory}${destinationUri}`;
-    destinationUri= "/" + destinationPath.substring(8);
-		console.warn("uri", photo.uri);
+		let destinationUri = `photos/${Date.now()}.jpg`;
+		const destinationPath = `${FileSystem.documentDirectory}${destinationUri}`;
+		destinationUri = "/" + destinationPath.substring(8);
 		await FileSystem.moveAsync({
 			from: photo.uri,
 			to: destinationPath
 		});
 		await this.setState({
 			previewImage: true,
-      previewSource: destinationUri,
-      newPhotos: true
+			previewSource: destinationUri,
+			newPhotos: true
 		});
-		console.warn("destPath", destinationPath);
 	};
 
 	render() {
@@ -59,8 +57,13 @@ export default class CameraView extends React.Component {
 			return <Text>No access to camera</Text>;
 		} else {
 			if (this.state.previewImage) {
-				console.warn("previewSource", this.state.previewSource);
-				return <Image source={{uri: this.state.previewSource}} resizeMode="cover" style={{flex: 1, width: undefined, height: undefined}} />;
+				return (
+					<Image
+						source={{ uri: this.state.previewSource }}
+						resizeMode="cover"
+						style={{ flex: 1, width: undefined, height: undefined }}
+					/>
+				);
 			} else {
 				return (
 					<View style={{ flex: 1 }}>
@@ -100,9 +103,18 @@ export default class CameraView extends React.Component {
 										Flip{" "}
 									</Text>
 								</TouchableOpacity>
+							</View>
+							<View
+								style={{
+									flex: 1,
+									backgroundColor: "transparent",
+                  flexDirection: "row",
+                  alignSelf: "center",
+								}}
+							>
 								<TouchableOpacity
 									onPress={this.takePicture}
-									style={{ alignSelf: "center" }}
+									style={{ alignSelf: "flex-end" }}
 								>
 									<Ionicons
 										name="ios-radio-button-on"
