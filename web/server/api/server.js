@@ -3,6 +3,11 @@ const axios = require('axios')
 const router = require('express').Router()
 module.exports = router
 
+router.get('/', (req, res, next) => {
+  console.log("testing")
+  res.json()
+})
+
 router.put('/', async (req, res, next) => {
   try {
     const response = await axios.put('https://grace-star-shopper.herokuapp.com/api/stars/7', {owned:true})
