@@ -5,7 +5,7 @@ module.exports = router
 
 router.get('/', (req, res, next) => {
   console.log("testing")
-  res.json()
+  res.json("Hello World")
 })
 
 router.put('/', async (req, res, next) => {

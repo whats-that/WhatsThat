@@ -1,9 +1,9 @@
-node_modules
-public/bundle.js
-public/bundle.js.map
-secrets.js
+web/node_modules
+web/public/bundle.js
+web/public/bundle.js.map
+web/secrets.js
 .DS_Store
 npm-debug.log
 yarn-error.log
 mobile/.expo/*
-
+mobile/node_modules
