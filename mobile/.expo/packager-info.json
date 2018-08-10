@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 62756,
-  "expoServerNgrokUrl": "https://2t-4wb.lbheart.mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.2t-4wb.lbheart.mobile.exp.direct",
-  "ngrokPid": 62780,
+  "packagerPort": 19004,
+  "packagerPid": 10976,
+  "expoServerNgrokUrl": "https://2t-4wb.johnnycheng14.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.2t-4wb.johnnycheng14.mobile.exp.direct",
+  "ngrokPid": 10860,
   "devToolsPort": 19008
 }
