@@ -60,7 +60,7 @@ export default class CameraView extends React.Component {
 		} else {
 			if (this.state.previewImage) {
 				return (
-					<View style={{ flex: 1 }}>
+					<View style={{ flex: 1, bottom: 49 }}>
 						<Image
 							source={{ uri: this.state.previewSource }}
 							resizeMode="cover"
@@ -84,7 +84,7 @@ export default class CameraView extends React.Component {
 				);
 			} else {
 				return (
-					<View style={{ flex: 1 }}>
+					<View style={{ flex: 1, bottom: 49 }}>
 						<Camera
 							style={{ flex: 1 }}
 							type={this.state.type}
