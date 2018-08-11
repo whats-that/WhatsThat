@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - node # uses most recent stable node version
-go_import_path: web/
+go_import_path: github.com/whats-that/WhatsThat/tree/master/web
 services:
   - postgresql # starts up postgres
 addons:
