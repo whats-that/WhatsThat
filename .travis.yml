@@ -1,9 +1,7 @@
 language: node_js
 node_js:
   - node # uses most recent stable node version
-cache:
-  directories:
-    - web/
+go_import_path: web/
 services:
   - postgresql # starts up postgres
 addons:
