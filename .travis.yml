@@ -17,8 +17,9 @@ install:
 before_script:
   - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-script:
-  - sudo -E env "PATH=$PATH/web"
+install:
+  - export GOPATH="${TRAVIS_BUILD_DIR}/whats-that/WhatsThat/web/"
+  - export PATH="${TRAVIS_BUILD_DIR}/whats-that/WhatsThat/web/"
 
 before_deploy:
   - npm run build-client # make the bundle
