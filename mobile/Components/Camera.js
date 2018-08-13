@@ -22,12 +22,13 @@ export default class CameraView extends React.Component {
 			newPhotos: false,
 			previewImage: false,
 			previewSource: "",
-<<<<<<< HEAD
+			photoBlob: {},
 			isShowingPicture: true,
 			cameraPhotos: [],
 		};
 		this.takePicture = this.takePicture.bind(this);
 		this.onPictureSaved = this.onPictureSaved.bind(this);
+		this.usePicture = this.usePicture.bind(this);
 		this.getPhotos = this.getPhotos.bind(this);
 		this.selectedPictureURI = this.selectedPictureURI.bind(this)
 	}
@@ -51,13 +52,6 @@ export default class CameraView extends React.Component {
 			  previewImage: false,
 			  isShowingPicture: true
 		  })
-=======
-			photoBlob: {}
-		};
-		this.takePicture = this.takePicture.bind(this);
-		this.onPictureSaved = this.onPictureSaved.bind(this);
-		this.usePicture = this.usePicture.bind(this);
->>>>>>> master
 	}
 
 	async componentWillMount() {
