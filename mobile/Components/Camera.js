@@ -65,10 +65,12 @@ export default class CameraView extends React.Component {
 	}
 
 	async takePicture() {
-		console.log("inside takePicture");
+		console.log("inside takePicture");  //For whatever reason, this is the only thing that prevents the onPress from requiring a double click
 		if (this.camera) {
-			this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
+			const blob = await this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved, base64: true, quality: 0.1 });
+			// console.log(blob)
 		}
+
 	}
 
 	onPictureSaved = async photo => {
@@ -89,7 +91,10 @@ export default class CameraView extends React.Component {
 	async usePicture() {
 		// console.warn(this.state)
 		// const imageFile = new File(this.state.previewSource)
-		await axios.post('http://whatsthat-capstone.herokuapp.com/api/server', this.state.photoBlob)
+		console.log(this.state.photoBlob)
+		// console.log(this.state.photoBlob.base64.length)
+		// await axios.post('http://172.16.21.118:8080/api/server', this.state.photoBlob)
+		await axios.post('http://172.16.21.118:8080/api/server/getDataFromGoogleAPI', this.state.photoBlob)
 		return;
 	}
 	render() {
@@ -151,7 +156,7 @@ export default class CameraView extends React.Component {
 									onPress={this.usePicture}
 									style={{ alignSelf: "flex-end", paddingRight: 10}}
 								>
-									<Ionicons name="ios-arrow-dropright-circle" size={60} color="#00ffcc" />
+									<Ionicons name="ios-arrow-dropright-circle" size={60} color="#33cccc" />
 								</TouchableOpacity>
 							</View>
 						</ImageBackground>
