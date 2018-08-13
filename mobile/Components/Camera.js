@@ -67,8 +67,10 @@ export default class CameraView extends React.Component {
 	async takePicture() {
 		console.log("inside takePicture");
 		if (this.camera) {
-			this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
+			const blob = await this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved, base64: true, quality: 0.1 });
+			// console.log(blob)
 		}
+
 	}
 
 	onPictureSaved = async photo => {
@@ -89,7 +91,10 @@ export default class CameraView extends React.Component {
 	async usePicture() {
 		// console.warn(this.state)
 		// const imageFile = new File(this.state.previewSource)
-		await axios.post('http://whatsthat-capstone.herokuapp.com/api/server', this.state.photoBlob)
+		console.log(this.state.photoBlob)
+		// console.log(this.state.photoBlob.base64.length)
+		// await axios.post('http://172.16.21.118:8080/api/server', this.state.photoBlob)
+		await axios.post('http://172.16.21.118:8080/api/server/getDataFromGoogleAPI', this.state.photoBlob)
 		return;
 	}
 	render() {
