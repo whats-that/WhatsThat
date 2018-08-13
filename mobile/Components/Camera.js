@@ -11,7 +11,8 @@ export default class CameraView extends React.Component {
 			type: Camera.Constants.Type.back,
 			newPhotos: false,
 			previewImage: false,
-			previewSource: ""
+			previewSource: "",
+			photoBlob: {}
 		};
 		this.takePicture = this.takePicture.bind(this);
 		this.onPictureSaved = this.onPictureSaved.bind(this);
@@ -45,7 +46,8 @@ export default class CameraView extends React.Component {
 		await this.setState({
 			previewImage: true,
 			previewSource: destinationUri,
-			newPhotos: true
+			newPhotos: true,
+			photoBlob: photo
 		});
 	};
   async usePicture () {

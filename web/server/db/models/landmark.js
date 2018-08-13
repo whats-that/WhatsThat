@@ -10,10 +10,14 @@ const LandMark = db.define('landmark', {
     validations: {
       max: 5,
       min: 1
-    }
+    },
+    default: 5 
   },
   comment: {
     type: Sequelize.TEXT
+  },
+  image: {
+    type: Sequelize.STRING
   }
 })
 

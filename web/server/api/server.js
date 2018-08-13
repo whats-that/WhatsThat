@@ -1,18 +1,32 @@
 const axios = require('axios')
 const router = require('express').Router()
-module.exports = router
+const { LandMark } = require('../db')
 const googleResponse = require('./sampleResponse');
 
-router.get('/', (req, res, next) => {
-  console.log("testing")
-  res.json("Hello world!")
+module.exports = router
+
+router.get('/', async (req, res, next) => { //will access list of past landmarks
+  try {
+    const landmarks = await LandMark.findAll({
+      where: {
+        userId: req.user.id
+      }
+    }) 
+    res.json(landmarks)
+  } catch (error) {
+    next(error)
+  }
 })
 
-router.put('/', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => { //will access single past landmark
   try {
-    const response = await axios.put('https://grace-star-shopper.herokuapp.com/api/stars/7', {owned:true})
-    console.log(response.data)
-    res.json(response.data)
+    const landmark = await LandMark.findOne({
+      where: {
+        userId: req.user.id,
+        id: req.params.id
+      }
+    })
+    res.json(landmark)
   } catch (error) {
     next(error)
   }
