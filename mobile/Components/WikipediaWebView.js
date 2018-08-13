@@ -1,15 +1,26 @@
 import React from 'react';
-import {WebView} from 'react-native';
+import {WebView, ActivityIndicator, View, Text} from 'react-native';
 
 export default class WikipediaWebView extends React.Component {
     constructor(){
         super();
 
-        this.suffix = 'flat iron building';
+        this.state = {
+            searchString: 'empire state building',
+            acitivityIndicatorIsVisible: true,
+        };
 
         this.capitalizeFirstLetterOfWord = this.capitalizeFirstLetterOfWord.bind(this);
 
         this.appropriateStringForWikipediaSearch = this.appropriateStringForWikipediaSearch.bind(this);
+
+        this.hideActivityIndicator = this.hideActivityIndicator.bind(this);
+    }
+
+    hideActivityIndicator(){
+        this.setState({
+            acitivityIndicatorIsVisible: false,
+        });
     }
 
     capitalizeFirstLetterOfWord(arrOfWords){
@@ -26,7 +37,7 @@ export default class WikipediaWebView extends React.Component {
     }
 
     appropriateStringForWikipediaSearch(){
-        const wordsWithoutSpacesArray = this.suffix.split(' ');
+        const wordsWithoutSpacesArray = this.state.searchString.split(' ');
 
         const capitalizedFirstLetterForWordsArray = this.capitalizeFirstLetterOfWord(wordsWithoutSpacesArray);
 
@@ -34,10 +45,16 @@ export default class WikipediaWebView extends React.Component {
     }
 
     render(){
-
         return (
-            <WebView
-            source={{uri: 'https://www.wikipedia.org/wiki/' + this.appropriateStringForWikipediaSearch()}} />
+            <View style={{flex: 1}}>
+                <WebView
+                    onLoad={this.hideActivityIndicator}
+                    source={{ uri: 'https://www.wikipedia.org/wiki/' + this.appropriateStringForWikipediaSearch() }} />
+            {this.state.acitivityIndicatorIsVisible ?
+
+            <ActivityIndicator style={{width: '100%', height: '100%'}}/> : null}
+            </View>
+
         );
     }
 }
