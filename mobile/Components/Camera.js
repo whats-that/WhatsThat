@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { Camera, Permissions, FileSystem } from "expo";
 import { Ionicons } from "@expo/vector-icons";
+import axios from 'axios'
 
 export default class CameraView extends React.Component {
 	constructor() {
@@ -21,6 +22,7 @@ export default class CameraView extends React.Component {
 			newPhotos: false,
 			previewImage: false,
 			previewSource: "",
+<<<<<<< HEAD
 			isShowingPicture: true,
 			cameraPhotos: [],
 		};
@@ -49,6 +51,13 @@ export default class CameraView extends React.Component {
 			  previewImage: false,
 			  isShowingPicture: true
 		  })
+=======
+			photoBlob: {}
+		};
+		this.takePicture = this.takePicture.bind(this);
+		this.onPictureSaved = this.onPictureSaved.bind(this);
+		this.usePicture = this.usePicture.bind(this);
+>>>>>>> master
 	}
 
 	async componentWillMount() {
@@ -79,10 +88,14 @@ export default class CameraView extends React.Component {
 		await this.setState({
 			previewImage: true,
 			previewSource: destinationUri,
-			newPhotos: true
+			newPhotos: true,
+			photoBlob: photo
 		});
 	};
 	async usePicture() {
+		// console.warn(this.state)
+		// const imageFile = new File(this.state.previewSource)
+		await axios.post('http://whatsthat-capstone.herokuapp.com/api/server', this.state.photoBlob)
 		return;
 	}
 	render() {

@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19004,
-  "packagerPort": 19005,
-  "packagerPid": 3730,
-  "expoServerNgrokUrl": "https://v2-mjy.jlangsam89.mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.v2-mjy.jlangsam89.mobile.exp.direct",
-  "ngrokPid": 733,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 44893,
+  "expoServerNgrokUrl": "https://f7-j32.lbheart.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.f7-j32.lbheart.mobile.exp.direct",
+  "ngrokPid": 44908,
   "devToolsPort": 19002
 }
