@@ -22,9 +22,13 @@ export default class CameraView extends React.Component {
 			newPhotos: false,
 			previewImage: false,
 			previewSource: "",
+<<<<<<< HEAD
+			photoBlob: {}
+=======
 			photoBlob: {},
 			isShowingPicture: true,
 			cameraPhotos: [],
+>>>>>>> master
 		};
 		this.takePicture = this.takePicture.bind(this);
 		this.onPictureSaved = this.onPictureSaved.bind(this);
