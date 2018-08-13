@@ -4,7 +4,10 @@ import {
 	View,
 	TouchableOpacity,
 	ImageBackground,
-	Button
+	Button,
+	CameraRoll,
+	ScrollView,
+	Image
 } from "react-native";
 import { Camera, Permissions, FileSystem } from "expo";
 import { Ionicons } from "@expo/vector-icons";
@@ -19,11 +22,36 @@ export default class CameraView extends React.Component {
 			newPhotos: false,
 			previewImage: false,
 			previewSource: "",
-			photoBlob: {}
+			photoBlob: {},
+			isShowingPicture: true,
+			cameraPhotos: [],
 		};
 		this.takePicture = this.takePicture.bind(this);
 		this.onPictureSaved = this.onPictureSaved.bind(this);
 		this.usePicture = this.usePicture.bind(this);
+		this.getPhotos = this.getPhotos.bind(this);
+		this.selectedPictureURI = this.selectedPictureURI.bind(this)
+	}
+
+	selectedPictureURI(pictureURI){
+		this.setState({
+			previewSource: pictureURI,
+			previewImage: true,
+			isShowingPicture: false,
+		})
+	}
+
+	async getPhotos(){
+		  const photos = await CameraRoll.getPhotos({
+			  first: 100,
+			  assetType: 'All'
+		  });
+
+		  await this.setState({
+			  cameraPhotos: photos.edges,
+			  previewImage: false,
+			  isShowingPicture: true
+		  })
 	}
 
 	async componentWillMount() {
@@ -65,7 +93,28 @@ export default class CameraView extends React.Component {
 		return;
 	}
 	render() {
-		const { hasCameraPermission } = this.state;
+		const { hasCameraPermission, isShowingPicture } = this.state;
+		 if (this.state.cameraPhotos.length > 0 && isShowingPicture){
+			return (
+			<ScrollView>
+			{
+					this.state.cameraPhotos.map((photo, i) => {
+						return (
+							<TouchableOpacity onPress={() => this.selectedPictureURI(photo.node.image.uri)
+							} key={i}>
+							<Image
+								source={{uri: photo.node.image.uri}}
+								key={i}
+								style={{width: '100%', height: 300}}
+								resizeMode="cover" key={i}/>
+							</TouchableOpacity>
+						)
+					})
+				}
+				</ScrollView>
+			)
+		}
+
 		if (hasCameraPermission === null) {
 			return <View />;
 		} else if (hasCameraPermission === false) {
@@ -86,12 +135,12 @@ export default class CameraView extends React.Component {
 									bottom: 0,
 									left: 0,
 									backgroundColor: "transparent",
-									// opacity: 0.3,
                   flex:  1,
                   flexDirection: "row",
                   justifyContent: "space-between"
 								}}
 							>
+
 								<TouchableOpacity
 									onPress={() => this.setState({ previewImage: false })}
 									style={{ alignSelf: "flex-end", paddingLeft: 10 }}
@@ -107,20 +156,6 @@ export default class CameraView extends React.Component {
 							</View>
 						</ImageBackground>
 					</View>
-					// {/* <Button
-					// 	title="back-btn"
-					// 	onPress={() => this.setState({ previewImage: false })}
-					// 	style={{ alignSelf: "flex-end" }}
-					// >
-					// 	Retake
-					// </Button>
-					// <Button
-					// 	title="submit-btn"
-					// 	onPress={this.usePicture}
-					// 	style={{ alignSelf: "flex-end" }}
-					// >
-					// 	Submit
-					// </Button> */}
 				);
 			} else {
 				return (
@@ -139,40 +174,22 @@ export default class CameraView extends React.Component {
 									flexDirection: "row"
 								}}
 							>
-								{/* <TouchableOpacity
-									style={{
-										flex: 0.1,
-										alignSelf: "flex-end",
-									}}
-									onPress={() => {
-										this.setState({
-											type:
-												this.state.type === Camera.Constants.Type.back
-													? Camera.Constants.Type.front
-													: Camera.Constants.Type.back
-										});
-									}}
-								>
-									<Text
-										style={{ fontSize: 18, marginBottom: 10, color: "white" }}
-									>
-										{" "}
-										Flip{" "}
-									</Text>
-								</TouchableOpacity> */}
 							</View>
 							<View
 								style={{
 									flex: 1,
 									backgroundColor: "transparent",
 									flexDirection: "row",
-									alignSelf: "center"
+									alignSelf: "center",
 								}}
 							>
 								<TouchableOpacity
 									onPress={this.takePicture}
 									style={{ alignSelf: "flex-end" }}
 								>
+								<TouchableOpacity onPress={this.getPhotos} style={{position: 'absolute', bottom: 10, left: 140}}>
+							<Image source={require('../assets/landscapeIcon.png')} style={{width: 70, height: 70, tintColor: 'white'}}/>
+							</TouchableOpacity>
 									<Ionicons
 										name="ios-radio-button-on"
 										size={70}
