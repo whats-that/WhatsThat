@@ -50,7 +50,7 @@ const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
   // body parsing middleware
-  app.use(express.json())
+  app.use(express.json({limit:'100mb'}))
   app.use(express.urlencoded({extended: true}))
 
   // compression middleware : reduce page loads time to the order of 15-20% (GZIP compression)
