@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import { Camera, Permissions, FileSystem } from "expo";
 import { Ionicons } from "@expo/vector-icons";
-// import CameraRollPicker from 'react-native-camera-roll-picker';
 
 export default class CameraView extends React.Component {
 	constructor() {
