@@ -308,7 +308,7 @@ var Navbar = function Navbar(_ref) {
   }, "Home"), _react.default.createElement("a", {
     href: "#",
     onClick: handleClick
-  }, "Logout")) : _react.default.createElement("div", null, _react.default.createElement("div", null, "hello"), _react.default.createElement(_reactRouterDom.Link, {
+  }, "Logout")) : _react.default.createElement("div", null, _react.default.createElement("div", null, "hel"), _react.default.createElement(_reactRouterDom.Link, {
     to: "/login"
   }, "Login"), _react.default.createElement(_reactRouterDom.Link, {
     to: "/signup"
