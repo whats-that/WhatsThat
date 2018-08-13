@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const db = requrire('../db')
+const db = require('../db')
 
 const LandMark = db.define('landmark', {
   name: {
@@ -21,4 +21,4 @@ const LandMark = db.define('landmark', {
   }
 })
 
-module.exports(LandMark)
+module.exports = LandMark
