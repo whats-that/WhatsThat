@@ -34,7 +34,7 @@ export default class CameraView extends React.Component {
 	}
 
 	async takePicture() {
-		console.log("inside takePicture");
+		console.log("inside takePicture");  //For whatever reason, this is the only thing that prevents the onPress from requiring a double click
 		if (this.camera) {
 			this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
 		}

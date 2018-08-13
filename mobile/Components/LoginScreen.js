@@ -16,13 +16,13 @@ export default class LoginScreen extends React.Component {
 		super();
 		this.state = {
 			username: "",
-			password: ""
+			password: "",
+			createAccount: false
 		};
 	}
 
-	handleInput() {
-		return;
-	}
+	handleSubmit() {}
+
 	render() {
 		return (
 			<ImageBackground
@@ -44,24 +44,61 @@ export default class LoginScreen extends React.Component {
 					<Text style={{ fontSize: 32, color: "white", textAlign: "center" }}>
 						Welcome to What's That!
 					</Text>
-					<Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-						Please sign in to continue
-					</Text>
-					{/* <View
+					{this.state.createAccount ? (
+						<Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
+							Please create an account to continue
+						</Text>
+					) : (
+						<Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
+							Please sign in to continue
+						</Text>
+					)}
+					<View
 						style={{
 							justifyContent: "center",
-							marginTop: 50,
-							padding: 20,
-							backgroundColor: "#ffffff"
+							marginTop: 30,
+							backgroundColor: "transparent"
 						}}
-					> */}
+					>
 						<TextInput
-              style={{ height: 40, width: 300 }}
-              placeholder="Username"
+							style={{ height: 40, width: 300, textAlign: "center" }}
+							placeholder="Username"
 							onChangeText={text => this.setState({ username: text })}
 							value={this.state.username}
 						/>
-					{/* </View> */}
+						<TextInput
+							style={{ height: 40, width: 300, textAlign: "center" }}
+							placeholder="Password"
+							secureTextEntry={true}
+							onChangeText={text => this.setState({ password: text })}
+							value={this.state.password}
+						/>
+						{!this.state.createAccount ? (
+							<Button
+								onPress={() => this.setState({ createAccount: true })}
+								style={{}}
+								title="Create Account"
+							/>
+						) : (
+							<View />
+						)}
+						{this.state.password && this.state.username ? (
+							<Button onPress={this.handleSubmit} style={{}} title="Submit" />
+						) : (
+							<View />
+						)}
+						{this.state.createAccount ? (
+							<TextInput
+								style={{ height: 40, width: 300, textAlign: "center" }}
+								placeholder="Confirm Password"
+								secureTextEntry={true}
+								onChangeText={text => this.setState({ password: text })}
+								value={this.state.password}
+							/>
+						) : (
+							<View />
+						)}
+					</View>
 				</View>
 			</ImageBackground>
 		);
