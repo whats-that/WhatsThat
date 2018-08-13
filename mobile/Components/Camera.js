@@ -65,7 +65,7 @@ export default class CameraView extends React.Component {
 	}
 
 	async takePicture() {
-		console.log("inside takePicture");
+		console.log("inside takePicture");  //For whatever reason, this is the only thing that prevents the onPress from requiring a double click
 		if (this.camera) {
 			const blob = await this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved, base64: true, quality: 0.1 });
 			// console.log(blob)
@@ -156,7 +156,7 @@ export default class CameraView extends React.Component {
 									onPress={this.usePicture}
 									style={{ alignSelf: "flex-end", paddingRight: 10}}
 								>
-									<Ionicons name="ios-arrow-dropright-circle" size={60} color="#00ffcc" />
+									<Ionicons name="ios-arrow-dropright-circle" size={60} color="#33cccc" />
 								</TouchableOpacity>
 							</View>
 						</ImageBackground>
