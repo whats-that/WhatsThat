@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19007,
-  "packagerPort": 19008,
-  "packagerPid": 16558,
-  "expoServerNgrokUrl": "https://av-qw4.mkrepp.mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.av-qw4.mkrepp.mobile.exp.direct",
-  "ngrokPid": 6581,
+  "expoServerPort": 19004,
+  "packagerPort": 19005,
+  "packagerPid": 3730,
+  "expoServerNgrokUrl": "https://v2-mjy.jlangsam89.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.v2-mjy.jlangsam89.mobile.exp.direct",
+  "ngrokPid": 733,
   "devToolsPort": 19002
 }
