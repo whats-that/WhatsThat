@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19003,
-  "packagerPort": 19004,
-  "packagerPid": 5859,
-  "expoServerNgrokUrl": "https://hz-rm2.jlangsam89.mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.hz-rm2.jlangsam89.mobile.exp.direct",
-  "ngrokPid": 5893
+  "expoServerPort": 19009,
+  "packagerPort": 19010,
+  "packagerPid": 22020,
+  "expoServerNgrokUrl": "https://8f-jsx.mkrepp.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.8f-jsx.mkrepp.mobile.exp.direct",
+  "ngrokPid": 22041
 }
