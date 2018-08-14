@@ -98,6 +98,11 @@ export default class LoginScreen extends React.Component {
 						) : (
 							<View />
 						)}
+						<Button
+							onPress={this.handleSubmit}
+							style={{}}
+							title="Submit"
+						/>
 					</View>
 				</View>
 			</ImageBackground>
