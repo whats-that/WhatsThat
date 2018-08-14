@@ -1,6 +1,6 @@
 const axios = require('axios')
 const router = require('express').Router()
-module.exports = router
+
 const googleResponse = require('./sampleResponse')
 // Imports the Google Cloud client library.
 const Storage = require('@google-cloud/storage')
@@ -9,7 +9,8 @@ const vision = require('@google-cloud/vision')
 // const filename = '/Users/song/Workspace/images/bryant1.jpg'
 const bucketName = 'whatsthat'
 
-router.get('/getDataFromGoogleAPI', (req, res, next) => {
+router.post('/getDataFromGoogleAPI', (req, res, next) => {
+  console.log("hit post route")
   const client = new vision.ImageAnnotatorClient()
   const blob = req.body.base64
 
@@ -20,22 +21,34 @@ router.get('/getDataFromGoogleAPI', (req, res, next) => {
     console.log(err) // writes out file without error, but it's not a valid image
   })
 
-  const filename = "/Users/song/Workspace/FullstackAcademy/senior/whats-that/web/out.png"
+  console.log("made it past require")
+  const filename = "/Users/mattkrepp/CodeStuff/capstone/WhatsThat/web/out.png"
+  // const requestObj = 
   client
     // .labelDetection(`gs://${bucketName}/demo-image.jpg`)
-    .labelDetection(filename)
-    .then(results => {
-      const labels = results[0].labelAnnotations
 
-      console.log('Labels:')
-      labels.forEach(label => console.log(label.description))
+    .webDetection(filename)
+    .then(results => {
+      console.log(results)
+      res.json(results)
+      res.send("oops didn't hit")
     })
+
+    // .labelDetection(filename)
+    // .then(results => {
+    //   const labels = results[0].labelAnnotations
+
+    //   console.log('Results:', results)
+    //   // labels.forEach(label => console.log(label.description))
+    // })
     .catch(err => {
       console.error('ERROR:', err)
     })
-  res.send('get data from google API ...  ')
+  // res.send('get data from google API ...  ')
 })
 
+
+module.exports = router
 // router.get('/savePicToBucket', (req, res, next) => {
 //   // Creates a client
 //   const storage = new Storage()
