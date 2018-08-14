@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, TabBarIOS } from "react-native";
 import CameraView from "./Components/Camera";
-import CameraButton from "./Components/CameraButton";
 import LoginScreen from "./Components/LoginScreen";
 import WikipediaWebView from "./Components/WikipediaWebView";
 
