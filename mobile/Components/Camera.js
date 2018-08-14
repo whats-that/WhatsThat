@@ -7,7 +7,8 @@ import {
 	Button,
 	CameraRoll,
 	ScrollView,
-	Image
+	Image,
+	ActivityIndicator
 } from "react-native";
 import { Camera, Permissions, FileSystem } from "expo";
 import { Ionicons } from "@expo/vector-icons";
@@ -25,12 +26,14 @@ export default class CameraView extends React.Component {
 			photoBlob: {},
 			isShowingPicture: true,
 			cameraPhotos: [],
+			cameraPhotosAreLoading: false,
 		};
 		this.takePicture = this.takePicture.bind(this);
 		this.onPictureSaved = this.onPictureSaved.bind(this);
 		this.usePicture = this.usePicture.bind(this);
 		this.getPhotos = this.getPhotos.bind(this);
-		this.selectedPictureURI = this.selectedPictureURI.bind(this)
+		this.selectedPictureURI = this.selectedPictureURI.bind(this);
+		this.closeCameraRoll = this.closeCameraRoll.bind(this);
 	}
 
 	selectedPictureURI(pictureURI){
@@ -41,17 +44,37 @@ export default class CameraView extends React.Component {
 		})
 	}
 
-	async getPhotos(){
-		  const photos = await CameraRoll.getPhotos({
-			  first: 100,
-			  assetType: 'All'
-		  });
+	closeCameraRoll(){
+		this.setState({
+			isShowingPicture: false
+		});
+	}
 
-		  await this.setState({
-			  cameraPhotos: photos.edges,
-			  previewImage: false,
-			  isShowingPicture: true
-		  })
+	async getPhotos(){
+
+		this.setState({
+			cameraPhotosAreLoading: true
+		});
+
+		try {
+			const photos = await CameraRoll.getPhotos({
+				first: 100,
+				assetType: 'All'
+			});
+
+			await this.setState({
+				cameraPhotos: photos.edges,
+				previewImage: false,
+				isShowingPicture: true,
+				cameraPhotosAreLoading: false,
+			})
+		} catch(err){
+			console.warn('error loading images', err)
+			this.setState({
+				cameraPhotosAreLoading: false,
+			})
+		}
+
 	}
 
 	async componentWillMount() {
@@ -65,11 +88,9 @@ export default class CameraView extends React.Component {
 	}
 
 	async takePicture() {
-		console.log("inside takePicture");  //For whatever reason, this is the only thing that prevents the onPress from requiring a double click
 		if (this.camera) {
-			const blob = await this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved, base64: true, quality: 0.1 });
+			this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
 		}
-
 	}
 
 	onPictureSaved = async photo => {
@@ -88,37 +109,47 @@ export default class CameraView extends React.Component {
 		});
 	};
 	async usePicture() {
-		// console.warn(this.state)
-		// const imageFile = new File(this.state.previewSource)
-		console.log(this.state.photoBlob)
-		// console.log(this.state.photoBlob.base64.length)
-		// await axios.post('http://172.16.21.118:8080/api/server', this.state.photoBlob)
-		await axios.post('http://172.16.21.118:8080/api/server/getDataFromGoogleAPI', this.state.photoBlob)
+		await axios.post('http://whatsthat-capstone.herokuapp.com/api/server', this.state.photoBlob)
 		return;
 	}
 	render() {
 		const { hasCameraPermission, isShowingPicture } = this.state;
-		 if (this.state.cameraPhotos.length > 0 && isShowingPicture){
-			return (
-			<ScrollView>
-			{
-					this.state.cameraPhotos.map((photo, i) => {
-						return (
-							<TouchableOpacity onPress={() => this.selectedPictureURI(photo.node.image.uri)
-							} key={i}>
-							<Image
-								source={{uri: photo.node.image.uri}}
-								key={i}
-								style={{width: '100%', height: 300}}
-								resizeMode="cover" key={i}/>
-							</TouchableOpacity>
-						)
-					})
-				}
-				</ScrollView>
-			)
+		if (this.state.cameraPhotosAreLoading) {
+			return <ActivityIndicator style={{width: '100%', height: '100%'}}/>
 		}
 
+		 if (this.state.cameraPhotos.length > 0 && isShowingPicture){
+					return (
+						<View>
+					<ScrollView >
+					{
+							this.state.cameraPhotos.map((photo, i) => {
+								return (
+									<TouchableOpacity onPress={() => this.selectedPictureURI(photo.node.image.uri)
+									} key={i}>
+									<Image
+										source={{uri: photo.node.image.uri}}
+										key={i}
+										style={{width: '100%', height: 300}}
+										resizeMode="cover" key={i}/>
+									</TouchableOpacity>
+								)
+							})
+						}
+
+						</ScrollView>
+						<TouchableOpacity
+									onPress={this.closeCameraRoll}
+									style={{ position: 'absolute',paddingLeft: 10, bottom: 50}}
+								>
+									<Ionicons
+									name="md-close-circle"
+									size={60}
+									color="#cc0000" />
+								</TouchableOpacity>
+						</View>
+						)
+				}
 		if (hasCameraPermission === null) {
 			return <View />;
 		} else if (hasCameraPermission === false) {
@@ -155,7 +186,7 @@ export default class CameraView extends React.Component {
 									onPress={this.usePicture}
 									style={{ alignSelf: "flex-end", paddingRight: 10}}
 								>
-									<Ionicons name="ios-arrow-dropright-circle" size={60} color="#33cccc" />
+									<Ionicons name="ios-arrow-dropright-circle" size={60} color="#00ffcc" />
 								</TouchableOpacity>
 							</View>
 						</ImageBackground>
