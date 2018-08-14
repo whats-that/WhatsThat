@@ -9,8 +9,44 @@ const vision = require('@google-cloud/vision')
 // const filename = '/Users/song/Workspace/images/bryant1.jpg'
 const bucketName = 'whatsthat'
 
+router.get('/test', (req, res, next) => {
+  res.send("testingggg .... ")
+})
+
 router.get('/getDataFromGoogleAPI', (req, res, next) => {
-  res.send("testing .... ")
+  const client = new vision.ImageAnnotatorClient()
+  const blob = req.body.base64
+
+  var img = `data:image/png;base64,${blob}`
+  let base64Data = img.replace(/^data:image\/png;base64,/, '')
+  let binaryData = new Buffer.from(base64Data, 'base64').toString('binary')
+  require('fs').writeFile('out.png', binaryData, 'binary', function(err) {
+    console.log(err) // writes out file without error, but it's not a valid image
+  })
+
+  console.log("made it past require")
+  const filename = "/app/demo-image.jpg"
+  // const requestObj =
+  client
+    // .labelDetection(`gs://${bucketName}/demo-image.jpg`)
+
+    .webDetection(filename)
+    .then(results => {
+      console.log(results)
+      res.json(results)
+      res.send("oops didn't hit")
+    })
+
+    // .labelDetection(filename)
+    // .then(results => {
+    //   const labels = results[0].labelAnnotations
+
+    //   console.log('Results:', results)
+    //   // labels.forEach(label => console.log(label.description))
+    // })
+    .catch(err => {
+      console.error('ERROR:', err)
+    })
 })
 
 router.post('/getDataFromGoogleAPI', (req, res, next) => {
