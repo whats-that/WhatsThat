@@ -9,6 +9,10 @@ const vision = require('@google-cloud/vision')
 // const filename = '/Users/song/Workspace/images/bryant1.jpg'
 const bucketName = 'whatsthat'
 
+router.get('/getDataFromGoogleAPI', (req, res, next) => {
+  res.send("testing .... ")
+})
+
 router.post('/getDataFromGoogleAPI', (req, res, next) => {
   console.log("hit google api post route")
   const client = new vision.ImageAnnotatorClient()
@@ -30,7 +34,7 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
     .webDetection(filename)
     .then(results => {
       console.log(results)
-      res.json(results)
+      res.json("hello")
       res.send("oops didn't hit")
     })
 
