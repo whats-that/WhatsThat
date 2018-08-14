@@ -7,4 +7,4 @@ const Image = db.define('image', {
   }
 })
 
-module.exports(Image)
+module.exports = Image
