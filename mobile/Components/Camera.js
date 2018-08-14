@@ -109,7 +109,7 @@ export default class CameraView extends React.Component {
 		});
 	};
 	async usePicture() {
-		await axios.post('http://whatsthat-capstone.herokuapp.com/api/server', this.state.photoBlob)
+		await axios.post('http://whatsthat-capstone.herokuapp.com/api/server/getDataFromGoogleAPI', this.state.photoBlob)
 		return;
 	}
 	render() {

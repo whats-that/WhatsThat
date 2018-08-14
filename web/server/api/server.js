@@ -10,7 +10,7 @@ const vision = require('@google-cloud/vision')
 const bucketName = 'whatsthat'
 
 router.post('/getDataFromGoogleAPI', (req, res, next) => {
-  console.log("hit post route")
+  console.log("hit google api post route")
   const client = new vision.ImageAnnotatorClient()
   const blob = req.body.base64
 
@@ -23,7 +23,7 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
 
   console.log("made it past require")
   const filename = "/Users/mattkrepp/CodeStuff/capstone/WhatsThat/web/out.png"
-  // const requestObj = 
+  // const requestObj =
   client
     // .labelDetection(`gs://${bucketName}/demo-image.jpg`)
 
