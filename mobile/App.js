@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TabBarIOS } from "react-native";
+import { TabBarIOS } from "react-native";
 import CameraView from "./Components/Camera";
 import LoginScreen from "./Components/LoginScreen";
 import WikipediaWebView from "./Components/WikipediaWebView";
@@ -9,23 +9,35 @@ export default class App extends React.Component {
 		super();
 
 		this.state = {
-			selectedTab: "Home"
+			selectedTab: "Login"
 		};
 	}
 
 	render() {
 		return (
-      // <LoginScreen />
 			<TabBarIOS selectedTab={this.state.selectedTab}>
-				<TabBarIOS.Item
-					selected={this.state.selectedTab === "Home"}
+			<TabBarIOS.Item
+					selected={this.state.selectedTab === "Login"}
 					onPress={() => {
 						this.setState({
-							selectedTab: "Home"
+							selectedTab: "Login"
 						});
 					}}
-					title="Home"
+					title="Login"
 					icon={require("./assets/homeIcon.png")}
+				>
+					<LoginScreen />
+				</TabBarIOS.Item>
+
+				<TabBarIOS.Item
+					selected={this.state.selectedTab === "Camera"}
+					onPress={() => {
+						this.setState({
+							selectedTab: "Camera"
+						});
+					}}
+					title="Camera"
+					icon={require("./assets/cameraIcon.png")}
 				>
 					<CameraView />
 				</TabBarIOS.Item>
@@ -46,12 +58,3 @@ export default class App extends React.Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center"
-	}
-});
