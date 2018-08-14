@@ -1,8 +1,8 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19003,
+  "packagerPort": 19004,
+  "packagerPid": 5859,
+  "expoServerNgrokUrl": "https://hz-rm2.jlangsam89.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.hz-rm2.jlangsam89.mobile.exp.direct",
+  "ngrokPid": 5893
 }
