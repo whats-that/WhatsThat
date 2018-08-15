@@ -16,7 +16,6 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
 
   const filename = path.join(__dirname, '../../out.png')
   client
-
     .webDetection(filename)
     .then(results => {
       console.log(results)

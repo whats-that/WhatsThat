@@ -3,6 +3,7 @@ import { TabBarIOS } from "react-native";
 import CameraView from "./Components/Camera";
 import LoginScreen from "./Components/LoginScreen";
 import WikipediaWebView from "./Components/WikipediaWebView";
+import SingleLandMark from './Components/SingleLandMark'
 
 export default class App extends React.Component {
 	constructor() {
