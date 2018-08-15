@@ -89,7 +89,7 @@ export default class CameraView extends React.Component {
 
 	async takePicture() {
 		if (this.camera) {
-			this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
+			this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved, base64: true, quality: 0.1 });
 		}
 	}
 
@@ -109,7 +109,14 @@ export default class CameraView extends React.Component {
 		});
 	};
 	async usePicture() {
-		await axios.post('http://whatsthat-capstone.herokuapp.com/api/server', this.state.photoBlob)
+		// await axios.post('http://whatsthat-capstone.herokuapp.com/api/server', this.state.photoBlob)
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+				 console.log(position)
+			},
+			(error) => alert(error.message),
+			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+	 );
 		return;
 	}
 	render() {
