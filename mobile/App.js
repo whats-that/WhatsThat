@@ -4,6 +4,7 @@ import CameraView from "./Components/Camera";
 import LoginScreen from "./Components/LoginScreen";
 import WikipediaWebView from "./Components/WikipediaWebView";
 import SingleLandMark from './Components/SingleLandMark'
+import PastLandMarks from './Components/PastLandMarks'
 
 export default class App extends React.Component {
 	constructor() {
