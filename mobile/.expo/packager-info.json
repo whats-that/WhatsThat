@@ -1,8 +1,9 @@
 {
-  "expoServerPort": 19009,
-  "packagerPort": 19010,
-  "packagerPid": 22020,
-  "expoServerNgrokUrl": "https://8f-jsx.mkrepp.mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.8f-jsx.mkrepp.mobile.exp.direct",
-  "ngrokPid": 22041
+  "expoServerPort": 19001,
+  "packagerPort": 19002,
+  "packagerPid": 2188,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "devToolsPort": 19002
 }

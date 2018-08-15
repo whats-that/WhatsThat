@@ -25,10 +25,10 @@ export default class SingleLandMarks extends React.Component {
     return (
       <View>
         <Text>{this.state.name}</Text>
-        <FormLabel>Stars</FormLabel>
+        {/* <FormLabel>Stars</FormLabel>
         <FormInput onChangeText={someFunction}/>
         <FormLabel>Comment</FormLabel>
-        <FormInput onChangeText={someFunction}/>
+        <FormInput onChangeText={someFunction}/> */}
       </View>
     )
   }
