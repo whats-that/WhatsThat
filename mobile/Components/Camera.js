@@ -88,6 +88,7 @@ export default class CameraView extends React.Component {
 	}
 
 	async takePicture() {
+		console.log('structural console.log; don\'t remove')
 		if (this.camera) {
 			this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved, base64: true, quality: 0.1 });
 		}
