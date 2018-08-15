@@ -9,23 +9,75 @@ const vision = require('@google-cloud/vision')
 // const filename = '/Users/song/Workspace/images/bryant1.jpg'
 const bucketName = 'whatsthat'
 
-router.get('/', (req, res, next) => {
-  console.log('testing')
-  res.send('testing...  ')
-  // res.json()
-})
+router.get('/getDataFromGoogleAPI', (req, res, next) => {
+  const client = new vision.ImageAnnotatorClient()
+  const filename =
+    '/Users/song/Workspace/FullstackAcademy/senior/whats-that/web/img1.jpg'
 
-router.put('/', async (req, res, next) => {
-  try {
-    const response = await axios.put(
-      'https://grace-star-shopper.herokuapp.com/api/stars/7',
-      {owned: true}
-    )
-    console.log(response.data)
-    res.json(response.data)
-  } catch (error) {
-    next(error)
-  }
+  // client
+  //   // .labelDetection(`gs://${bucketName}/demo-image.jpg`)
+  //   .landmarkDetection(filename)
+  //   .then(results => {
+  //     console.log(results)
+  //     const landmarks = results[0].landmarkAnnotations
+  //     console.log('Landmarks:')
+  //     landmarks.forEach(landmark => console.log(landmark))
+  //   })
+
+  client
+    .labelDetection(filename)
+    .then(results => {
+      // console.log('result... ', results[0])
+      const labels = results[0].labelAnnotations
+      console.log('Labels:')
+      labels.forEach(label => console.log(label.description))
+    })
+    .catch(err => {
+      console.error('ERROR:', err)
+    })
+
+  // client
+  //   .textDetection(fileName)
+  //   .then(results => {
+  //     const detections = results[0].textAnnotations
+  //     console.log('Text:')
+  //     detections.forEach(text => console.log(text))
+  //   })
+  //   .catch(err => {
+  //     console.error('ERROR:', err)
+  //   })
+
+  // client
+  //   .logoDetection(fileName)
+  //   .then(results => {
+  //     const logos = results[0].logoAnnotations
+  //     console.log('Logos:')
+  //     logos.forEach(logo => console.log(logo))
+  //   })
+  //   .catch(err => {
+  //     console.error('ERROR:', err)
+  //   })
+
+  // client
+  //   .faceDetection(fileName)
+  //   .then(results => {
+  //     const faces = results[0].faceAnnotations
+
+  //     console.log('Faces:')
+  //     faces.forEach((face, i) => {
+  //       console.log(`  Face #${i + 1}:`)
+  //       console.log(`    Joy: ${face.joyLikelihood}`)
+  //       console.log(`    Anger: ${face.angerLikelihood}`)
+  //       console.log(`    Sorrow: ${face.sorrowLikelihood}`)
+  //       console.log(`    Surprise: ${face.surpriseLikelihood}`)
+  //     })
+  //   })
+  //   .catch(err => {
+  //     console.error('ERROR:', err)
+  //   })
+
+
+  res.send('get data from google API ...  ')
 })
 
 router.post('/', async (req, res, next) => {
@@ -51,8 +103,8 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
   require('fs').writeFile('out.png', binaryData, 'binary', function(err) {
     console.log(err) // writes out file without error, but it's not a valid image
   })
-
-  const filename = "/Users/song/Workspace/FullstackAcademy/senior/whats-that/web/out.png"
+  const filename =
+    '/Users/song/Workspace/FullstackAcademy/senior/whats-that/web/out.png'
   client
     // .labelDetection(`gs://${bucketName}/demo-image.jpg`)
     .labelDetection(filename)
@@ -79,7 +131,8 @@ router.post('/savePicToBucket', (req, res, next) => {
     console.log(err) // writes out file without error, but it's not a valid image
   })
 
-  const filename = "/Users/song/Workspace/FullstackAcademy/senior/whats-that/web/out.png"
+  const filename =
+    '/Users/song/Workspace/FullstackAcademy/senior/whats-that/web/out.png'
   // Uploads a local file to the bucket
   storage
     .bucket(bucketName)
