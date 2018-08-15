@@ -1,16 +1,9 @@
-const axios = require('axios')
 const router = require('express').Router()
-
-const googleResponse = require('./sampleResponse')
+const path = require('path')
 // Imports the Google Cloud client library.
-const Storage = require('@google-cloud/storage')
-// Imports the Google Cloud client library
 const vision = require('@google-cloud/vision')
-// const filename = '/Users/song/Workspace/images/bryant1.jpg'
-const bucketName = 'whatsthat'
 
 router.post('/getDataFromGoogleAPI', (req, res, next) => {
-  console.log("hit post route")
   const client = new vision.ImageAnnotatorClient()
   const blob = req.body.base64
 
@@ -21,12 +14,8 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
     console.log(err) // writes out file without error, but it's not a valid image
   })
 
-  console.log("made it past require")
-  const filename = "/Users/mattkrepp/CodeStuff/capstone/WhatsThat/web/out.png"
-  // const requestObj = 
+  const filename = path.join(__dirname, '../../out.png')
   client
-    // .labelDetection(`gs://${bucketName}/demo-image.jpg`)
-
     .webDetection(filename)
     .then(results => {
       console.log(results)
