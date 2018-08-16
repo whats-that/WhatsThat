@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-const {geocoderAppId, geocoderAppCode} = require('../secrets');
+// const {geocoderAppId, geocoderAppCode} = require('../secrets');
 
 export default class LandmarksNearMe extends React.Component {
     constructor(){
