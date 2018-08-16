@@ -17,15 +17,12 @@ const axios = require('axios')
 router.post('/', async (req, res, next) => {
   try {
     const {query, latitude, longitude} = req.body
-    console.log("query", query)
     const instance = axios.create({
       baseURL: 'https://api.yelp.com/v3/businesses/',
       headers: {Authorization: `Bearer ${process.env.Yelp_API_Key}`}
     })
     const response = await instance.get(`/search?term=${query}&latitude=${latitude}&longitude=${longitude}&limit=10`)
-    console.log('response', response)
     const restaurant = response.data.businesses[0]
-    console.log(restaurant)
     res.json(restaurant)
   } catch (error) {
     next(error)
