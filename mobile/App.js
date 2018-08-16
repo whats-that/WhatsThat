@@ -3,7 +3,8 @@ import { TabBarIOS } from "react-native";
 import CameraView from "./Components/Camera";
 import LoginScreen from "./Components/LoginScreen";
 import WikipediaWebView from "./Components/WikipediaWebView";
-import SingleLandMark from './Components/SingleLandMark'
+import SingleLandMark from './Components/SingleLandMark';
+import LandmarksNearMe from './Components/LandmarksNearMe'
 
 export default class App extends React.Component {
 	constructor() {
@@ -54,6 +55,18 @@ export default class App extends React.Component {
 					icon={require("./assets/searchIcon.png")}
 				>
 					<WikipediaWebView />
+				</TabBarIOS.Item>
+				<TabBarIOS.Item
+					selected={this.state.selectedTab === "Landmarks"}
+					onPress={() => {
+						this.setState({
+							selectedTab: "Landmarks"
+						});
+					}}
+					title="Landmarks">
+					{/* <WikipediaWebView />
+					 */}
+					 <LandmarksNearMe />
 				</TabBarIOS.Item>
 			</TabBarIOS>
 		);

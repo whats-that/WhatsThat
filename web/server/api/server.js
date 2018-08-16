@@ -36,7 +36,6 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
   // res.send('get data from google API ...  ')
 })
 
-
 module.exports = router
 // router.get('/savePicToBucket', (req, res, next) => {
 //   // Creates a client
