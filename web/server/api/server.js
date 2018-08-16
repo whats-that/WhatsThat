@@ -19,6 +19,7 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
     .webDetection(filename)
     .then(results => {
       console.log(results)
+      //need a helper function for saving to database
       res.json(results)
       res.send("oops didn't hit")
     })
