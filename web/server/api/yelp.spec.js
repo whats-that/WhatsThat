@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../index')
 
 describe(' /POST yelp', () => {
-  it('should be able to make a request to google server', async () => {
+  it('should be able to make a request to yelp server', async () => {
     let req = {
       query: "Starbucks",
       latitude: 40.704886099999996,
