@@ -1,6 +1,14 @@
 const router = require('express')
 const axios = require('axios')
 
+router.get('/', async (req, res, next) => {
+  try {
+    await axios.post('/', 'molinari-delicatessen-san-francisco')
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const query = req.body
@@ -12,3 +20,5 @@ router.post('/', async (req, res, next) => {
     next(error)
   }
 })
+
+module.exports = router
