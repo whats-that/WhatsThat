@@ -5,6 +5,7 @@ import LoginScreen from "./Components/LoginScreen";
 import WikipediaWebView from "./Components/WikipediaWebView";
 import SingleLandMark from './Components/SingleLandMark'
 import PastLandMarks from './Components/PastLandMarks'
+import Restaurant from './Components/Restaurant'
 
 export default class App extends React.Component {
 	constructor() {
