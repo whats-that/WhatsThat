@@ -3,7 +3,6 @@ import { TabBarIOS } from "react-native";
 import CameraView from "./Components/Camera";
 import LoginScreen from "./Components/LoginScreen";
 import WikipediaWebView from "./Components/WikipediaWebView";
-import SingleLandMark from './Components/SingleLandMark';
 import LandmarksNearMe from './Components/LandmarksNearMe'
 
 export default class App extends React.Component {
@@ -64,8 +63,6 @@ export default class App extends React.Component {
 						});
 					}}
 					title="Landmarks">
-					{/* <WikipediaWebView />
-					 */}
 					 <LandmarksNearMe />
 				</TabBarIOS.Item>
 			</TabBarIOS>
