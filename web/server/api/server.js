@@ -2,6 +2,7 @@ const router = require('express').Router()
 const path = require('path')
 // Imports the Google Cloud client library.
 const vision = require('@google-cloud/vision')
+const { LandMark } = require('../db/models')
 
 router.post('/getDataFromGoogleAPI', (req, res, next) => {
   const client = new vision.ImageAnnotatorClient()
@@ -35,6 +36,16 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
       console.error('ERROR:', err)
     })
   // res.send('get data from google API ...  ')
+})
+
+router.get('/history', async (req, res, next) => {
+  const landmarks = await LandMark.findAll({
+    where: {
+      userId: 1
+    }
+  })
+  console.log('serverside landmarks',landmarks)
+  res.send(landmarks)
 })
 
 module.exports = router
