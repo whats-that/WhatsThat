@@ -17,7 +17,7 @@ const LandMark = db.define('landmark', {
     type: Sequelize.TEXT
   },
   image: {
-    type: Sequelize.BLOB
+    type: Sequelize.TEXT
   }
 })
 
