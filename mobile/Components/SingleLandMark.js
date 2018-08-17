@@ -13,14 +13,14 @@ export default class SingleLandMark extends React.Component {
     this.update = this.update.bind(this)
   }
   
-  // async componentDidMount() {
-  //   const res = await axios.get(`/server/${this.props.id}`)
-  //   this.setState({
-  //     landmark: res.data,
-  //     rating: res.data.rating,
-  //     comment: res.data.comment
-  //   })
-  // }
+  async componentDidMount() {
+    const res = await axios.get(`http://whatsthat-capstone.herokuapp.com/api/server/${this.props.id}`)
+    this.setState({
+      landmark: res.data,
+      rating: res.data.rating,
+      comment: res.data.comment
+    })
+  }
 
   update() {
     console.log(this.state)

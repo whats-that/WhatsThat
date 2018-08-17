@@ -39,13 +39,26 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
 })
 
 router.get('/history', async (req, res, next) => {
-  const landmarks = await LandMark.findAll({
-    where: {
-      userId: 1
-    }
-  })
-  console.log('serverside landmarks',landmarks)
-  res.send(landmarks)
+  try {
+    const landmarks = await LandMark.findAll({
+      where: {
+        userId: 1
+      },
+      attributes: ['id', 'name', 'rating', 'comment']
+    })
+    res.send(landmarks)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/history/:id', async (req, res, next) => {
+  try {
+    const landmark = await LandMark.findById(req.params.id)
+    res.send(landmark)
+  } catch (error) {
+    next(error)    
+  }
 })
 
 module.exports = router
