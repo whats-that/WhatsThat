@@ -40,9 +40,9 @@ export default class PastLandMarks extends React.Component {
           justifyContent: "center",
           alignItems: "center"
         }}>
-          {/* {this.state.landmarks.map(landmark => {
+          {this.state.landmarks.map(landmark => {
             return this.landmarkRender(landmark)
-          })} */}
+          })}
         </View>
       )
     } else {
