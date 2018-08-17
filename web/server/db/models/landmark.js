@@ -11,7 +11,7 @@ const LandMark = db.define('landmark', {
       max: 5,
       min: 1
     },
-    default: 5 
+    defaultValue: 5 
   },
   comment: {
     type: Sequelize.TEXT
