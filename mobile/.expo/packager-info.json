@@ -1,9 +1,9 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": "https://f7-j32.lbheart.mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.f7-j32.lbheart.mobile.exp.direct",
-  "ngrokPid": 17403,
+  "expoServerPort": 19002,
+  "packagerPort": 19003,
+  "packagerPid": 11289,
+  "expoServerNgrokUrl": "https://z2-dpk.lbheart.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.z2-dpk.lbheart.mobile.exp.direct",
+  "ngrokPid": 6637,
   "devToolsPort": 19002
 }
