@@ -11,7 +11,7 @@ const LandMark = db.define('landmark', {
       max: 5,
       min: 1
     },
-    defaultValue: 5 
+    defaultValue: 5
   },
   comment: {
     type: Sequelize.TEXT
@@ -22,3 +22,16 @@ const LandMark = db.define('landmark', {
 })
 
 module.exports = LandMark
+
+
+/*
+image: {
+  type: Sequelize.BLOB
+},
+coordinates: {
+  type: Sequelize.ARRAY(Sequelize.FLOAT)
+}
+})
+
+module.exports = LandMark
+*/

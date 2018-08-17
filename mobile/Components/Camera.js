@@ -112,33 +112,11 @@ export default class CameraView extends React.Component {
 		});
 	};
 	async usePicture() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-		const result = await axios.post('http://whatsthat-capstone.herokuapp.com/api/server/getDataFromGoogleAPI', this.state.photoBlob)
-		console.warn(result)
-		return;
-=======
+		// const result = await axios.post('http://whatsthat-capstone.herokuapp.com/api/server/getDataFromGoogleAPI', this.state.photoBlob)
+		// console.warn(result)
+		// return;
 		const result = await axios.post('http://172.16.23.112:8080/api/server/getDataFromGoogleAPI', this.state.photoBlob)
 		console.log(result.data[0].webDetection.bestGuessLabels[0].label)
-
->>>>>>> b229a73fca886521b01133c02480f28810462f2d
-=======
-		// await axios.post('http://whatsthat-capstone.herokuapp.com/api/server', this.state.photoBlob)
-		console.log(this.state.photoBlob);
-		const result = await axios.post(
-			"http://172.16.23.112:8080/api/server/getDataFromGoogleAPI",
-			this.state.photoBlob
-		);
-		// console.log(result.data[0].webDetection.bestGuessLabels[0].label)
-		// 	navigator.geolocation.getCurrentPosition(
-		// 		(position) => {
-		// 			 console.log(position)
-		// 		},
-		// 		(error) => alert(error.message),
-		// 		{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-		//  )
-		return;
->>>>>>> 0e4616fd0b7bc395e32e3d9988502c5e98c912af
 	}
 	render() {
 		const { hasCameraPermission, isShowingPicture } = this.state;

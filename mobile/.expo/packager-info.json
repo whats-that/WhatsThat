@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
@@ -16,4 +17,13 @@
   "packagerNgrokUrl": null,
   "ngrokPid": null
 >>>>>>> 0e4616fd0b7bc395e32e3d9988502c5e98c912af
+=======
+  "expoServerPort": 19002,
+  "packagerPort": 19003,
+  "packagerPid": 11289,
+  "expoServerNgrokUrl": "https://z2-dpk.lbheart.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.z2-dpk.lbheart.mobile.exp.direct",
+  "ngrokPid": 6637,
+  "devToolsPort": 19002
+>>>>>>> new/googleVisionAPI
 }

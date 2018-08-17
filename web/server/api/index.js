@@ -2,6 +2,7 @@ const router = require('express').Router()
 module.exports = router
 
 router.use('/users', require('./users'))
+router.use('/landmark', require('./landmark'))
 router.use('/server', require('./server'))
 router.use('/yelp', require('./yelp'))
 router.use('/geocoder', require('./geocoder'))
