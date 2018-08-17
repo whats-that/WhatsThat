@@ -244,22 +244,13 @@ export default class CameraView extends React.Component {
 										color="white"
 									/>
 								</TouchableOpacity>
-								{/* <View
-									style={{
-										flex: 1,
-										backgroundColor: "transparent",
-										flexDirection: "column",
-									}}
-								> */}
 								</View>
 									<TouchableOpacity
 										onPress={this.getPhotos}
 										style={{ position: "absolute", bottom: 15, right: 15 }}
-										// style={{ alignSelf: "flex-end" }}
 									>
 										<Ionicons name="ios-photos" size={30} color="white" />
 									</TouchableOpacity>
-							{/* </View> */}
 						</Camera>
 					</View>
 				);
