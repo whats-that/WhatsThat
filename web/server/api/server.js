@@ -107,7 +107,7 @@ router.get('/history', async (req, res, next) => {
       },
       attributes: ['id', 'name', 'rating', 'comment']
     })
-    res.send(landmarks)
+    res.json(landmarks)
   } catch (error) {
     next(error)
   }
@@ -115,8 +115,9 @@ router.get('/history', async (req, res, next) => {
 
 router.get('/history/:id', async (req, res, next) => {
   try {
+    console.log(req.params.id)
     const landmark = await Landmark.findById(req.params.id)
-    res.send(landmark)
+    res.json(landmark)
   } catch (error) {
     next(error)
   }

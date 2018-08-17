@@ -16,6 +16,7 @@ import UserhomeScreen from '../screens/UserhomeScreen'
 import MyPlacesScreen from '../screens/MyPlacesScreen';
 import MyThingsScreen from '../screens/MyThingsScreen';
 import MyPeopleScreen from '../screens/MyPeopleScreen';
+import SingleLandMark from '../screens/SingleLandMark'
 
 const HomeStack = createStackNavigator({
   Home: CameraScreen,
@@ -76,6 +77,8 @@ const ProfileStack = createStackNavigator({
   MyPlaces: MyPlacesScreen,
   MyThings: MyThingsScreen,
   MyPeople: MyPeopleScreen,
+  MyLandmark: SingleLandMark
+
 });
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
