@@ -112,21 +112,11 @@ export default class CameraView extends React.Component {
 		});
 	};
 	async usePicture() {
-		// await axios.post('http://whatsthat-capstone.herokuapp.com/api/server', this.state.photoBlob)
-		console.log(this.state.photoBlob);
-		const result = await axios.post(
-			"http://172.16.23.112:8080/api/server/getDataFromGoogleAPI",
-			this.state.photoBlob
-		);
-		// console.log(result.data[0].webDetection.bestGuessLabels[0].label)
-		// 	navigator.geolocation.getCurrentPosition(
-		// 		(position) => {
-		// 			 console.log(position)
-		// 		},
-		// 		(error) => alert(error.message),
-		// 		{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-		//  )
-		return;
+		// const result = await axios.post('http://whatsthat-capstone.herokuapp.com/api/server/getDataFromGoogleAPI', this.state.photoBlob)
+		// console.warn(result)
+		// return;
+		const result = await axios.post('http://172.16.23.112:8080/api/server/getDataFromGoogleAPI', this.state.photoBlob)
+		console.log(result.data[0].webDetection.bestGuessLabels[0].label)
 	}
 	render() {
 		const { hasCameraPermission, isShowingPicture } = this.state;
