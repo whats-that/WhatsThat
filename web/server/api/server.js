@@ -1,19 +1,10 @@
-const axios = require('axios')
 const router = require('express').Router()
-
-const googleResponse = require('./sampleResponse')
+const path = require('path')
 // Imports the Google Cloud client library.
-const Storage = require('@google-cloud/storage')
-// Imports the Google Cloud client library
 const vision = require('@google-cloud/vision')
-// const filename = '/Users/song/Workspace/images/bryant1.jpg'
-const bucketName = 'whatsthat'
+const { LandMark } = require('../db/models')
 
-router.get('/test', (req, res, next) => {
-  res.send("testingggg .... ")
-})
-
-router.get('/getDataFromGoogleAPI', (req, res, next) => {
+router.post('/getDataFromGoogleAPI', (req, res, next) => {
   const client = new vision.ImageAnnotatorClient()
   const blob = req.body.base64
 
@@ -24,15 +15,12 @@ router.get('/getDataFromGoogleAPI', (req, res, next) => {
     console.log(err) // writes out file without error, but it's not a valid image
   })
 
-  console.log("made it past require")
-  const filename = "/app/demo-image.jpg"
-  // const requestObj =
+  const filename = path.join(__dirname, '../../out.png')
   client
-    // .labelDetection(`gs://${bucketName}/demo-image.jpg`)
-
     .webDetection(filename)
     .then(results => {
       console.log(results)
+      //need a helper function for saving to database
       res.json(results)
       res.send("oops didn't hit")
     })
@@ -87,6 +75,28 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
   // res.send('get data from google API ...  ')
 })
 
+router.get('/history', async (req, res, next) => {
+  try {
+    const landmarks = await LandMark.findAll({
+      where: {
+        userId: 1
+      },
+      attributes: ['id', 'name', 'rating', 'comment']
+    })
+    res.send(landmarks)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/history/:id', async (req, res, next) => {
+  try {
+    const landmark = await LandMark.findById(req.params.id)
+    res.send(landmark)
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = router
 // router.get('/savePicToBucket', (req, res, next) => {

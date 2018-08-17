@@ -5,39 +5,57 @@ import axios from 'axios'
 export default class PastLandMarks extends React.Component {
   constructor() {
     super()
-    this.state = []
+    this.state = {
+      landmarks: []
+    }
   }
   
   async componentDidMount() {
-    const res = await axios.get('/server')
-    this.setState(res.data)
+    const res = await axios.get('http://whatsthat-capstone.herokuapp.com/api/server/history')
+    console.log('res', res.data)
+    this.setState({landmarks: res.data})
   }
 
   landmarkRender(landmark) {
     <View key={landmark.id}>
       <Text>{landmark.name}</ Text>
       <Text>{landmark.rating} Stars</ Text>
-      <Button title='rating' onPress={}> {/* will redirect to singlelandmark*/}
-        {
+      <Button title={
           landmark.comment ? 
           'Edit review' : 
           'Review'
-        }
+        } onPress={() => console.log(landmark)}> {/* will redirect to singlelandmark*/}
+        
       </Button>
     </ View>
   }
 
   render() {
-    if(this.state.length){
+    console.log('landmarks', this.state.landmarks)
+    if(this.state.landmarks.length){
       return (
-        <View>
-          {this.state.map(landmark => {
+        <View style={{
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
+          {this.state.landmarks.map(landmark => {
             return this.landmarkRender(landmark)
           })}
         </View>
       )
     } else {
-      return <Text>You have not visited any landmarks. Maybe you should travel some more.</ Text>
+      return (
+        <View style={{
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
+          <Text>You have not visited any landmarks. Maybe you should travel some more.</ Text>
+        </View>
+      )
     }
   }
 }
