@@ -1,8 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-<<<<<<< HEAD
-const {User, LandMark} = require('../server/db/models')
+const {User, Landmark} = require('../server/db/models')
 const {one, two} = require('./blobs')
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -15,10 +14,6 @@ const {one, two} = require('./blobs')
  *
  * Now that you've got the main idea, check it out in practice below!
  */
-=======
-const {User} = require('../server/db/models')
->>>>>>> new/googleVisionAPI
-
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
@@ -46,8 +41,8 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
 
   const landmarks = await Promise.all([
-    LandMark.create({name: 'one', rating: 4, image: one.base64, userId: 1}),
-    LandMark.create({name: 'two', image: two.base64, userId: 1})
+    Landmark.create({name: 'one', rating: 4, image: one.base64, userId: 1}),
+    Landmark.create({name: 'two', image: two.base64, userId: 1})
   ])
 
   console.log(`seeded ${landmarks.length} landmarks`)

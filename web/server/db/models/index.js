@@ -8,5 +8,5 @@ User.hasMany(Landmark)
 // usuage : const { User } = require('path~/db/models)
 module.exports = {
   User,
-  LandMark,
+  Landmark,
 }

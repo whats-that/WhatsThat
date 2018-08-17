@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const LandMark = db.define('landmark', {
+const Landmark = db.define('landmark', {
   name: {
     type: Sequelize.STRING
   },
@@ -16,13 +16,15 @@ const LandMark = db.define('landmark', {
   comment: {
     type: Sequelize.TEXT
   },
+  coordinates: {
+    type: Sequelize.ARRAY(Sequelize.FLOAT)
+  },
   image: {
-    type: Sequelize.BLOB
+    type: Sequelize.TEXT
   }
 })
 
-module.exports = LandMark
-
+module.exports = Landmark
 
 /*
 image: {

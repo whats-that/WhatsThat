@@ -1,11 +1,7 @@
 {
-  "hostType": "tunnel",
+  "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-<<<<<<< HEAD
-  "urlRandomness": null
-=======
-  "urlRandomness": "z2-dpk"
->>>>>>> new/googleVisionAPI
+  "urlRandomness": "73-qei"
 }

@@ -40,14 +40,17 @@ class MapScreen extends React.Component {
     this.setState({ userId });
     await this.props.fetchUserLandmark(Number(this.state.userId));
     // console.log('user current landmark.. ', this.props.userCurrentLandmark);
-    this.setState({
-      region: {
-        latitude: this.props.userCurrentLandmark.coordinates[0],
-        longitude: this.props.userCurrentLandmark.coordinates[1],
-        latitudeDelta: 0.09,
-        longitudeDelta: 0.04,
-      },
-    });
+    if (this.props.userCurrentLandmark.coordinates) {
+      this.setState({
+        region: {
+          latitude: this.props.userCurrentLandmark.coordinates[0],
+          longitude: this.props.userCurrentLandmark.coordinates[1],
+          latitudeDelta: 0.09,
+          longitudeDelta: 0.04,
+        },
+      });
+    }
+
   }
 
   render() {

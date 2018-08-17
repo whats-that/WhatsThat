@@ -2,7 +2,7 @@ const router = require('express').Router()
 const path = require('path')
 // Imports the Google Cloud client library.
 const vision = require('@google-cloud/vision')
-const { LandMark } = require('../db/models')
+const { Landmark } = require('../db/models')
 
 router.post('/getDataFromGoogleAPI', (req, res, next) => {
   const client = new vision.ImageAnnotatorClient()
@@ -41,7 +41,8 @@ router.post('/getDataFromGoogleAPI', (req, res, next) => {
         res.end()
       })
     .catch(err => {
-      console.log('Process Completed... ')
+      // console.log('Process Completed... ')
+      console.error('Process Completed...', err)
       // console.error('ERROR..:', err)
     })
     // client
@@ -100,7 +101,7 @@ router.get('/getDataFromGoogleAPI', (req, res, next) => {
 
 router.get('/history', async (req, res, next) => {
   try {
-    const landmarks = await LandMark.findAll({
+    const landmarks = await Landmark.findAll({
       where: {
         userId: 1
       },
@@ -114,7 +115,7 @@ router.get('/history', async (req, res, next) => {
 
 router.get('/history/:id', async (req, res, next) => {
   try {
-    const landmark = await LandMark.findById(req.params.id)
+    const landmark = await Landmark.findById(req.params.id)
     res.send(landmark)
   } catch (error) {
     next(error)
