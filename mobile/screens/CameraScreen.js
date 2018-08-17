@@ -85,7 +85,7 @@ class CameraScreen extends React.Component {
     // console.log(this.state.photoBlob.base64.length)
     // const result = await axios.post('http://172.16.21.118:8080/api/server', this.state.photoBlob)
     const result = await axios.post(
-      'http://172.16.21.118:8080/api/server/getDataFromGoogleAPI',
+      'http://172.16.23.255:8080/api/server/getDataFromGoogleAPI',
       this.state.photoBlob
     );
     console.log('this props... ', this.props);
