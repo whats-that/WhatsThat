@@ -5,13 +5,16 @@ import axios from 'axios'
 export default class PastLandMarks extends React.Component {
   constructor() {
     super()
-    this.state = []
+    this.state = {
+      landmarks: []
+    }
   }
   
-  // async componentDidMount() {
-  //   const res = await axios.get('/server')
-  //   this.setState(res.data)
-  // }
+  async componentDidMount() {
+    const res = await axios.get('http://whatsthat-capstone.herokuapp.com/api/server/history')
+    console.log('res', res.data)
+    this.setState({landmarks: res.data})
+  }
 
   landmarkRender(landmark) {
     <View key={landmark.id}>
@@ -28,7 +31,8 @@ export default class PastLandMarks extends React.Component {
   }
 
   render() {
-    if(this.state.length){
+    console.log('landmarks', this.state.landmarks)
+    if(this.state.landmarks.length){
       return (
         <View style={{
           flex: 1,
@@ -36,7 +40,7 @@ export default class PastLandMarks extends React.Component {
           justifyContent: "center",
           alignItems: "center"
         }}>
-          {this.state.map(landmark => {
+          {this.state.landmarks.map(landmark => {
             return this.landmarkRender(landmark)
           })}
         </View>
