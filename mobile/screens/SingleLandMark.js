@@ -14,7 +14,7 @@ export default class SingleLandMark extends React.Component {
   }
   
   async componentDidMount() {
-    const res = await axios.get(`http://whatsthat-capstone.herokuapp.com/api/server/${this.props.id}`)
+    const res = await axios.get(`http://172.16.23.255:8080/api/server/${this.props.id}`)
     this.setState({
       landmark: res.data,
       rating: res.data.rating,

@@ -11,7 +11,7 @@ export default class PastLandMarks extends React.Component {
   }
   
   async componentDidMount() {
-    const res = await axios.get('http://whatsthat-capstone.herokuapp.com/api/server/history')
+    const res = await axios.get('http://172.16.23.255:8080/api/server/history')
     console.log('res', res.data)
     this.setState({landmarks: res.data})
   }
