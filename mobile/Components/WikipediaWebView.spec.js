@@ -3,19 +3,19 @@ const expect = chai.expect;
 
 import enzyme, {shallow} from 'enzyme';
 import React from 'react';
-import WikipediaWebView from './WikipediaWebView';
+import WikiScreen from '../screen/WikipediaWebView';
 
 import Adapter from 'enzyme-adapter-react-16';
 const adapter = new Adapter();
 enzyme.configure({adapter});
 
 
-describe('WikipediaWebView', () => {
+describe('WikiScreen', () => {
 
   let wikipediaWebView;
 
   beforeEach(() => {
-    wikipediaWebView = shallow(<WikipediaWebView />);
+    wikipediaWebView = shallow(<WikiScreen />);
   });
 
   it('should render', () => {

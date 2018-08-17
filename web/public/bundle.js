@@ -118,6 +118,261 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./client/components/About.js":
+/*!************************************!*\
+  !*** ./client/components/About.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var landmark_images = ['http://images.nymag.com/travel/visitorsguide/photoops0712_1b_560.jpg', 'https://www.planetware.com/photos-large/USNY/new-york-city-brooklyn-bridge.jpg', 'https://thumbs-prod.si-cdn.com/zi63jyuo6KIGLAtwh06xU_ldWSQ=/800x600/filters:no_upscale()/https://public-media.smithsonianmag.com/filer/8c/08/8c087dbd-dfd0-446e-8f30-c964de6e87c9/central-park.jpg', 'https://imgs.6sqft.com/wp-content/uploads/2014/08/21033525/Grand_Central_Terminal_Lobby.jpg', 'http://cdn.brownstoner.com/wp-content/uploads/2016/01/east-new-york-brooklyn-landmark-preservation-rezoning-3.jpg', 'https://si.wsj.net/public/resources/images/BN-TJ019_NYTOWN_HD_20170509114050.jpg', 'https://static01.nyt.com/images/2016/12/14/nyregion/14LANDMARKS2/14LANDMARKS2-facebookJumbo.jpg', 'https://static1.squarespace.com/static/52da9677e4b03d314575985a/t/58d4f0dc1b10e32d585d3e9c/1490350310238/NYC+Hotels+Best+Views.jpg?format=1500w', 'https://a1.cdn-hotels.com/gdcs/production58/d1542/4d9c1080-c199-11e7-81c7-0242ac1101c4.jpg', 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Statue_of_Liberty%2C_NY.jpg', 'https://s24890.pcdn.co/wp-content/uploads/2017/10/New-York-City-Best-Photo-Locations-7.jpg', 'http://www.turizmoteka.hr/image/9873/original/', 'https://dicasnovayork.com.br/wp-content/uploads/2015/09/Flatiron-Building-1050x700.jpg', 'https://cdn.archpaper.com/wp-content/uploads/2017/08/NYPL_Jiahui-Huang_Flickr.jpg', 'https://thenypost.files.wordpress.com/2018/08/wash-park-arch.jpg?quality=90&strip=all&w=618&h=410&crop=1'];
+
+var About =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(About, _Component);
+
+  function About() {
+    _classCallCheck(this, About);
+
+    return _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).apply(this, arguments));
+  }
+
+  _createClass(About, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        className: "about-top"
+      }, _react.default.createElement("div", {
+        className: "about-title"
+      }, "WhatsThat is ..."), _react.default.createElement("div", {
+        className: "about-ex"
+      }, "find About Landmarks"), _react.default.createElement("div", {
+        className: "about-ex2"
+      }, "find About Things"), _react.default.createElement("div", {
+        className: "about-ex3"
+      }, "find Your Location"), _react.default.createElement("div", {
+        className: "about-ex4"
+      }, "find Places Around You"), _react.default.createElement("div", {
+        className: "about-ex5"
+      }, "find People Around You")), _react.default.createElement("hr", null), _react.default.createElement("div", {
+        className: "landmark-wrapper"
+      }, landmark_images.map(function (img, idx) {
+        return _react.default.createElement("div", {
+          key: idx,
+          className: "eachDiv"
+        }, _react.default.createElement("img", {
+          src: img,
+          className: "eachImg"
+        }));
+      })));
+    }
+  }]);
+
+  return About;
+}(_react.Component);
+
+var mapState = function mapState(state) {
+  return {};
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {};
+};
+
+var _default = (0, _reactRedux.connect)(mapState, mapDispatch)(About);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/components/Homepage.js":
+/*!***************************************!*\
+  !*** ./client/components/Homepage.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var HomePage =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(HomePage, _Component);
+
+  function HomePage() {
+    _classCallCheck(this, HomePage);
+
+    return _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).apply(this, arguments));
+  }
+
+  _createClass(HomePage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        className: "homepage-wrapper"
+      }, _react.default.createElement("div", {
+        className: "camera-image"
+      }), _react.default.createElement("div", {
+        className: "homepage-right"
+      }, _react.default.createElement("div", {
+        className: "homepage-title"
+      }, "WhatsThat"), _react.default.createElement("div", {
+        className: "homepage-text"
+      }, "Curious About WhatsThat?"), _react.default.createElement("div", {
+        className: "homepage-text"
+      }, "Are You Traveling?"), _react.default.createElement("div", {
+        className: "homepage-text"
+      }, "Take a Photo,"), _react.default.createElement("div", {
+        className: "homepage-text"
+      }, "Then, You Will Get the Answer!"))));
+    }
+  }]);
+
+  return HomePage;
+}(_react.Component);
+
+exports.default = HomePage;
+
+/***/ }),
+
+/***/ "./client/components/Mine.js":
+/*!***********************************!*\
+  !*** ./client/components/Mine.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Mine =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Mine, _Component);
+
+  function Mine() {
+    _classCallCheck(this, Mine);
+
+    return _possibleConstructorReturn(this, (Mine.__proto__ || Object.getPrototypeOf(Mine)).apply(this, arguments));
+  }
+
+  _createClass(Mine, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        className: "mine-data-wrapper"
+      }, _react.default.createElement("div", {
+        className: "mine-data-title"
+      }, "My Places"), _react.default.createElement("div", null, "..."), _react.default.createElement("div", {
+        className: "mine-data-title"
+      }, "My Things"), _react.default.createElement("div", null, "..."), _react.default.createElement("div", {
+        className: "mine-data-title"
+      }, "My People"), _react.default.createElement("div", null, "...")));
+    }
+  }]);
+
+  return Mine;
+}(_react.Component);
+
+var mapState = function mapState(state) {
+  return {};
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {};
+};
+
+var _default = (0, _reactRedux.connect)(mapState, mapDispatch)(Mine);
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./client/components/auth-form.js":
 /*!****************************************!*\
   !*** ./client/components/auth-form.js ***!
@@ -143,42 +398,44 @@ var _store = __webpack_require__(/*! ../store */ "./client/store/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * COMPONENT
- */
 var AuthForm = function AuthForm(props) {
   var name = props.name,
       displayName = props.displayName,
       handleSubmit = props.handleSubmit,
       error = props.error;
-  return _react.default.createElement("div", null, _react.default.createElement("form", {
+  return _react.default.createElement("div", {
+    className: "form"
+  }, _react.default.createElement("form", {
     onSubmit: handleSubmit,
-    name: name
-  }, _react.default.createElement("div", null, _react.default.createElement("label", {
-    htmlFor: "email"
-  }, _react.default.createElement("small", null, "Email")), _react.default.createElement("input", {
+    name: name,
+    className: "form-wrapper"
+  }, _react.default.createElement("div", {
+    className: "form-title"
+  }, _react.default.createElement("h1", null, "WhatsThat ", displayName)), _react.default.createElement("div", null, _react.default.createElement("label", {
+    htmlFor: "email",
+    className: "input-text"
+  }, "Email"), _react.default.createElement("input", {
     name: "email",
-    type: "text"
+    type: "text",
+    className: "input-box"
   })), _react.default.createElement("div", null, _react.default.createElement("label", {
-    htmlFor: "password"
-  }, _react.default.createElement("small", null, "Password")), _react.default.createElement("input", {
+    htmlFor: "password",
+    className: "input-text"
+  }, "Password"), _react.default.createElement("input", {
     name: "password",
-    type: "password"
+    type: "password",
+    className: "input-box"
   })), _react.default.createElement("div", null, _react.default.createElement("button", {
-    type: "submit"
-  }, displayName)), error && error.response && _react.default.createElement("div", null, " ", error.response.data, " ")), _react.default.createElement("a", {
-    href: "/auth/google"
-  }, displayName, " with Google"));
+    type: "submit",
+    className: "btn btn-info-own"
+  }, displayName)), error && error.response && _react.default.createElement("div", null, " ", error.response.data, " "), _react.default.createElement("div", null, _react.default.createElement("a", {
+    href: "/auth/google",
+    className: "btn btn-info"
+  }, displayName, " with Google")), _react.default.createElement("div", null, _react.default.createElement("a", {
+    href: "/auth/facebook",
+    className: "btn btn-info-facebook"
+  }, displayName, " with Facebook"))));
 };
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
-// can create prop not using store
-
 
 var mapLogin = function mapLogin(state) {
   return {
@@ -211,10 +468,6 @@ var mapDispatch = function mapDispatch(dispatch) {
 var Login = (0, _reactRedux.connect)(mapLogin, mapDispatch)(AuthForm);
 exports.Login = Login;
 var Signup = (0, _reactRedux.connect)(mapSignup, mapDispatch)(AuthForm);
-/**
- * PROP TYPES
- */
-
 exports.Signup = Signup;
 AuthForm.propTypes = {
   name: _propTypes.default.string.isRequired,
@@ -262,12 +515,36 @@ Object.defineProperty(exports, "Signup", {
     return _authForm.Signup;
   }
 });
+Object.defineProperty(exports, "Homepage", {
+  enumerable: true,
+  get: function get() {
+    return _Homepage.default;
+  }
+});
+Object.defineProperty(exports, "About", {
+  enumerable: true,
+  get: function get() {
+    return _About.default;
+  }
+});
+Object.defineProperty(exports, "Mine", {
+  enumerable: true,
+  get: function get() {
+    return _Mine.default;
+  }
+});
 
 var _navbar = _interopRequireDefault(__webpack_require__(/*! ./navbar */ "./client/components/navbar.js"));
 
 var _userHome = _interopRequireDefault(__webpack_require__(/*! ./user-home */ "./client/components/user-home.js"));
 
 var _authForm = __webpack_require__(/*! ./auth-form */ "./client/components/auth-form.js");
+
+var _Homepage = _interopRequireDefault(__webpack_require__(/*! ./Homepage */ "./client/components/Homepage.js"));
+
+var _About = _interopRequireDefault(__webpack_require__(/*! ./About */ "./client/components/About.js"));
+
+var _Mine = _interopRequireDefault(__webpack_require__(/*! ./Mine */ "./client/components/Mine.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -303,16 +580,52 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Navbar = function Navbar(_ref) {
   var handleClick = _ref.handleClick,
       isLoggedIn = _ref.isLoggedIn;
-  return _react.default.createElement("div", null, _react.default.createElement("h1", null, "BOILERPLATE"), _react.default.createElement("nav", null, isLoggedIn ? _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Link, {
-    to: "/home"
-  }, "Home"), _react.default.createElement("a", {
-    href: "#",
-    onClick: handleClick
-  }, "Logout")) : _react.default.createElement("div", null, _react.default.createElement("div", null, "hel"), _react.default.createElement(_reactRouterDom.Link, {
+  return _react.default.createElement(_react.default.Fragment, null, isLoggedIn ? _react.default.createElement("div", null, _react.default.createElement("div", {
+    className: "ui pointing transparent massive white fluid four pointed transparent menu"
+  }, _react.default.createElement(_reactRouterDom.Link, {
+    to: '/'
+  }, _react.default.createElement("div", {
+    className: "item"
+  }, _react.default.createElement("i", {
+    className: "photo icon"
+  }), " WhatThat")), _react.default.createElement("div", {
+    className: "right menu"
+  }, _react.default.createElement(_reactRouterDom.Link, {
+    to: "/about"
+  }, _react.default.createElement("div", {
+    className: "item"
+  }, "About")), _react.default.createElement(_reactRouterDom.Link, {
+    to: '/mine'
+  }, _react.default.createElement("div", {
+    className: "item"
+  }, "Mine")), _react.default.createElement(_reactRouterDom.Link, {
+    to: '/'
+  }, _react.default.createElement("div", {
+    onClick: handleClick,
+    className: "item"
+  }, "Logout"))))) : _react.default.createElement("div", null, _react.default.createElement("div", {
+    className: "ui pointing transparent massive white fluid four pointed transparent menu"
+  }, _react.default.createElement(_reactRouterDom.Link, {
+    to: '/'
+  }, _react.default.createElement("div", {
+    className: "item"
+  }, _react.default.createElement("i", {
+    className: "photo icon"
+  }), " WhatThat")), _react.default.createElement("div", {
+    className: "right menu"
+  }, _react.default.createElement(_reactRouterDom.Link, {
+    to: "/about"
+  }, _react.default.createElement("div", {
+    className: "item"
+  }, "About")), _react.default.createElement(_reactRouterDom.Link, {
     to: "/login"
-  }, "Login"), _react.default.createElement(_reactRouterDom.Link, {
+  }, _react.default.createElement("div", {
+    className: "item"
+  }, "Login")), _react.default.createElement(_reactRouterDom.Link, {
     to: "/signup"
-  }, "Sign Up"))), _react.default.createElement("hr", null));
+  }, _react.default.createElement("div", {
+    className: "item"
+  }, "Sign Up"))))));
 };
 /**
  * CONTAINER
@@ -511,9 +824,6 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * COMPONENT
- */
 var Routes =
 /*#__PURE__*/
 function (_Component) {
@@ -535,17 +845,31 @@ function (_Component) {
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       return _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/",
+        component: _components.Homepage
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/about",
+        component: _components.About
+      }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/login",
         component: _components.Login
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/signup",
         component: _components.Signup
       }), isLoggedIn && _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
-        path: "/home",
-        component: _components.UserHome
-      })), _react.default.createElement(_reactRouterDom.Route, {
-        component: _components.Login
-      }));
+        exact: true,
+        path: "/",
+        component: _components.Homepage
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/about",
+        component: _components.About
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/mine",
+        component: _components.Mine
+      })));
     }
   }]);
 
@@ -802,7 +1126,7 @@ var auth = function auth(email, password, method) {
                 try {
                   dispatch(getUser(res.data));
 
-                  _history.default.push('/home');
+                  _history.default.push('/');
                 } catch (dispatchOrHistoryErr) {
                   console.error(dispatchOrHistoryErr);
                 }
