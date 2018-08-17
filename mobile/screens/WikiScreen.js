@@ -1,14 +1,37 @@
 import React from 'react';
-import { WebView, ActivityIndicator, View, Text } from 'react-native';
+import {
+  StyleSheet,
+  WebView,
+  ActivityIndicator,
+  View,
+  Alert,
+} from 'react-native';
 
-export default class WikipediaWebView extends React.Component {
+export default class WikiScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Wiki',
+  };
+
   constructor() {
-    super();
-
-    this.state = {
-      searchString: 'empire state building',
-      acitivityIndicatorIsVisible: true,
-    };
+    super(...arguments);
+    // this.props.navigation.getParams('keyword', 'NO-ID'),
+    if (this.props.navigation.state.params === 'no data') {
+      this.state = {
+        searchString: this.props.navigation.state.params.keyword,
+        acitivityIndicatorIsVisible: true,
+      };
+      Alert.alert('No data found!');
+    } else if (this.props.navigation.state.params) {
+      this.state = {
+        searchString: this.props.navigation.state.params.keyword,
+        acitivityIndicatorIsVisible: true,
+      };
+    } else {
+      this.state = {
+        searchString: 'computer vision',
+        acitivityIndicatorIsVisible: true,
+      };
+    }
 
     this.capitalizeFirstLetterOfWord = this.capitalizeFirstLetterOfWord.bind(
       this
@@ -68,3 +91,11 @@ export default class WikipediaWebView extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 15,
+    backgroundColor: '#fff',
+  },
+});
