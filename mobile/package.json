@@ -19,10 +19,13 @@
     "expo": "^29.0.0",
     "latlng-to-zip": "0.0.1",
     "lodash": "^4.17.10",
+    "metro-bundler": "^0.22.1",
+    "path": "^0.12.7",
     "qs": "^6.5.2",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-29.0.0.tar.gz",
     "react-native-maps": "^0.21.0",
+    "react-native-popup-menu": "^0.14.0",
     "react-test-renderer": "^16.4.2"
   },
   "devDependencies": {

@@ -8,15 +8,16 @@ import {
 // import HomeScreen from '../screens/HomeScreen';
 import TabBarIcon from '../components/TabBarIcon';
 import WikiScreen from '../screens/WikiScreen';
-import AnalysisScreen from '../screens/AnalysisScreen'
+import AnalysisScreen from '../screens/AnalysisScreen';
 import MapScreen from '../screens/MapScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import CameraScreen from '../screens/CameraScreen'
-import UserhomeScreen from '../screens/UserhomeScreen'
+import CameraScreen from '../screens/CameraScreen';
+import UserhomeScreen from '../screens/UserhomeScreen';
 import MyPlacesScreen from '../screens/MyPlacesScreen';
 import MyThingsScreen from '../screens/MyThingsScreen';
 import MyPeopleScreen from '../screens/MyPeopleScreen';
-import SingleLandMark from '../screens/SingleLandMark'
+import SingleLandMark from '../screens/SingleLandMark';
+import LandmarksNearMe from '../screens/LandmarksNearMe';
 
 const HomeStack = createStackNavigator({
   Home: CameraScreen,
@@ -25,10 +26,7 @@ const HomeStack = createStackNavigator({
 HomeStack.navigationOptions = {
   tabBarLabel: 'Camera',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={'md-camera'}
-    />
+    <TabBarIcon focused={focused} name={'md-camera'} />
   ),
 };
 
@@ -37,12 +35,7 @@ const MapStack = createStackNavigator({
 });
 MapStack.navigationOptions = {
   tabBarLabel: 'Map',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={'md-map'}
-    />
-  ),
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={'md-map'} />,
 };
 
 const WikiStack = createStackNavigator({
@@ -51,10 +44,7 @@ const WikiStack = createStackNavigator({
 WikiStack.navigationOptions = {
   tabBarLabel: 'Wiki',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={'md-keypad'}
-    />
+    <TabBarIcon focused={focused} name={'md-keypad'} />
   ),
 };
 
@@ -64,10 +54,7 @@ const AnalysisStack = createStackNavigator({
 AnalysisStack.navigationOptions = {
   tabBarLabel: 'Analysis',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={'md-analytics'}
-    />
+    <TabBarIcon focused={focused} name={'md-analytics'} />
   ),
 };
 
@@ -77,16 +64,13 @@ const ProfileStack = createStackNavigator({
   MyPlaces: MyPlacesScreen,
   MyThings: MyThingsScreen,
   MyPeople: MyPeopleScreen,
-  MyLandmark: SingleLandMark
-
+  MyLandmark: SingleLandMark,
+  NearMe: LandmarksNearMe,
 });
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={'md-person'}
-    />
+    <TabBarIcon focused={focused} name={'md-person'} />
   ),
 };
 
@@ -95,11 +79,7 @@ export default createBottomTabNavigator({
   MapStack,
   WikiStack,
   AnalysisStack,
-  ProfileStack
+  ProfileStack,
 });
-
-
-
-
 
 // name={'md-information-circle'}

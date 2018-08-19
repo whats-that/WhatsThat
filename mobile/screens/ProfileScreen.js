@@ -25,34 +25,7 @@ export default class LoginScreen extends React.Component {
   }
 
   login = evt => {
-    fetch('http://172.16.21.118:8080/api/users/login', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-      }),
-    })
-      .then(res => res.json())
-      .then(resJson => {
-        if (resJson.success === true) {
-          const userId = resJson.userId;
-          const email = resJson.email;
-          AsyncStorage.setItem('userId', userId);
-          AsyncStorage.setItem('email', email);
-          this.props.navigation.navigate('Userhome');
-        } else {
-          alert(resJson.message);
-        }
-      })
-      .done();
-  };
-
-  login = evt => {
-    fetch('http://172.16.21.118:8080/api/users/login', {
+    fetch('http://192.168.0.101:8080/api/users/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -79,7 +52,7 @@ export default class LoginScreen extends React.Component {
   };
 
   signup = evt => {
-    fetch('http://172.16.21.118:8080/api/users/signup', {
+    fetch('http://192.168.0.101:8080/api/users/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

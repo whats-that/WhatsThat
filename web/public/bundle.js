@@ -153,7 +153,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var landmark_images = ['http://images.nymag.com/travel/visitorsguide/photoops0712_1b_560.jpg', 'https://www.planetware.com/photos-large/USNY/new-york-city-brooklyn-bridge.jpg', 'https://thumbs-prod.si-cdn.com/zi63jyuo6KIGLAtwh06xU_ldWSQ=/800x600/filters:no_upscale()/https://public-media.smithsonianmag.com/filer/8c/08/8c087dbd-dfd0-446e-8f30-c964de6e87c9/central-park.jpg', 'https://imgs.6sqft.com/wp-content/uploads/2014/08/21033525/Grand_Central_Terminal_Lobby.jpg', 'http://cdn.brownstoner.com/wp-content/uploads/2016/01/east-new-york-brooklyn-landmark-preservation-rezoning-3.jpg', 'https://si.wsj.net/public/resources/images/BN-TJ019_NYTOWN_HD_20170509114050.jpg', 'https://static01.nyt.com/images/2016/12/14/nyregion/14LANDMARKS2/14LANDMARKS2-facebookJumbo.jpg', 'https://static1.squarespace.com/static/52da9677e4b03d314575985a/t/58d4f0dc1b10e32d585d3e9c/1490350310238/NYC+Hotels+Best+Views.jpg?format=1500w', 'https://a1.cdn-hotels.com/gdcs/production58/d1542/4d9c1080-c199-11e7-81c7-0242ac1101c4.jpg', 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Statue_of_Liberty%2C_NY.jpg', 'https://s24890.pcdn.co/wp-content/uploads/2017/10/New-York-City-Best-Photo-Locations-7.jpg', 'http://www.turizmoteka.hr/image/9873/original/', 'https://dicasnovayork.com.br/wp-content/uploads/2015/09/Flatiron-Building-1050x700.jpg', 'https://cdn.archpaper.com/wp-content/uploads/2017/08/NYPL_Jiahui-Huang_Flickr.jpg', 'https://thenypost.files.wordpress.com/2018/08/wash-park-arch.jpg?quality=90&strip=all&w=618&h=410&crop=1'];
+var landmark_images = ['https://dicasnovayork.com.br/wp-content/uploads/2015/09/Flatiron-Building-1050x700.jpg', 'https://attractionsofamerica-attractionsofame1.netdna-ssl.com/images/illinois/20170629131550_millenium-park.jpg', 'https://imgs.6sqft.com/wp-content/uploads/2014/08/21033525/Grand_Central_Terminal_Lobby.jpg', 'https://static1.squarespace.com/static/52da9677e4b03d314575985a/t/58d4f0dc1b10e32d585d3e9c/1490350310238/NYC+Hotels+Best+Views.jpg?format=1500w', 'http://www.obj.ca/sites/default/files/styles/article_main/public/2017-12/iStock-495755592.jpg?itok=XOzlUere', 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Statue_of_Liberty%2C_NY.jpg', 'https://static01.nyt.com/images/2016/12/14/nyregion/14LANDMARKS2/14LANDMARKS2-facebookJumbo.jpg', 'https://thumbs-prod.si-cdn.com/zi63jyuo6KIGLAtwh06xU_ldWSQ=/800x600/filters:no_upscale()/https://public-media.smithsonianmag.com/filer/8c/08/8c087dbd-dfd0-446e-8f30-c964de6e87c9/central-park.jpg', 'https://www.planetware.com/photos-large/USNY/new-york-city-brooklyn-bridge.jpg', 'http://cdn.brownstoner.com/wp-content/uploads/2016/01/east-new-york-brooklyn-landmark-preservation-rezoning-3.jpg', 'https://a1.cdn-hotels.com/gdcs/production58/d1542/4d9c1080-c199-11e7-81c7-0242ac1101c4.jpg', 'https://s24890.pcdn.co/wp-content/uploads/2017/10/New-York-City-Best-Photo-Locations-7.jpg', 'http://www.turizmoteka.hr/image/9873/original/', 'https://cdn.archpaper.com/wp-content/uploads/2017/08/NYPL_Jiahui-Huang_Flickr.jpg', 'https://thenypost.files.wordpress.com/2018/08/wash-park-arch.jpg?quality=90&strip=all&w=618&h=410&crop=1', 'https://si.wsj.net/public/resources/images/BN-TJ019_NYTOWN_HD_20170509114050.jpg', 'http://images.nymag.com/travel/visitorsguide/photoops0712_1b_560.jpg', 'https://lh3.googleusercontent.com/zg7CqQ4bzYUMQvFIkHLPJVLCg0zG6S68O89ca38tnTNx6Px67zgxjlCFriWbUsSW4RByNeSnDuZ7XN-GkqhLugUIE3hSfJeofO6nB4prpr1ljufe3lAcNrjkB3jH02MEn_Ir0zVd'];
 
 var About =
 /*#__PURE__*/
@@ -281,7 +281,7 @@ function (_Component) {
         className: "homepage-text"
       }, "Take a Photo,"), _react.default.createElement("div", {
         className: "homepage-text"
-      }, "Then, You Will Get the Answer!"))));
+      }, "\xA0", "\xA0", "\xA0", "\xA0", "\xA0", "\xA0", "\xA0", "\xA0", "\xA0", "\xA0", "Then, You Will Get the Answer!"))));
     }
   }]);
 
@@ -368,6 +368,109 @@ var mapDispatch = function mapDispatch(dispatch) {
 };
 
 var _default = (0, _reactRedux.connect)(mapState, mapDispatch)(Mine);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/components/Test.js":
+/*!***********************************!*\
+  !*** ./client/components/Test.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Test =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Test, _Component);
+
+  function Test() {
+    _classCallCheck(this, Test);
+
+    return _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).apply(this, arguments));
+  }
+
+  _createClass(Test, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        className: "test-top"
+      }, _react.default.createElement("div", {
+        className: "test-ex"
+      }, "Test WhatsThat with random images and texts")), _react.default.createElement("hr", null), _react.default.createElement("div", {
+        className: "test-top"
+      }, _react.default.createElement("div", {
+        className: "test-ex"
+      }, "Life\u2019s but a walking shadow, a poor player, that struts and frets his hour upon the stage, and then is heard no more; it is a tale told by an idiot, full of sound and fury, signifying nothing.")), _react.default.createElement("hr", null), _react.default.createElement("div", {
+        className: "test-top"
+      }, _react.default.createElement("div", {
+        className: "test-ex"
+      }, "Neighbours bring food with death and flowers with sickness and little things in between. Boo was our neighbour. He gave us two soap dolls, a broken watch and chain, a pair of good luck pennies, and our lives.")), _react.default.createElement("hr", null), _react.default.createElement("div", {
+        className: "test-top"
+      }, _react.default.createElement("div", {
+        className: "test-ex"
+      }, "The unexamined life is not worth living. we must reflect upon the life we live was partly inspired by the famous phrase inscribed at the shrine of the oracle at Delphi, \u201CKnow thyself.\u201D The key to finding value in the prophecies of the oracle was self-knowledge, not a decoder ring. Socrates felt so passionately about the value of self-examination that he closely examined not only his own beliefs and values but those of others as well. More precisely, through his relentless questioning, he forced people to examine their own beliefs. He saw the citizens of his beloved Athens sleepwalking through life, living only for money, power, and fame, so he became famous trying to help them.")), _react.default.createElement("hr", null), _react.default.createElement("div", {
+        className: "test-top"
+      }, _react.default.createElement("div", {
+        className: "test-ex"
+      }, "Full fathom five thy father lies, of his bones are coral made. Those are pearls that were his eyes. Nothing of him that doth fade, but doth suffer a sea-change into something rich and strange.")), _react.default.createElement("hr", null), _react.default.createElement("div", {
+        className: "test-top"
+      }, _react.default.createElement("div", {
+        className: "test-ex2"
+      }, "Pigs cannot fly. This often sarcastic idiom is commonly used among friends in the US to mean that whatever you are discussing will never happen. A similar saying was first used in Scotland in the late 1500s and a version of which even appeared in Lewis Carroll\u2019s 1865 novel Alice in Wonderland.")), _react.default.createElement("hr", null), _react.default.createElement("div", {
+        className: "test-top"
+      }, _react.default.createElement("div", {
+        className: "test-ex3"
+      }, "When someone does a runner, he leaves a place in a hurry in order to avoid paying for something (like in a restaurant) or flees a difficult situation to escape punishment. Like many British idioms, this particular idiom originates from one of Shakespeare\u2019s popular plays, Anthony and Cleopatra, a gripping story of romance and tragedy that was first performed in 1606.")), _react.default.createElement("hr", null), _react.default.createElement("div", {
+        className: "test-wrapper"
+      }));
+    }
+  }]);
+
+  return Test;
+}(_react.Component);
+
+var mapState = function mapState(state) {
+  return {};
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {};
+};
+
+var _default = (0, _reactRedux.connect)(mapState, mapDispatch)(Test);
 
 exports.default = _default;
 
@@ -533,6 +636,12 @@ Object.defineProperty(exports, "Mine", {
     return _Mine.default;
   }
 });
+Object.defineProperty(exports, "Test", {
+  enumerable: true,
+  get: function get() {
+    return _Test.default;
+  }
+});
 
 var _navbar = _interopRequireDefault(__webpack_require__(/*! ./navbar */ "./client/components/navbar.js"));
 
@@ -545,6 +654,8 @@ var _Homepage = _interopRequireDefault(__webpack_require__(/*! ./Homepage */ "./
 var _About = _interopRequireDefault(__webpack_require__(/*! ./About */ "./client/components/About.js"));
 
 var _Mine = _interopRequireDefault(__webpack_require__(/*! ./Mine */ "./client/components/Mine.js"));
+
+var _Test = _interopRequireDefault(__webpack_require__(/*! ./Test */ "./client/components/Test.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -595,6 +706,10 @@ var Navbar = function Navbar(_ref) {
   }, _react.default.createElement("div", {
     className: "item"
   }, "About")), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/test"
+  }, _react.default.createElement("div", {
+    className: "item"
+  }, "Text")), _react.default.createElement(_reactRouterDom.Link, {
     to: '/mine'
   }, _react.default.createElement("div", {
     className: "item"
@@ -618,6 +733,10 @@ var Navbar = function Navbar(_ref) {
   }, _react.default.createElement("div", {
     className: "item"
   }, "About")), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/test"
+  }, _react.default.createElement("div", {
+    className: "item"
+  }, "Text")), _react.default.createElement(_reactRouterDom.Link, {
     to: "/login"
   }, _react.default.createElement("div", {
     className: "item"
@@ -856,6 +975,9 @@ function (_Component) {
         path: "/login",
         component: _components.Login
       }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/test",
+        component: _components.Test
+      }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/signup",
         component: _components.Signup
       }), isLoggedIn && _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
@@ -866,6 +988,9 @@ function (_Component) {
         exact: true,
         path: "/about",
         component: _components.About
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/test",
+        component: _components.Test
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/mine",
         component: _components.Mine

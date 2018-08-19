@@ -36,10 +36,14 @@ class MapScreen extends React.Component {
 
   async componentDidMount() {
     const userId = await AsyncStorage.getItem('userId');
+    const latitude = await AsyncStorage.getItem('latitude');
+    const longitude = await AsyncStorage.getItem('longitude');
+    console.log(longitude);
     console.log('userId is... ', userId);
     this.setState({ userId });
     await this.props.fetchUserLandmark(Number(this.state.userId));
     // console.log('user current landmark.. ', this.props.userCurrentLandmark);
+
     if (this.props.userCurrentLandmark.coordinates) {
       this.setState({
         region: {
@@ -50,11 +54,22 @@ class MapScreen extends React.Component {
         },
       });
     }
+  }
 
+  async componentWillReceiveProps(nextProps) {
+    if (nextProps.userCurrentLandmark !== this.props.userCurrentLandmark) {
+      this.setState({
+        region: {
+          latitude: nextProps.userCurrentLandmark.coordinates[0],
+          longitude: nextProps.userCurrentLandmark.coordinates[1],
+          latitudeDelta: 0.09,
+          longitudeDelta: 0.04,
+        },
+      });
+    }
   }
 
   render() {
-    console.log('map screen this.props: ', this.props);
     return (
       <View style={{ flex: 1 }}>
         <View
@@ -64,17 +79,21 @@ class MapScreen extends React.Component {
             flex: 0.2,
             flexDirection: 'row',
             justifyContent: 'space-between',
-            backgroundColor: 'white'
+            backgroundColor: 'white',
           }}
         >
           {/* <View> */}
-            <Text style={{ fontSize: 17, marginLeft: 30, marginTop: 15 }}>Popular</Text>
+          <Text style={{ fontSize: 17, marginLeft: 30, marginTop: 15 }}>
+            Popular
+          </Text>
           {/* </View> */}
           {/* <View> */}
-            <Text style={{ fontSize: 17, marginTop: 15 }}>Eat</Text>
+          <Text style={{ fontSize: 17, marginTop: 15 }}>Eat</Text>
           {/* </View> */}
           {/* <View> */}
-            <Text style={{ fontSize: 17, marginRight: 30, marginTop: 15 }}>People</Text>
+          <Text style={{ fontSize: 17, marginRight: 30, marginTop: 15 }}>
+            People
+          </Text>
           {/* </View> */}
         </View>
         <MapView style={{ flex: 1 }} region={this.state.region} />
