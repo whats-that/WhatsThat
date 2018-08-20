@@ -36,6 +36,66 @@ class MapScreen extends React.Component {
     this.setState({ selectedIndex });
   }
 
+  async componentDidMount() {
+    this.setState({ loading: true });
+    const userId = await AsyncStorage.getItem('userId');
+    const latitude = await AsyncStorage.getItem('latitude');
+    const longitude = await AsyncStorage.getItem('longitude');
+    console.log(longitude);
+    console.log('userId is... ', userId);
+    this.setState({ userId });
+    await this.props.fetchUserLandmark(Number(this.state.userId));
+    // console.log('user current landmark.. ', this.props.userCurrentLandmark);
+
+    if (this.props.userCurrentLandmark.coordinates) {
+      this.setState({
+        region: {
+          latitude: this.props.userCurrentLandmark.coordinates[0],
+          longitude: this.props.userCurrentLandmark.coordinates[1],
+          latitudeDelta: 0.09,
+          longitudeDelta: 0.04,
+        },
+      });
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.userCurrentLandmark !== prevState.userCurrentLandmark) {
+      return {
+        region: {
+          latitude: nextProps.userCurrentLandmark.coordinates[0],
+          longitude: nextProps.userCurrentLandmark.coordinates[1],
+        },
+      };
+    }
+  }
+
+  // static getDerivedStateFromProps(props, state) {
+  //   // Any time the current user changes,
+  //   // Reset any parts of state that are tied to that user.
+  //   // In this simple example, that's just the email.
+  //   if (props.userID !== state.prevPropsUserID) {
+  //     return {
+  //       prevPropsUserID: props.userID,
+  //       email: props.defaultEmail,
+  //     };
+  //   }
+  //   return null;
+  // }
+
+  // async componentWillReceiveProps(nextProps) {
+  //   if (nextProps.userCurrentLandmark !== this.props.userCurrentLandmark) {
+  //     this.setState({
+  //       region: {
+  //         latitude: nextProps.userCurrentLandmark.coordinates[0],
+  //         longitude: nextProps.userCurrentLandmark.coordinates[1],
+  //         latitudeDelta: 0.09,
+  //         longitudeDelta: 0.04,
+  //       },
+  //     });
+  //   }
+  // }
+
   render() {
     const buttons = ['Popular', 'Eat', 'People'];
     const { selectedIndex } = this.state;
@@ -71,7 +131,17 @@ class MapScreen extends React.Component {
           </Text>
           {/* </View> */}
         </View>
-        <LandmarksNearMe navigation={this.props.navigation} />
+        <MapView style={{ flex: 1 }} region={this.state.region}>
+          {this.props.userCurrentLandmark && (
+            <MapView.Marker
+              coordinate={{
+                latitude: this.state.region.latitude,
+                longitude: this.state.region.longitude,
+              }}
+              title={this.props.userCurrentLandmark.name}
+            />
+          )}
+        </MapView>
       </View>
     );
   }

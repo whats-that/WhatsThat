@@ -38,7 +38,7 @@ class AnalysisScreen extends React.Component {
     try {
       await soundObject.stopAsync();
     } catch (err) {
-      console.error(err); 
+      console.error(err);
     }
   }
 
@@ -46,7 +46,7 @@ class AnalysisScreen extends React.Component {
     try {
       await soundObject.pauseAsync();
     } catch (err) {
-      console.error(err); 
+      console.error(err);
     }
   }
 
