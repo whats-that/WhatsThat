@@ -7,7 +7,9 @@ import {
   Alert,
 } from 'react-native';
 
-export default class WikiScreen extends React.Component {
+import {connect} from 'react-redux';
+
+class WikiScreen extends React.Component {
   static navigationOptions = {
     title: 'Wiki',
   };
@@ -27,6 +29,14 @@ export default class WikiScreen extends React.Component {
     this.hideActivityIndicator = this.hideActivityIndicator.bind(this);
   }
 
+  componentWillReceiveProps(nextProps){
+    if (nextProps.searchString !== this.props.searchString){
+      this.setState({
+        acitivityIndicatorIsVisible: true
+      })
+    }
+  }
+
   hideActivityIndicator() {
     this.setState({
       acitivityIndicatorIsVisible: false,
@@ -43,8 +53,9 @@ export default class WikiScreen extends React.Component {
     return capitalizedFirstLetterArray;
   }
 
-  appropriateStringForWikipediaSearch(keyword) {
-    const wordsWithoutSpacesArray = keyword.split(' ');
+  appropriateStringForWikipediaSearch() {
+    // const wordsWithoutSpacesArray = keyword.split(' ');
+    const wordsWithoutSpacesArray = this.props.searchString.split(' ');
 
     const capitalizedFirstLetterForWordsArray = this.capitalizeFirstLetterOfWord(
       wordsWithoutSpacesArray
@@ -54,15 +65,15 @@ export default class WikiScreen extends React.Component {
   }
 
   render() {
-    var searchString = '';
-    if (this.props.navigation.state.params === 'no data') {
-      searchString = 'no data';
-      Alert.alert('No data found!');
-    } else if (this.props.navigation.state.params) {
-      searchString = this.props.navigation.state.params.keyword;
-    } else {
-      searchString = 'computer vision';
-    }
+    // var searchString = '';
+    // if (this.props.navigation.state.params === 'no data') {
+    //   searchString = 'no data';
+    //   Alert.alert('No data found!');
+    // } else if (this.props.navigation.state.params) {
+    //   searchString = this.props.navigation.state.params.keyword;
+    // } else {
+    //   searchString = 'computer vision';
+    // }
     return (
       <View style={{ flex: 1 }}>
         <WebView
@@ -70,7 +81,7 @@ export default class WikiScreen extends React.Component {
           source={{
             uri:
               'https://www.wikipedia.org/wiki/' +
-              this.appropriateStringForWikipediaSearch(searchString),
+              this.appropriateStringForWikipediaSearch(),
           }}
         />
         {this.state.acitivityIndicatorIsVisible ? (
@@ -80,6 +91,14 @@ export default class WikiScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    searchString: state.searchString,
+  }
+}
+
+export default connect(mapStateToProps, null)(WikiScreen);
 
 const styles = StyleSheet.create({
   container: {
