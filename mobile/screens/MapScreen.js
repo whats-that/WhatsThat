@@ -68,6 +68,7 @@ class MapScreen extends React.Component {
         },
       };
     }
+    return null;
   }
 
   // static getDerivedStateFromProps(props, state) {
