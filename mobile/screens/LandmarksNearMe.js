@@ -5,7 +5,6 @@ import MapView from 'react-native-maps';
 export default class LandmarksNearMe extends React.Component {
     constructor(){
         super();
-
         this.state = {
             landmarks: [],
             region: {
@@ -16,7 +15,6 @@ export default class LandmarksNearMe extends React.Component {
             },
             geocoderBody: {},
         };
-
         this.landmarkWasPressed = this.landmarkWasPressed.bind(this);
     }
 
@@ -44,7 +42,7 @@ export default class LandmarksNearMe extends React.Component {
                 }
             });
 
-            let results = await axios.post('http://172.16.23.255:8080/api/geocoder', this.state.geocoderBody);
+            let results = await axios.post('http://172.16.21.118:8080/api/geocoder', this.state.geocoderBody);
 
             let locationObjects = [];
 
