@@ -74,6 +74,15 @@ ProfileStack.navigationOptions = {
   ),
 };
 
+// const TestStack = createStackNavigator({
+// });
+// TestStack.navigationOptions = {
+//   tabBarLabel: 'Test',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon focused={focused} name={'md-analytics'} />
+//   ),
+// };
+
 export default createBottomTabNavigator({
   HomeStack, // default view
   MapStack,
@@ -81,5 +90,3 @@ export default createBottomTabNavigator({
   AnalysisStack,
   ProfileStack,
 });
-
-// name={'md-information-circle'}

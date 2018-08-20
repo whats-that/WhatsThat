@@ -11,10 +11,12 @@ import {
   View,
   Button,
   AsyncStorage,
+  ActivityIndicator,
 } from 'react-native';
 import { MapView } from 'expo';
 import { connect } from 'react-redux';
 import { fetchUserLandmark } from '../reducers/landmark';
+import { ButtonGroup } from 'react-native-elements';
 
 class MapScreen extends React.Component {
   static navigationOptions = {
@@ -31,10 +33,17 @@ class MapScreen extends React.Component {
         longitudeDelta: 0.04,
       },
       userId: '',
+      selectedIndex: 2,
+      loading: false,
     };
+    this.updateIndex = this.updateIndex.bind(this);
+  }
+  updateIndex(selectedIndex) {
+    this.setState({ selectedIndex });
   }
 
   async componentDidMount() {
+    this.setState({ loading: true });
     const userId = await AsyncStorage.getItem('userId');
     const latitude = await AsyncStorage.getItem('latitude');
     const longitude = await AsyncStorage.getItem('longitude');
@@ -70,8 +79,23 @@ class MapScreen extends React.Component {
   }
 
   render() {
+    const buttons = ['Popular', 'Eat', 'People'];
+    const { selectedIndex } = this.state;
+    if (!this.state.loading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
+    }
     return (
       <View style={{ flex: 1 }}>
+        <ButtonGroup
+          onPress={this.updateIndex}
+          selectedIndex={selectedIndex}
+          buttons={buttons}
+          containerStyle={{ height: 70 }}
+        />
         <View
           style={{
             height: 40,
@@ -96,7 +120,15 @@ class MapScreen extends React.Component {
           </Text>
           {/* </View> */}
         </View>
-        <MapView style={{ flex: 1 }} region={this.state.region} />
+        <MapView style={{ flex: 1 }} region={this.state.region}>
+          <MapView.Marker
+            coordinate={{
+              latitude: this.state.region.latitude,
+              longitude: this.state.region.longitude,
+            }}
+            title={this.props.userCurrentLandmark.name}
+          />
+        </MapView>
       </View>
     );
   }

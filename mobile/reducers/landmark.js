@@ -54,7 +54,7 @@ export const fetchUserLandmark = userId => async dispatch => {
     const landmarks = res.data;
     dispatch(getUserLandmark(landmarks));
   } catch (err) {
-    console.log('error in thunk creator: ', err);
+    console.error('error in thunk creator: ', err);
   }
 };
 
@@ -67,14 +67,14 @@ export const createLandmark = landmark => async dispatch => {
     const newlandmark = res.data;
     dispatch(addLandmark(newlandmark));
   } catch (err) {
-    console.log('error in thunk creator: ', err);
+    console.error('error in thunk creator: ', err);
   }
 };
 
 export default function(state = [], action) {
   switch (action.type) {
     // case GET_LANDMARK:
-    //   return
+    //   return action.landmark
     case GET_LANDMARKS:
       return action.landmarks;
     case GET_USER_LANDMARKS:

@@ -10,7 +10,7 @@ import {
   Button,
 } from 'react-native';
 import { connect } from 'react-redux';
-import axios from 'axios'
+import axios from 'axios';
 
 class MyPlacesScreen extends React.Component {
   static navigationOptions = {
@@ -30,14 +30,16 @@ class MyPlacesScreen extends React.Component {
   }
 
   landmarkRender(landmark) {
-    console.log('this props we are looking for', this.props)
+    console.log('this props we are looking for', this.props);
     return (
       <View key={landmark.id}>
         <Text>{landmark.name}</Text>
         <Text>{landmark.rating} Stars</Text>
         <Button
           title={landmark.comment ? 'Edit review' : 'Review'}
-          onPress={() => this.props.navigation.navigate('MyLandmark', {id: landmark.id})}
+          onPress={() =>
+            this.props.navigation.navigate('MyLandmark', { id: landmark.id })
+          }
         >
           {' '}
           {/* will redirect to singlelandmark*/}

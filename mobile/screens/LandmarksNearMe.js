@@ -5,7 +5,6 @@ import MapView from 'react-native-maps';
 export default class LandmarksNearMe extends React.Component {
     constructor(){
         super();
-
         this.state = {
             landmarks: [],
             region: {
@@ -16,7 +15,6 @@ export default class LandmarksNearMe extends React.Component {
             },
             geocoderBody: {},
         };
-
         this.landmarkWasPressed = this.landmarkWasPressed.bind(this);
     }
 

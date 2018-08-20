@@ -21,8 +21,9 @@ import {
   renderers,
 } from 'react-native-popup-menu';
 const { SlideInMenu } = renderers;
-
+import Loader from './Loader';
 import { createLandmark } from '../reducers/landmark';
+import { createThing } from '../reducers/thing';
 
 class CameraScreen extends React.Component {
   constructor() {
@@ -36,6 +37,7 @@ class CameraScreen extends React.Component {
       photoBlob: {},
       userId: '',
       textDetection: false,
+      loading: false,
     };
     this.takePicture = this.takePicture.bind(this);
     this.onPictureSaved = this.onPictureSaved.bind(this);
@@ -142,8 +144,13 @@ class CameraScreen extends React.Component {
     this.props.navigation.navigate('Analysis', { text });
   };
 
-
   async usePicture() {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({
+        loading: false,
+      });
+    }, 5000);
     console.log(this.state.textDetection);
     // const imageFile = new File(this.state.previewSource)
     if (!this.state.textDetection) {
@@ -158,24 +165,36 @@ class CameraScreen extends React.Component {
         name: apiData.name,
         image: apiData.image,
         coordinates: apiData.coordinates,
-        accuracy: apiData.accuracy
+        accuracy: apiData.accuracy,
       };
       landmarkObj.userId = Number(this.state.userId);
 
-      // var latitude = landmarkObj.coordinates[0]
-      // var longitude = landmarkObj.coordinates[1]
-      // console.log(longitude)
-      // AsyncStorage.setItem('latitude', parseFloat(latitude))
-      // AsyncStorage.setItem('longitude', parseFloat(longitude))
+      const label = apiData.label.description;
+      const label_r = apiData.label.score;
+      const keywords = apiData.webEntities.map(el => el.description);
+      const keywords_r = apiData.webEntities.map(el => el.score);
+      console.log(apiData);
+      const images = apiData.webImages.map(el => el.url);
 
+      var thingObj = {
+        label,
+        label_r,
+        keywords,
+        keywords_r,
+        images,
+      };
+      thingObj.userId = Number(this.state.userId);
+      this.setState({ loading: false });
       if (result.data.name) {
         console.log('landmark exists');
         this.props.createLandmark(landmarkObj);
-        this.goToAnalysis(apiData);
+        this.props.createThing(thingObj);
+        this.goToAnalysis(thingObj);
         this.goToWiki(result.data.name);
       } else {
         console.log('no landmark exists');
-        this.goToAnalysis(apiData);
+        this.props.createThing(thingObj);
+        this.goToAnalysis(thingObj);
       }
     } else {
       console.log('use picture for text detection....');
@@ -184,6 +203,7 @@ class CameraScreen extends React.Component {
         this.state.photoBlob
       );
       var text = result.data;
+      this.setState({ loading: false });
       this.goToTextAnalysis(text);
     }
   }
@@ -197,6 +217,7 @@ class CameraScreen extends React.Component {
     } else {
       return this.state.previewImage ? (
         <View style={{ flex: 1 }}>
+          <Loader loading={this.state.loading} />
           <ImageBackground
             source={{ uri: this.state.previewSource }}
             resizeMode="cover"
@@ -243,13 +264,6 @@ class CameraScreen extends React.Component {
               this.camera = ref;
             }}
           >
-            {/* <View
-              style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
-              }}
-            /> */}
             <View
               style={{
                 flex: 1,
@@ -258,18 +272,6 @@ class CameraScreen extends React.Component {
                 alignSelf: 'center',
               }}
             >
-              {/* <TouchableOpacity
-                // onPress={() => this.setState({ previewImage: false })}
-                style={styles.textToggle}
-              >
-                <Ionicons
-                  name={'md-paper'}
-                  size={30}
-                  color="white"
-                  style={{}}
-                />
-              </TouchableOpacity> */}
-
               <TouchableOpacity
                 onPress={this.takePicture}
                 style={{ alignSelf: 'flex-end' }}
@@ -287,6 +289,7 @@ class CameraScreen extends React.Component {
 const mapState = state => ({});
 const mapDispatch = dispatch => ({
   createLandmark: landmark => dispatch(createLandmark(landmark)),
+  createThing: thing => dispatch(createThing(thing)),
 });
 
 export default connect(

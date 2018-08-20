@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
-  "packagerPort": 19002,
-  "packagerPid": 41213,
-  "expoServerNgrokUrl": "https://73-qei.lbheart.mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.73-qei.lbheart.mobile.exp.direct",
-  "ngrokPid": 41228,
+  "packagerPort": 19001,
+  "packagerPid": 4808,
+  "expoServerNgrokUrl": "https://ge-dun.lbheart.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.ge-dun.lbheart.mobile.exp.direct",
+  "ngrokPid": 4843,
   "devToolsPort": 19008
 }

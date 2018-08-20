@@ -14,13 +14,12 @@ router.post('/getDataFromGoogleAPI', async (req, res, next) => {
     let base64Data = img.replace(/^data:image\/png;base64,/, '')
     let binaryData = new Buffer.from(base64Data, 'base64').toString('binary')
     await fs.writeFile('out.png', binaryData, 'binary', function(err) {
-      console.log(err) // writes out file without error, but it's not a valid image
+      console.log('image error: ', err) // writes out file without error, but it's not a valid image
     })
 
     console.log('Start Google Vision API... ')
     const filename = path.join(__dirname, '../../out.png')
 
-    // const logoDetectionResult = await client.logoDetection(filename)
     const [
       landmarkDectectionResult,
       webDetectionResult,
@@ -31,13 +30,6 @@ router.post('/getDataFromGoogleAPI', async (req, res, next) => {
       client.labelDetection(filename)
     ])
     console.log('processing...')
-    const foo = () => {
-      console.log(
-        'web dection pages.... : ',
-        webDetectionResult[0].webDetection.pagesWithMatchingImages
-      )
-    }
-    // foo()
     console.log(
       'web dection.webEntities ... : ',
       webDetectionResult[0].webDetection
@@ -46,13 +38,15 @@ router.post('/getDataFromGoogleAPI', async (req, res, next) => {
       'label dection[0].labelAnnotations.. ',
       labelDetectionResult[0].labelAnnotations[0]
     )
-    // console.log('web dection visuals ... : ', webDetetionResult[0].webDetection.visuallySimilarImages[0].url)
+    console.log(
+      'web dection visuals ... : ',
+      webDetectionResult[0].webDetection.visuallySimilarImages
+    )
 
     const landmark = landmarkDectectionResult[0].landmarkAnnotations[0]
     console.log('Landmark Detection Start... ')
     console.log(landmark)
-    // console.log(landmark.description)
-    // console.log(landmark.locations[0].latLng) // e.g. {latitude: 40.718639, longitude: -74.013519}
+
     var returnObj = {}
     if (landmark) {
       returnObj = {
@@ -63,12 +57,14 @@ router.post('/getDataFromGoogleAPI', async (req, res, next) => {
           landmark.locations[0].latLng.longitude
         ],
         accuracy: Number(landmark.score.toFixed(2)),
-        webEntities: webDetectionResult[0].webDetection.webEntities, // array: description (replated keywords), score (correlation),
+        webEntities: webDetectionResult[0].webDetection.webEntities,
+        webImages: webDetectionResult[0].webDetection.visuallySimilarImages,
         label: labelDetectionResult[0].labelAnnotations[0]
       }
     } else {
       returnObj = {
-        webEntities: webDetectionResult[0].webDetection.webEntities, // array: description (replated keywords), score (correlation),
+        webEntities: webDetectionResult[0].webDetection.webEntities,
+        webImages: webDetectionResult[0].webDetection.visuallySimilarImages,
         label: labelDetectionResult[0].labelAnnotations[0]
       }
     }
@@ -78,13 +74,14 @@ router.post('/getDataFromGoogleAPI', async (req, res, next) => {
     // try w/ all
     // if (logo) console.log('logo is...', logo)
     // else console.log('no logo')
-    console.log('touchh here')
+    console.log('touch here')
     res.send(returnObj)
 
     res.end()
     // res.setHeader('Content-Type', 'text/html')
     // res.redirect('/')
   } catch (err) {
+    // res.send("fail")
     console.error('Detection Process Completed...')
   }
 })
@@ -229,6 +226,10 @@ module.exports = router
 //     })
 //   res.send('store picture to the bucket ...  ')
 // })
+
+// const logoDetectionResult = await client.logoDetection(filename)
+// console.log(landmark.description)
+// console.log(landmark.locations[0].latLng) // e.g. {latitude: 40.718639, longitude: -74.013519}
 
 /* middleware to deal with header issue */
 // // middleware that does not modify the response body
