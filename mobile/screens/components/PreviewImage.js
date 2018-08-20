@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
 	View,
 	ImageBackground,
@@ -9,12 +9,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { createLandmark } from '../../reducers/landmark';
-
+import { createThing } from '../../reducers/thing'
+import Loader from '../Loader'
 
 class PreviewImage extends Component {
 	constructor () {
 		super();
 		this.usePicture = this.usePicture.bind(this);
+		this.goToWiki = this.goToWiki.bind(this);
+		this.goToAnalysis = this.goToAnalysis.bind(this);
+		this.goToTextAnalysis = this.goToTextAnalysis.bind(this);
+		this.textDetection = this.textDetection.bind(this);
 	}
 
 	async UNSAFE_componentWillMount () {
@@ -24,28 +29,86 @@ class PreviewImage extends Component {
 		console.log(this.state)
 	}
 
+	async textDetection () {
+		console.log('use picture for text detection....');
+		const result = await axios.post(
+			'http://172.16.23.112:8080/api/server/textToVoice',
+			this.state.photoBlob
+		);
+		var text = result.data;
+		this.setState({ loading: false });
+		this.goToTextAnalysis(text);
+	}
+
+	async landmarkDetection () {
+		console.log('2use picture for landmark detection....');
+		const result = await axios.post(
+			'http://172.16.23.112:8080/api/server/getDataFromGoogleAPI',
+			this.state.photoBlob
+		);
+		var apiData = result.data;
+		// console.log(apiData)
+		var landmarkObj = {
+			name: apiData.name,
+			image: apiData.image,
+			coordinates: apiData.coordinates,
+			accuracy: apiData.accuracy,
+		};
+		landmarkObj.userId = Number(this.state.userId);
+
+		const label = apiData.label.description;
+		const label_r = apiData.label.score;
+		const keywords = apiData.webEntities.map(el => el.description);
+		const keywords_r = apiData.webEntities.map(el => el.score);
+		console.log(apiData);
+		const images = apiData.webImages.map(el => el.url);
+
+		var thingObj = {
+			label,
+			label_r,
+			keywords,
+			keywords_r,
+			images,
+		};
+		thingObj.userId = Number(this.state.userId);
+		this.setState({ loading: false });
+		if (result.data.name) {
+			console.log('landmark exists');
+			this.props.createLandmark(landmarkObj);
+			this.props.createThing(thingObj);
+			this.goToAnalysis(thingObj);
+			this.goToWiki(result.data.name);
+		} else {
+			console.log('no landmark exists');
+			this.props.createThing(thingObj);
+			this.goToAnalysis(thingObj);
+		}
+	}
   async usePicture() {
-    const result = await axios.post(
-      'http://172.16.23.112:8080/api/server/getDataFromGoogleAPI',
-      this.state.photoBlob
-    );
-    console.log('this props... ', this.props);
-    var landmarkObj = result.data;
-    landmarkObj.userId = console.log(
-      landmarkObj.name,
-      landmarkObj.coordinates,
-      landmarkObj.userId
-    );
-
-    landmarkObj.userId = Number(this.state.userId);
-
-    this.props.createLandmark(landmarkObj);
-    this.goToWiki(result.data.name);
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({
+        loading: false,
+      });
+    }, 5000);
+    console.log(this.state.textDetection);
+		if (!this.state.textDetection) await this.landmarkDetection();
+		else await this.textDetection();
   }
 
 	goToWiki = passingData => {
     console.log('hit gotoWiki....');
     this.props.navigation.navigate('Wiki', { keyword: passingData });
+	};
+
+	goToAnalysis = data => {
+    console.log('go to analysis... ');
+    this.props.navigation.navigate('Analysis', { data });
+  };
+
+  goToTextAnalysis = text => {
+    console.log('go to text analysis... ');
+    this.props.navigation.navigate('Analysis', { text });
 	};
 
 	render() {
@@ -56,6 +119,7 @@ class PreviewImage extends Component {
 					resizeMode="cover"
 					style={{ flex: 1, width: undefined, height: undefined }}
 				>
+					<Loader loading={this.state.loading} />
 					<View
 						style={{
 							position: "absolute",
@@ -92,7 +156,8 @@ class PreviewImage extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  createLandmark: landmark => dispatch(createLandmark(landmark)),
+	createLandmark: landmark => dispatch(createLandmark(landmark)),
+	createThing: thing => dispatch(createThing(thing))
 });
 
 export default connect(

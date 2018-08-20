@@ -21,9 +21,11 @@ import {
   renderers,
 } from 'react-native-popup-menu';
 const { SlideInMenu } = renderers;
-import Loader from './Loader';
 import { createLandmark } from '../reducers/landmark';
 import { createThing } from '../reducers/thing';
+import CameraComponent from './components/CameraComponent';
+import PreviewImage from './components/PreviewImage';
+import NoPermission from './components/NoPermission';
 
 class CameraScreen extends React.Component {
   constructor() {
@@ -109,85 +111,8 @@ class CameraScreen extends React.Component {
       newPhotos: true,
       photoBlob: photo,
     });
-  };
-
-  goToWiki = passingData => {
-    this.props.navigation.navigate('Wiki', { keyword: passingData });
-  };
-
-  goToAnalysis = data => {
-    console.log('go to analysis... ');
-    this.props.navigation.navigate('Analysis', { data });
-  };
-
-  goToTextAnalysis = text => {
-    console.log('go to text analysis... ');
-    this.props.navigation.navigate('Analysis', { text });
-  };
-
-  async usePicture() {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({
-        loading: false,
-      });
-    }, 5000);
-    console.log(this.state.textDetection);
-    // const imageFile = new File(this.state.previewSource)
-    if (!this.state.textDetection) {
-      console.log('2use picture for landmark detection....');
-      const result = await axios.post(
-        'http://172.16.21.118:8080/api/server/getDataFromGoogleAPI',
-        this.state.photoBlob
-      );
-      var apiData = result.data;
-      // console.log(apiData)
-      var landmarkObj = {
-        name: apiData.name,
-        image: apiData.image,
-        coordinates: apiData.coordinates,
-        accuracy: apiData.accuracy,
-      };
-      landmarkObj.userId = Number(this.state.userId);
-
-      const label = apiData.label.description;
-      const label_r = apiData.label.score;
-      const keywords = apiData.webEntities.map(el => el.description);
-      const keywords_r = apiData.webEntities.map(el => el.score);
-      console.log(apiData);
-      const images = apiData.webImages.map(el => el.url);
-
-      var thingObj = {
-        label,
-        label_r,
-        keywords,
-        keywords_r,
-        images,
-      };
-      thingObj.userId = Number(this.state.userId);
-      this.setState({ loading: false });
-      if (result.data.name) {
-        console.log('landmark exists');
-        this.props.createLandmark(landmarkObj);
-        this.props.createThing(thingObj);
-        this.goToAnalysis(thingObj);
-        this.goToWiki(result.data.name);
-      } else {
-        console.log('no landmark exists');
-        this.props.createThing(thingObj);
-        this.goToAnalysis(thingObj);
-      }
-    } else {
-      console.log('use picture for text detection....');
-      const result = await axios.post(
-        'http://172.16.21.118:8080/api/server/textToVoice',
-        this.state.photoBlob
-      );
-      var text = result.data;
-      this.setState({ loading: false });
-      this.goToTextAnalysis(text);
-    }
   }
+
 
   render() {
     const { hasCameraPermission } = this.state;
