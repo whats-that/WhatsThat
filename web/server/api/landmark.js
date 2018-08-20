@@ -11,6 +11,20 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/id/:id', async (req, res, next) => {
+  try {
+    const landmarks = await Landmark.findById({
+      where: {
+        id: req.params.id
+      },
+      attributes: ['name', 'rating', 'comment', 'createdAt', 'image']
+    })
+    res.json(landmarks)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:userId', async (req, res, next) => {
   try {
     console.log('server... userId', req.params.userId)
@@ -19,20 +33,6 @@ router.get('/:userId', async (req, res, next) => {
         userId: req.params.userId
       },
       attributes: ['name', 'coordinates', 'userId', 'createdAt']
-    })
-    res.json(landmarks)
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.get('/id/:id', async (req, res, next) => {
-  try {
-    const landmarks = await Landmark.findById({
-      where: {
-        id: req.params.id
-      },
-      attributes: ['name', 'rating', 'comment', 'createdAt', 'image']
     })
     res.json(landmarks)
   } catch (err) {

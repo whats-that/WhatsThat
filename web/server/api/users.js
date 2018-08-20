@@ -13,6 +13,21 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:userId/history', async (req, res, next) => {
+  try {
+    console.log('user is...!:', req.params.userId)
+    const landmarks = await Landmark.findAll({
+      where: {
+        userId: req.params.userId
+      },
+      attributes: ['id', 'name', 'rating']
+    })
+    res.json(landmarks)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({
@@ -44,20 +59,5 @@ router.post('/signup', async (req, res, next) => {
     } else {
       next(err)
     }
-  }
-})
-
-router.get('/:id/history', async (req, res, next) => {
-  try {
-    console.log('user is...!:', req.params.id)
-    const landmarks = await Landmark.findAll({
-      where: {
-        userId: req.params.id
-      },
-      attributes: ['id', 'name', 'rating']
-    })
-    res.json(landmarks)
-  } catch (error) {
-    next(error)
   }
 })

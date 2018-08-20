@@ -24,6 +24,7 @@ const { SlideInMenu } = renderers;
 import Loader from './Loader';
 import { createLandmark } from '../reducers/landmark';
 import { createThing } from '../reducers/thing';
+import searchString, {setSearchString} from '../reducers/searchString';
 
 class CameraScreen extends React.Component {
   constructor() {
@@ -131,7 +132,8 @@ class CameraScreen extends React.Component {
   };
 
   goToWiki = passingData => {
-    this.props.navigation.navigate('Wiki', { keyword: passingData });
+    this.props.setSearchString(passingData);
+    this.props.navigation.navigate('Wiki');
   };
 
   goToAnalysis = data => {
@@ -184,6 +186,9 @@ class CameraScreen extends React.Component {
         keywords_r,
         images,
       };
+      if (!this.state.userId) {
+        thingObj.userId = 1
+      }
       thingObj.userId = Number(this.state.userId);
       this.setState({ loading: false });
       if (result.data.name) {
@@ -291,6 +296,7 @@ const mapState = state => ({});
 const mapDispatch = dispatch => ({
   createLandmark: landmark => dispatch(createLandmark(landmark)),
   createThing: thing => dispatch(createThing(thing)),
+  setSearchString: (searchString) => dispatch(setSearchString(searchString)),
 });
 
 export default connect(

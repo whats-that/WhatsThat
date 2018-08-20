@@ -176,14 +176,4 @@ router.get('/getDataFromGoogleAPI', (req, res, next) => {
   })
 })
 
-router.get('/history/:id', async (req, res, next) => {
-  try {
-    console.log(req.params.id)
-    const landmark = await Landmark.findById(req.params.id)
-    res.json(landmark)
-  } catch (error) {
-    next(error)
-  }
-})
-
 module.exports = router
