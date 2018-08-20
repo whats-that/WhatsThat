@@ -32,7 +32,7 @@ router.get('/id/:id', async (req, res, next) => {
       where: {
         id: req.params.id
       },
-      attributes: ['name', 'coordinates', 'rating', 'comment', 'createdAt', 'image']
+      attributes: ['name', 'rating', 'comment', 'createdAt', 'image']
     })
     res.json(landmarks)
   } catch (err) {
