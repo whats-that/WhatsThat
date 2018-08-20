@@ -17,6 +17,7 @@ import { MapView } from 'expo';
 import { connect } from 'react-redux';
 import { fetchUserLandmark } from '../reducers/landmark';
 import { ButtonGroup } from 'react-native-elements';
+import LandmarksNearMe from './LandmarksNearMe';
 
 class MapScreen extends React.Component {
   static navigationOptions = {
@@ -26,15 +27,8 @@ class MapScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      region: {
-        latitude: 40.705137,
-        longitude: -74.007624,
-        latitudeDelta: 0.09,
-        longitudeDelta: 0.04,
-      },
       userId: '',
       selectedIndex: 2,
-      loading: false,
     };
     this.updateIndex = this.updateIndex.bind(this);
   }
@@ -71,7 +65,7 @@ class MapScreen extends React.Component {
         region: {
           latitude: nextProps.userCurrentLandmark.coordinates[0],
           longitude: nextProps.userCurrentLandmark.coordinates[1],
-        }
+        },
       };
     }
   }
@@ -105,13 +99,6 @@ class MapScreen extends React.Component {
   render() {
     const buttons = ['Popular', 'Eat', 'People'];
     const { selectedIndex } = this.state;
-    if (!this.state.loading) {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <ActivityIndicator size="large" />
-        </View>
-      );
-    }
     return (
       <View style={{ flex: 1 }}>
         <ButtonGroup
