@@ -15,33 +15,16 @@ class WikiScreen extends React.Component {
 
   constructor() {
     super(...arguments);
-    // this.props.navigation.getParams('keyword', 'NO-ID'),
-    if (this.props.navigation.state.params === 'no data') {
-      this.state = {
-        searchString: this.props.navigation.state.params.keyword,
-        acitivityIndicatorIsVisible: true,
-      };
-      Alert.alert('No data found!');
-    } else if (this.props.navigation.state.params) {
-      this.state = {
-        searchString: this.props.navigation.state.params.keyword,
-        acitivityIndicatorIsVisible: true,
-      };
-    } else {
-      this.state = {
-        searchString: 'computer vision',
-        acitivityIndicatorIsVisible: true,
-      };
-    }
-
+    this.state = {
+      // searchString: '',
+      acitivityIndicatorIsVisible: true,
+    };
     this.capitalizeFirstLetterOfWord = this.capitalizeFirstLetterOfWord.bind(
       this
     );
-
     this.appropriateStringForWikipediaSearch = this.appropriateStringForWikipediaSearch.bind(
       this
     );
-
     this.hideActivityIndicator = this.hideActivityIndicator.bind(this);
   }
 
@@ -53,14 +36,11 @@ class WikiScreen extends React.Component {
 
   capitalizeFirstLetterOfWord(arrOfWords) {
     let capitalizedFirstLetterArray = [];
-
     arrOfWords.forEach(word => {
       const newWord =
         word.charAt(0).toUpperCase() + word.substring(1, word.length);
-
       capitalizedFirstLetterArray.push(newWord);
     });
-
     return capitalizedFirstLetterArray;
   }
 
@@ -76,6 +56,15 @@ class WikiScreen extends React.Component {
   }
 
   render() {
+    var searchString = '';
+    if (this.props.navigation.state.params === 'no data') {
+      searchString = 'no data';
+      Alert.alert('No data found!');
+    } else if (this.props.navigation.state.params) {
+      searchString = this.props.navigation.state.params.keyword;
+    } else {
+      searchString = 'computer vision';
+    }
     return (
       <View style={{ flex: 1 }}>
         <WebView
@@ -83,7 +72,7 @@ class WikiScreen extends React.Component {
           source={{
             uri:
               'https://www.wikipedia.org/wiki/' +
-              this.appropriateStringForWikipediaSearch(),
+              this.appropriateStringForWikipediaSearch(searchString),
           }}
         />
         {this.state.acitivityIndicatorIsVisible ? (

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "expoServerPort": 19002,
   "packagerPort": 19003,
   "packagerPid": 2664,
@@ -6,4 +7,12 @@
   "packagerNgrokUrl": "https://packager.73-qei.jlangsam89.mobile.exp.direct",
   "ngrokPid": 2679,
   "devToolsPort": 19002
+=======
+  "expoServerPort": 19003,
+  "packagerPort": 19004,
+  "packagerPid": 18647,
+  "expoServerNgrokUrl": "https://ge-dun.lbheart.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.ge-dun.lbheart.mobile.exp.direct",
+  "ngrokPid": 18663
+>>>>>>> master
 }

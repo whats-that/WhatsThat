@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
 import auth from './auth';
 import landmark from './landmark';
-import searchString from './searchString';
+
+import thing from './thing';
+// import location from './location'
 
 export default combineReducers({
-  auth, landmark, searchString
+  auth, landmark, thing, searchString
+  // , location
 });

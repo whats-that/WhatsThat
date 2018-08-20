@@ -29,6 +29,10 @@ const list = [
     title: 'MyPeople',
     icon: 'people',
   },
+  {
+    title: 'NearMe',
+    icon: 'map',
+  },
 ];
 
 class Userhome extends React.Component {
@@ -66,11 +70,11 @@ class Userhome extends React.Component {
           }}
         >
           <UserAvatar name="Ryan S" size={100} style={{ marginTop: 70 }} />
-          <Text style={{ fontSize: 20, margin: 10 }}>
+          <Text style={{ fontSize: 20, marginTop: 10 }}>
             {this.state.userEmail}
           </Text>
         </ImageBackground>
-        <View>
+        <View style={{backgroundColor: 'rgb(233, 255, 252)', marginTop: 0, paddingTop: 0}} >
           <List>
             {list.map(item => (
               <TouchableOpacity
@@ -96,10 +100,3 @@ export default connect(
   mapState,
   mapDispatch
 )(Userhome);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
