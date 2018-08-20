@@ -30,7 +30,6 @@ class CameraScreen extends React.Component {
     super();
     this.state = {
       hasCameraPermission: null,
-      type: Camera.Constants.Type.back,
       newPhotos: false,
       previewImage: false,
       previewSource: '',
@@ -39,9 +38,8 @@ class CameraScreen extends React.Component {
       textDetection: false,
       loading: false,
     };
-    this.takePicture = this.takePicture.bind(this);
-    this.onPictureSaved = this.onPictureSaved.bind(this);
-    this.usePicture = this.usePicture.bind(this);
+    this.exitPicture = this.exitPicture.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -86,12 +84,6 @@ class CameraScreen extends React.Component {
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
-    // FileSystem.makeDirectoryAsync(
-    //   FileSystem.documentDirectory + 'photos'
-    // ).catch(e => {
-    //   console.log(e, 'Directory exists');
-    // });
-
     const userId = await AsyncStorage.getItem('userId');
     this.setState({ userId });
     this.setToggle = this.setToggle.bind(this);
@@ -103,25 +95,14 @@ class CameraScreen extends React.Component {
     if (key === 'text') this.setState({ textDetection: true });
     else this.setState({ textDetection: false });
   }
-
-  async takePicture() {
-    if (this.camera) {
-      const blob = await this.camera.takePictureAsync({
-        onPictureSaved: this.onPictureSaved,
-        base64: true,
-        quality: 0.1,
-      });
-    }
-  }
-
-  onPictureSaved = async photo => {
-    let destinationUri = `photos/${Date.now()}.jpg`;
-    const destinationPath = `${FileSystem.documentDirectory}${destinationUri}`;
-    destinationUri = '/' + destinationPath.substring(8);
-    await FileSystem.moveAsync({
-      from: photo.uri,
-      to: destinationPath,
+  
+  async exitPicture() {
+    await this.setState({
+      previewImage: false
     });
+  }
+  
+  async updateState(destinationUri, photo) {      //setState that is passable to child camera component
     await this.setState({
       previewImage: true,
       previewSource: destinationUri,
@@ -213,75 +194,9 @@ class CameraScreen extends React.Component {
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return <NoPermission />;
     } else {
-      return this.state.previewImage ? (
-        <View style={{ flex: 1 }}>
-          <Loader loading={this.state.loading} />
-          <ImageBackground
-            source={{ uri: this.state.previewSource }}
-            resizeMode="cover"
-            style={{ flex: 1, width: undefined, height: undefined }}
-          >
-            <View
-              style={{
-                position: 'absolute',
-                right: 0,
-                bottom: 0,
-                left: 0,
-                backgroundColor: 'transparent',
-                // opacity: 0.3,
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => this.setState({ previewImage: false })}
-                style={{ alignSelf: 'flex-end', paddingLeft: 10 }}
-              >
-                <Ionicons name="md-close-circle" size={60} color="#cc0000" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={this.usePicture}
-                style={{ alignSelf: 'flex-end', paddingRight: 10 }}
-              >
-                <Ionicons
-                  name="ios-arrow-dropright-circle"
-                  size={60}
-                  color="#00ffcc"
-                />
-              </TouchableOpacity>
-            </View>
-          </ImageBackground>
-        </View>
-      ) : (
-        <View style={{ flex: 1 }}>
-          <Camera
-            style={{ flex: 1 }}
-            type={this.state.type}
-            ref={ref => {
-              this.camera = ref;
-            }}
-          >
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
-                alignSelf: 'center',
-              }}
-            >
-              <TouchableOpacity
-                onPress={this.takePicture}
-                style={{ alignSelf: 'flex-end' }}
-              >
-                <Ionicons name="ios-radio-button-on" size={70} color="white" />
-              </TouchableOpacity>
-            </View>
-          </Camera>
-        </View>
-      );
+      return this.state.previewImage ? <PreviewImage state={this.state} exitPicture={this.exitPicture} navigation={this.props.navigation} /> : <CameraComponent state={this.state} updateState={this.updateState}/>;
     }
   }
 }
