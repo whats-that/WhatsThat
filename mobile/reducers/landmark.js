@@ -27,7 +27,11 @@ const getUserLandmark = landmarks => ({
 
 export const fetchLandmarks = () => async dispatch => {
   try {
+<<<<<<< HEAD
+    const res = await axios.get('http://172.16.21.174:8080/api/landmark');
+=======
     const res = await axios.get('http://172.16.21.118:8080/api/landmark');
+>>>>>>> master
     const landmarks = res.data;
     dispatch(getLandmarks(landmarks));
   } catch (err) {
@@ -49,7 +53,11 @@ export const fetchUserLandmark = userId => async dispatch => {
   try {
     console.log('fetch user landmark thunk start.. ');
     const res = await axios.get(
+<<<<<<< HEAD
+      `http://172.16.21.174:8080/api/landmark/${userId}`
+=======
       `http://172.16.21.118:8080/api/landmark/${userId}`
+>>>>>>> master
     );
     const landmarks = res.data;
     dispatch(getUserLandmark(landmarks));
@@ -61,7 +69,11 @@ export const fetchUserLandmark = userId => async dispatch => {
 export const createLandmark = landmark => async dispatch => {
   try {
     const res = await axios.post(
+<<<<<<< HEAD
+      `http://172.16.21.174:8080/api/landmark`,
+=======
       `http://172.16.21.118:8080/api/landmark`,
+>>>>>>> master
       landmark
     );
     const newlandmark = res.data;

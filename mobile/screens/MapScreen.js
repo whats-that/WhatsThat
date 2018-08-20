@@ -16,6 +16,7 @@ import {
 import { MapView } from 'expo';
 import { connect } from 'react-redux';
 import { fetchUserLandmark } from '../reducers/landmark';
+import LandmarksNearMe from '../Components/LandmarksNearMe';
 import { ButtonGroup } from 'react-native-elements';
 
 class MapScreen extends React.Component {
@@ -43,26 +44,21 @@ class MapScreen extends React.Component {
   }
 
   async componentDidMount() {
-    this.setState({ loading: true });
-    const userId = await AsyncStorage.getItem('userId');
-    const latitude = await AsyncStorage.getItem('latitude');
-    const longitude = await AsyncStorage.getItem('longitude');
-    console.log(longitude);
-    console.log('userId is... ', userId);
-    this.setState({ userId });
-    await this.props.fetchUserLandmark(Number(this.state.userId));
+    // const userId = await AsyncStorage.getItem('userId');
+    // console.log('userId is... ', userId);
+    // this.setState({ userId });
+    // await this.props.fetchUserLandmark(Number(this.state.userId));
     // console.log('user current landmark.. ', this.props.userCurrentLandmark);
-
-    if (this.props.userCurrentLandmark.coordinates) {
-      this.setState({
-        region: {
-          latitude: this.props.userCurrentLandmark.coordinates[0],
-          longitude: this.props.userCurrentLandmark.coordinates[1],
-          latitudeDelta: 0.09,
-          longitudeDelta: 0.04,
-        },
-      });
-    }
+    // if (this.props.userCurrentLandmark.coordinates) {
+    //   this.setState({
+    //     region: {
+    //       latitude: this.props.userCurrentLandmark.coordinates[0],
+    //       longitude: this.props.userCurrentLandmark.coordinates[1],
+    //       latitudeDelta: 0.09,
+    //       longitudeDelta: 0.04,
+    //     },
+    //   });
+    // }
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -120,7 +116,8 @@ class MapScreen extends React.Component {
           </Text>
           {/* </View> */}
         </View>
-        <MapView style={{ flex: 1 }} region={this.state.region}>
+       <LandmarksNearMe navigation={this.props.navigation} />
+        {/* <MapView style={{ flex: 1 }} region={this.state.region}>
           <MapView.Marker
             coordinate={{
               latitude: this.state.region.latitude,
@@ -128,7 +125,7 @@ class MapScreen extends React.Component {
             }}
             title={this.props.userCurrentLandmark.name}
           />
-        </MapView>
+        </MapView> */}
       </View>
     );
   }

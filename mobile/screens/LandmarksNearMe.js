@@ -1,8 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import MapView from 'react-native-maps';
+import { Button } from 'react-native-elements';
+import {connect} from 'react-redux'
+import {get_searchString} from '../reducers/searchString'
 
-export default class LandmarksNearMe extends React.Component {
+import {View, Text, TouchableOpacity} from 'react-native'
+
+class LandmarksNearMe extends React.Component {
     constructor(){
         super();
         this.state = {
@@ -14,12 +19,15 @@ export default class LandmarksNearMe extends React.Component {
                 longitudeDelta: 0,
             },
             geocoderBody: {},
+            // landmarkDetails: ''
         };
         this.landmarkWasPressed = this.landmarkWasPressed.bind(this);
     }
 
     landmarkWasPressed(event){
         console.warn(event);
+        this.props.newSearchString(event.name);
+        this.props.navigation.navigate('Wiki', { keyword: event.name });
     }
 
     componentDidMount(){
@@ -42,7 +50,11 @@ export default class LandmarksNearMe extends React.Component {
                 }
             });
 
+<<<<<<< HEAD:mobile/Components/LandmarksNearMe.js
+            let results = await axios.post('http://172.16.21.174:8080/api/geocoder', this.state.geocoderBody);
+=======
             let results = await axios.post('http://172.16.21.118:8080/api/geocoder', this.state.geocoderBody);
+>>>>>>> master:mobile/screens/LandmarksNearMe.js
 
             let locationObjects = [];
 
@@ -54,6 +66,7 @@ export default class LandmarksNearMe extends React.Component {
                 };
 
                     locationObjects.push(locationToAdd);
+                    console.warn('')
             });
 
             this.setState({
@@ -71,10 +84,25 @@ export default class LandmarksNearMe extends React.Component {
         {this.state.landmarks.map((landmark) => (
            <MapView.Marker
             coordinate={{latitude: landmark.latitude, longitude: landmark.longitude}}
-              title={landmark.name} onPress={() => this.landmarkWasPressed(landmark)}
-            key={landmark.name} />
+              title={landmark.name}
+            key={landmark.name} description={'clickable text'}>
+            <MapView.Callout>
+        <View>
+            <Text>{landmark.name}</Text>
+            <Text onPress={() => this.landmarkWasPressed(landmark)} style={{color: 'blue'}}>more...</Text>
+        </View>
+    </MapView.Callout>
+    </MapView.Marker>
           ))}
           </MapView>
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        newSearchString: (searchString) => dispatch(get_searchString(searchString)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LandmarksNearMe);

@@ -9,6 +9,7 @@ import {
   Button,
 } from 'react-native';
 import { connect } from 'react-redux';
+import {get_searchString} from '../reducers/searchString';
 import { Camera, Permissions, FileSystem } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
@@ -131,7 +132,11 @@ class CameraScreen extends React.Component {
   };
 
   goToWiki = passingData => {
-    this.props.navigation.navigate('Wiki', { keyword: passingData });
+    console.log('hit gotoWiki....');
+    // this.props.navigation.navigate('Wiki', { keyword: passingData });
+
+    this.props.searchString(passingData);
+    this.props.navigation.navigate('Wiki');
   };
 
   goToAnalysis = data => {
@@ -289,6 +294,7 @@ class CameraScreen extends React.Component {
 const mapState = state => ({});
 const mapDispatch = dispatch => ({
   createLandmark: landmark => dispatch(createLandmark(landmark)),
+  searchString: (searchString) => dispatch(get_searchString(searchString)),
   createThing: thing => dispatch(createThing(thing)),
 });
 
