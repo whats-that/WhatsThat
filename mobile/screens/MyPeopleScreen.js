@@ -26,9 +26,7 @@ class MyPeopleScreen extends React.Component {
 }
 
 const mapState = state => ({});
-
 const mapDispatch = dispatch => ({});
-
 export default connect(
   mapState,
   mapDispatch

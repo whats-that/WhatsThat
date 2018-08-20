@@ -4,9 +4,6 @@ import { Facebook } from 'expo';
 const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
 const FACEBOOK_LOGIN_FAIL = 'facebook_login_fail';
 
-// How to use AsyncStorage:
-// AsyncStorage.setItem('fb_token', token);
-// AsyncStorage.getItem('fb_token');
 export const facebookLogin = () => async dispatch => {
   let token = await AsyncStorage.getItem('fb_token');
   if (token) {
