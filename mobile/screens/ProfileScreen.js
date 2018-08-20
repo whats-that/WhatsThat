@@ -25,6 +25,7 @@ export default class LoginScreen extends React.Component {
   }
 
   login = evt => {
+    console.log("login start")
     fetch('http://172.16.21.118:8080/api/users/login', {
       method: 'POST',
       headers: {

@@ -163,6 +163,8 @@ router.get('/getDataFromGoogleAPI', (req, res, next) => {
         res.send(landmark.description)
       })
     })
+        .catch(err => {
+          console.error('ERROR:', err)
 
     // .labelDetection(filename)
     // .then(results => {
@@ -171,19 +173,17 @@ router.get('/getDataFromGoogleAPI', (req, res, next) => {
     //   console.log('Results:', results)
     //   // labels.forEach(label => console.log(label.description))
     // })
-    .catch(err => {
-      console.error('ERROR:', err)
-    })
-  // res.send('get data from google API ...  ')
+  })
 })
 
 router.get('/history', async (req, res, next) => {
   try {
+    console.log('user is...!:', req.user)
     const landmarks = await Landmark.findAll({
       where: {
-        userId: 1
+        userId: req.user
       },
-      attributes: ['id', 'name', 'rating', 'comment']
+      // attributes: ['id', 'name', 'rating', 'comment']
     })
     res.json(landmarks)
   } catch (error) {
