@@ -1,11 +1,9 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
 } from 'react-navigation';
 
-// import HomeScreen from '../screens/HomeScreen';
 import TabBarIcon from '../Components/TabBarIcon';
 import WikiScreen from '../screens/WikiScreen';
 import AnalysisScreen from '../screens/AnalysisScreen';
@@ -73,15 +71,6 @@ ProfileStack.navigationOptions = {
     <TabBarIcon focused={focused} name={'md-person'} />
   ),
 };
-
-// const TestStack = createStackNavigator({
-// });
-// TestStack.navigationOptions = {
-//   tabBarLabel: 'Test',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon focused={focused} name={'md-analytics'} />
-//   ),
-// };
 
 export default createBottomTabNavigator({
   HomeStack, // default view

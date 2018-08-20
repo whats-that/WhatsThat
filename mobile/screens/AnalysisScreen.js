@@ -1,19 +1,15 @@
 import React from 'react';
 import {
   Image,
-  Platform,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
   Linking,
-  Button,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-import { TabBarIOS } from 'react-native';
-import { WebBrowser, Audio } from 'expo';
+import { Audio } from 'expo';
 import {
   Menu,
   MenuOptions,
@@ -21,8 +17,7 @@ import {
   MenuTrigger,
   MenuProvider,
 } from 'react-native-popup-menu';
-import { ProgressCircle, StackedBarChart } from 'react-native-svg-charts';
-import { Icon, Badge } from 'react-native-elements';
+import { ProgressCircle } from 'react-native-svg-charts';
 
 class AnalysisScreen extends React.Component {
   static navigationOptions = {
@@ -31,21 +26,19 @@ class AnalysisScreen extends React.Component {
 
   async makeVoice(soundObject) {
     // var soundObject = new Audio.Sound();
-    console.log('make voice start ...');
     try {
       await soundObject.unloadAsync();
       await soundObject.loadAsync(require('./out.mp3'));
       await soundObject.playAsync();
-      // Your sound is playing!
     } catch (err) {
-      console.log(err); // An error occurred!
+      console.error(err);
     }
   }
   async stopVoice(soundObject) {
     try {
       await soundObject.stopAsync();
     } catch (err) {
-      console.log(err); // An error occurred!
+      console.error(err);
     }
   }
 
@@ -53,12 +46,11 @@ class AnalysisScreen extends React.Component {
     try {
       await soundObject.pauseAsync();
     } catch (err) {
-      console.log(err); // An error occurred!
+      console.error(err);
     }
   }
 
   render() {
-    // console.log(this.props.navigation.state.params);
     var soundObject = new Audio.Sound();
     const colors = [
       'rgb(72, 163, 224)',

@@ -1,8 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import MapView from 'react-native-maps';
+import {setSearchString} from '../reducers/searchString';
+import {connect} from 'react-redux';
 
-export default class LandmarksNearMe extends React.Component {
+import {View, Text, TouchableOpacity} from 'react-native'
+
+class LandmarksNearMe extends React.Component {
     constructor(){
         super();
         this.state = {
@@ -19,7 +23,10 @@ export default class LandmarksNearMe extends React.Component {
     }
 
     landmarkWasPressed(event){
-        console.warn(event);
+        // console.warn(event);
+        this.props.setSearchString(event.name);
+        // this.props.navigation.navigate('Wiki', { keyword: event.name });
+        this.props.navigation.navigate('Wiki');
     }
 
     componentDidMount(){
@@ -60,7 +67,7 @@ export default class LandmarksNearMe extends React.Component {
                 landmarks: locationObjects,
             });
 
-            console.warn(this.state.landmarks);
+            // console.warn(this.state.landmarks);
         });
     }
 
@@ -71,10 +78,25 @@ export default class LandmarksNearMe extends React.Component {
         {this.state.landmarks.map((landmark) => (
            <MapView.Marker
             coordinate={{latitude: landmark.latitude, longitude: landmark.longitude}}
-              title={landmark.name} onPress={() => this.landmarkWasPressed(landmark)}
-            key={landmark.name} />
+              title={landmark.name}
+            key={landmark.name} description={'clickable text'}>
+            <MapView.Callout>
+        <View>
+            <Text>{landmark.name}</Text>
+            <Text onPress={() => this.landmarkWasPressed(landmark)} style={{color: 'blue'}}>more...</Text>
+        </View>
+    </MapView.Callout>
+    </MapView.Marker>
           ))}
           </MapView>
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setSearchString: (searchString) => dispatch(setSearchString(searchString)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LandmarksNearMe);
