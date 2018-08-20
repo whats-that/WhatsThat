@@ -17,6 +17,7 @@ import { MapView } from 'expo';
 import { connect } from 'react-redux';
 import { fetchUserLandmark } from '../reducers/landmark';
 import { ButtonGroup } from 'react-native-elements';
+import LandmarksNearMe from './LandmarksNearMe';
 
 class MapScreen extends React.Component {
   static navigationOptions = {
@@ -26,15 +27,8 @@ class MapScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      region: {
-        latitude: 40.705137,
-        longitude: -74.007624,
-        latitudeDelta: 0.09,
-        longitudeDelta: 0.04,
-      },
       userId: '',
       selectedIndex: 2,
-      loading: false,
     };
     this.updateIndex = this.updateIndex.bind(this);
   }
@@ -42,52 +36,9 @@ class MapScreen extends React.Component {
     this.setState({ selectedIndex });
   }
 
-  async componentDidMount() {
-    this.setState({ loading: true });
-    const userId = await AsyncStorage.getItem('userId');
-    const latitude = await AsyncStorage.getItem('latitude');
-    const longitude = await AsyncStorage.getItem('longitude');
-    console.log(longitude);
-    console.log('userId is... ', userId);
-    this.setState({ userId });
-    await this.props.fetchUserLandmark(Number(this.state.userId));
-    // console.log('user current landmark.. ', this.props.userCurrentLandmark);
-
-    if (this.props.userCurrentLandmark.coordinates) {
-      this.setState({
-        region: {
-          latitude: this.props.userCurrentLandmark.coordinates[0],
-          longitude: this.props.userCurrentLandmark.coordinates[1],
-          latitudeDelta: 0.09,
-          longitudeDelta: 0.04,
-        },
-      });
-    }
-  }
-
-  async componentWillReceiveProps(nextProps) {
-    if (nextProps.userCurrentLandmark !== this.props.userCurrentLandmark) {
-      this.setState({
-        region: {
-          latitude: nextProps.userCurrentLandmark.coordinates[0],
-          longitude: nextProps.userCurrentLandmark.coordinates[1],
-          latitudeDelta: 0.09,
-          longitudeDelta: 0.04,
-        },
-      });
-    }
-  }
-
   render() {
     const buttons = ['Popular', 'Eat', 'People'];
     const { selectedIndex } = this.state;
-    if (!this.state.loading) {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <ActivityIndicator size="large" />
-        </View>
-      );
-    }
     return (
       <View style={{ flex: 1 }}>
         <ButtonGroup
@@ -120,15 +71,7 @@ class MapScreen extends React.Component {
           </Text>
           {/* </View> */}
         </View>
-        <MapView style={{ flex: 1 }} region={this.state.region}>
-          <MapView.Marker
-            coordinate={{
-              latitude: this.state.region.latitude,
-              longitude: this.state.region.longitude,
-            }}
-            title={this.props.userCurrentLandmark.name}
-          />
-        </MapView>
+        <LandmarksNearMe navigation={this.props.navigation} />
       </View>
     );
   }

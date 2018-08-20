@@ -1,14 +1,17 @@
 import React from 'react';
-import { Text, View, TextInput, Button, Picker, Image } from 'react-native';
+import { Text, View, TextInput, Button, Image } from 'react-native';
+import { Rating } from 'react-native-elements'
 import axios from 'axios';
 
 export default class SingleLandMark extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      landmark: { name: 'test' },
+      name: '',
+      date: '',
       rating: 5,
-      comment: 'This is a test comment',
+      comment: '',
+      image: ''
     };
     this.update = this.update.bind(this);
   }
@@ -19,12 +22,13 @@ export default class SingleLandMark extends React.Component {
       this.props.navigation.state.params.id
     );
     const res = await axios.get(
-      `http://172.16.21.118:8080/api/server/history/${
+      `http://whatsthat-capstone.herokuapp.com/api/landmark/id/${
         this.props.navigation.state.params.id
       }`
     );
     this.setState({
-      landmark: res.data,
+      name: res.data.name,
+      date: res.data.createdAt,
       rating: res.data.rating,
       comment: res.data.comment,
     });
@@ -44,13 +48,13 @@ export default class SingleLandMark extends React.Component {
           alignItems: 'center',
         }}
       >
-        {/* <Image style={{
+        <Image style={{
           width: 300,
           height: 300,
           resizeMode: Image.resizeMode.contain,
         }}
-          source={{uri:`data:image/png;base64,${this.state.landmark.base64}`}}/> */}
-        <Text>{this.state.landmark.name}</Text>
+          source={{uri:`data:image/png;base64,${this.state.image}`}}/>
+        <Text>{this.state.name}</Text>
         <Text>Stars</Text>
         <TextInput
           style={{
@@ -63,17 +67,6 @@ export default class SingleLandMark extends React.Component {
           onChangeText={rating => this.setState({ rating: Number(rating) })}
           value={'' + this.state.rating}
         />
-        {/* <Picker
-          selectedValue={this.state.rating}
-          style={{width: 40}}
-          onValueChange={itemValue => this.setState({rating: itemValue})}
-          mode='dropdown'>
-          <Picker.Item label='1' value='1' />
-          <Picker.Item label='2' value='2' />
-          <Picker.Item label='3' value='3' />
-          <Picker.Item label='4' value='4' />
-          <Picker.Item label='5' value='5' />
-        </Picker> */}
         <Text>Comment</Text>
         <TextInput
           style={{
