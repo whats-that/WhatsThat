@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import MapView from 'react-native-maps';
-// import {get_searchString} from '../reducers/searchString'
+import {setSearchString} from '../reducers/searchString';
+import {connect} from 'react-redux';
 
 import {View, Text, TouchableOpacity} from 'react-native'
 
-export default class LandmarksNearMe extends React.Component {
+class LandmarksNearMe extends React.Component {
     constructor(){
         super();
         this.state = {
@@ -22,9 +23,10 @@ export default class LandmarksNearMe extends React.Component {
     }
 
     landmarkWasPressed(event){
-        console.warn(event);
-        // this.props.newSearchString(event.name);
-        this.props.navigation.navigate('Wiki', { keyword: event.name });
+        // console.warn(event);
+        this.props.setSearchString(event.name);
+        // this.props.navigation.navigate('Wiki', { keyword: event.name });
+        this.props.navigation.navigate('Wiki');
     }
 
     componentDidMount(){
@@ -59,14 +61,13 @@ export default class LandmarksNearMe extends React.Component {
                 };
 
                     locationObjects.push(locationToAdd);
-                    console.warn('')
             });
 
             this.setState({
                 landmarks: locationObjects,
             });
 
-            console.warn(this.state.landmarks);
+            // console.warn(this.state.landmarks);
         });
     }
 
@@ -91,3 +92,11 @@ export default class LandmarksNearMe extends React.Component {
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setSearchString: (searchString) => dispatch(setSearchString(searchString)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LandmarksNearMe);
