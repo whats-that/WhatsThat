@@ -152,6 +152,7 @@ class CameraScreen extends React.Component {
       this.setState({
         loading: false,
       });
+      alert('process failure!')
     }, 5000);
     console.log(this.state.textDetection);
     // const imageFile = new File(this.state.previewSource)
