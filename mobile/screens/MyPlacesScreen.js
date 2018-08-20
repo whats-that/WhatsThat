@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   Button,
+  AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -24,7 +25,8 @@ class MyPlacesScreen extends React.Component {
   }
 
   async componentDidMount() {
-    const res = await axios.get('http://whatsthat-capstone.herokuapp.com/api/server/history')
+    const id = AsyncStorage.getItem('userId')
+    const res = await axios.get(`http://whatsthat-capstone.herokuapp.com/api/users/${id}/history`)
     console.log('res', res.data)
     this.setState({landmarks: res.data})
   }
@@ -40,10 +42,7 @@ class MyPlacesScreen extends React.Component {
           onPress={() =>
             this.props.navigation.navigate('MyLandmark', { id: landmark.id })
           }
-        >
-          {' '}
-          {/* will redirect to singlelandmark*/}
-        </Button>
+        />
       </View>
     );
   }

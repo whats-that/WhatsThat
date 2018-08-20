@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Landmark} = require('../db/models')
+const { Landmark } = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -19,6 +19,20 @@ router.get('/:userId', async (req, res, next) => {
         userId: req.params.userId
       },
       attributes: ['name', 'coordinates', 'userId', 'createdAt']
+    })
+    res.json(landmarks)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/id/:id', async (req, res, next) => {
+  try {
+    const landmarks = await Landmark.findById({
+      where: {
+        id: req.params.id
+      },
+      attributes: ['name', 'coordinates', 'rating', 'comment', 'createdAt', 'image']
     })
     res.json(landmarks)
   } catch (err) {

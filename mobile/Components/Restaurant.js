@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, View, Image } from 'react-native'
+import { Rating } from 'react-native-elements'
 
 export default class Restaurant extends React.Component {
   constructor(props) {
