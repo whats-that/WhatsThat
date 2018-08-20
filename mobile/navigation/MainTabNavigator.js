@@ -6,7 +6,7 @@ import {
 } from 'react-navigation';
 
 // import HomeScreen from '../screens/HomeScreen';
-import TabBarIcon from '../components/TabBarIcon';
+import TabBarIcon from '../Components/TabBarIcon';
 import WikiScreen from '../screens/WikiScreen';
 import AnalysisScreen from '../screens/AnalysisScreen';
 import MapScreen from '../screens/MapScreen';
