@@ -27,11 +27,11 @@ const getUserLandmark = landmarks => ({
 
 export const fetchLandmarks = () => async dispatch => {
   try {
-    const res = await axios.get('http://172.16.23.255:8080/api/landmark');
+    const res = await axios.get('http://172.16.21.118:8080/api/landmark');
     const landmarks = res.data;
     dispatch(getLandmarks(landmarks));
   } catch (err) {
-    console.log('error in thunk creator: ', err);
+    console.error('error in thunk creator: ', err);
   }
 };
 
@@ -49,32 +49,32 @@ export const fetchUserLandmark = userId => async dispatch => {
   try {
     console.log('fetch user landmark thunk start.. ');
     const res = await axios.get(
-      `http://172.16.23.255:8080/api/landmark/${userId}`
+      `http://172.16.21.118:8080/api/landmark/${userId}`
     );
     const landmarks = res.data;
     dispatch(getUserLandmark(landmarks));
   } catch (err) {
-    console.log('error in thunk creator: ', err);
+    console.error('error in thunk creator: ', err);
   }
 };
 
 export const createLandmark = landmark => async dispatch => {
   try {
     const res = await axios.post(
-      `http://172.16.23.255:8080/api/landmark`,
+      `http://172.16.21.118:8080/api/landmark`,
       landmark
     );
     const newlandmark = res.data;
     dispatch(addLandmark(newlandmark));
   } catch (err) {
-    console.log('error in thunk creator: ', err);
+    console.error('error in thunk creator: ', err);
   }
 };
 
 export default function(state = [], action) {
   switch (action.type) {
     // case GET_LANDMARK:
-    //   return
+    //   return action.landmark
     case GET_LANDMARKS:
       return action.landmarks;
     case GET_USER_LANDMARKS:
