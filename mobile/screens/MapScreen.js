@@ -65,18 +65,42 @@ class MapScreen extends React.Component {
     }
   }
 
-  async componentWillReceiveProps(nextProps) {
-    if (nextProps.userCurrentLandmark !== this.props.userCurrentLandmark) {
-      this.setState({
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.userCurrentLandmark !== prevState.userCurrentLandmark) {
+      return {
         region: {
           latitude: nextProps.userCurrentLandmark.coordinates[0],
           longitude: nextProps.userCurrentLandmark.coordinates[1],
-          latitudeDelta: 0.09,
-          longitudeDelta: 0.04,
-        },
-      });
+        }
+      };
     }
   }
+
+  // static getDerivedStateFromProps(props, state) {
+  //   // Any time the current user changes,
+  //   // Reset any parts of state that are tied to that user.
+  //   // In this simple example, that's just the email.
+  //   if (props.userID !== state.prevPropsUserID) {
+  //     return {
+  //       prevPropsUserID: props.userID,
+  //       email: props.defaultEmail,
+  //     };
+  //   }
+  //   return null;
+  // }
+
+  // async componentWillReceiveProps(nextProps) {
+  //   if (nextProps.userCurrentLandmark !== this.props.userCurrentLandmark) {
+  //     this.setState({
+  //       region: {
+  //         latitude: nextProps.userCurrentLandmark.coordinates[0],
+  //         longitude: nextProps.userCurrentLandmark.coordinates[1],
+  //         latitudeDelta: 0.09,
+  //         longitudeDelta: 0.04,
+  //       },
+  //     });
+  //   }
+  // }
 
   render() {
     const buttons = ['Popular', 'Eat', 'People'];
@@ -121,13 +145,15 @@ class MapScreen extends React.Component {
           {/* </View> */}
         </View>
         <MapView style={{ flex: 1 }} region={this.state.region}>
-          <MapView.Marker
-            coordinate={{
-              latitude: this.state.region.latitude,
-              longitude: this.state.region.longitude,
-            }}
-            title={this.props.userCurrentLandmark.name}
-          />
+          {this.props.userCurrentLandmark && (
+            <MapView.Marker
+              coordinate={{
+                latitude: this.state.region.latitude,
+                longitude: this.state.region.longitude,
+              }}
+              title={this.props.userCurrentLandmark.name}
+            />
+          )}
         </MapView>
       </View>
     );
