@@ -3,15 +3,30 @@ import {
 	View,
 	ImageBackground,
 	TouchableOpacity,
-	Ionicons
 } from 'react-native';
-import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
 
-export default class PreviewImage extends Component {
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { createLandmark } from '../../reducers/landmark';
+
+
+class PreviewImage extends Component {
+	constructor () {
+		super();
+		this.usePicture = this.usePicture.bind(this);
+	}
+
+	async UNSAFE_componentWillMount () {
+		await this.setState({
+			...this.props.state
+		});
+		console.log(this.state)
+	}
 
   async usePicture() {
     const result = await axios.post(
-      'http://172.16.23.255:8080/api/server/getDataFromGoogleAPI',
+      'http://172.16.23.112:8080/api/server/getDataFromGoogleAPI',
       this.state.photoBlob
     );
     console.log('this props... ', this.props);
@@ -28,11 +43,16 @@ export default class PreviewImage extends Component {
     this.goToWiki(result.data.name);
   }
 
+	goToWiki = passingData => {
+    console.log('hit gotoWiki....');
+    this.props.navigation.navigate('Wiki', { keyword: passingData });
+	};
+
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
 				<ImageBackground
-					source={{ uri: this.props.image }}
+					source={{ uri: this.state.previewSource }}
 					resizeMode="cover"
 					style={{ flex: 1, width: undefined, height: undefined }}
 				>
@@ -43,14 +63,13 @@ export default class PreviewImage extends Component {
 							bottom: 0,
 							left: 0,
 							backgroundColor: "transparent",
-							// opacity: 0.3,
 							flex: 1,
 							flexDirection: "row",
 							justifyContent: "space-between"
 						}}
 					>
 						<TouchableOpacity
-							onPress={() => this.setState({ previewImage: false })}
+							onPress={this.props.exitPicture}
 							style={{ alignSelf: "flex-end", paddingLeft: 10 }}
 						>
 							<Ionicons name="md-close-circle" size={60} color="#cc0000" />
@@ -71,3 +90,12 @@ export default class PreviewImage extends Component {
 		);
 	}
 }
+
+const mapDispatch = dispatch => ({
+  createLandmark: landmark => dispatch(createLandmark(landmark)),
+});
+
+export default connect(
+  null,
+  mapDispatch
+)(PreviewImage);

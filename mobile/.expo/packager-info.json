@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19001,
-  "packagerPort": 19002,
-  "packagerPid": 1368,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 2546,
+  "expoServerNgrokUrl": "https://73-qei.mkrepp.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.73-qei.mkrepp.mobile.exp.direct",
+  "ngrokPid": 2570,
   "devToolsPort": 19008
 }
