@@ -4,7 +4,7 @@ const Thing = require('./thing')
 
 Landmark.belongsTo(User)
 User.hasMany(Landmark)
-// Thing.belongsTo(User)
+Thing.belongsTo(User)
 User.hasMany(Thing)
 
 
