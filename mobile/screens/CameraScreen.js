@@ -12,6 +12,8 @@ import { Camera, Permissions, FileSystem } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 
+import NoPermission from './components/NoPermission';
+import PreviewImage from './components/PreviewImage';
 import { createLandmark } from '../reducers/landmark';
 
 class CameraScreen extends React.Component {
@@ -107,48 +109,9 @@ class CameraScreen extends React.Component {
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return <NoPermission />;
     } else {
-      return this.state.previewImage ? (
-        <View style={{ flex: 1 }}>
-          <ImageBackground
-            source={{ uri: this.state.previewSource }}
-            resizeMode="cover"
-            style={{ flex: 1, width: undefined, height: undefined }}
-          >
-            <View
-              style={{
-                position: 'absolute',
-                right: 0,
-                bottom: 0,
-                left: 0,
-                backgroundColor: 'transparent',
-                // opacity: 0.3,
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => this.setState({ previewImage: false })}
-                style={{ alignSelf: 'flex-end', paddingLeft: 10 }}
-              >
-                <Ionicons name="md-close-circle" size={60} color="#cc0000" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={this.usePicture}
-                style={{ alignSelf: 'flex-end', paddingRight: 10 }}
-              >
-                <Ionicons
-                  name="ios-arrow-dropright-circle"
-                  size={60}
-                  color="#00ffcc"
-                />
-              </TouchableOpacity>
-            </View>
-          </ImageBackground>
-        </View>
-      ) : (
+      return this.state.previewImage ? <PreviewImage image={this.state.previewImage} /> : (
         <View style={{ flex: 1 }}>
           <Camera
             style={{ flex: 1 }}
