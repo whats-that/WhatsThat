@@ -26,10 +26,6 @@ const list = [
     icon: 'dns',
   },
   {
-    title: 'MyPeople',
-    icon: 'people',
-  },
-  {
     title: 'NearMe',
     icon: 'map',
   },

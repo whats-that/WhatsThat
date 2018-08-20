@@ -68,6 +68,7 @@ class MapScreen extends React.Component {
         },
       };
     }
+    return null;
   }
 
   // static getDerivedStateFromProps(props, state) {
@@ -97,7 +98,7 @@ class MapScreen extends React.Component {
   // }
 
   render() {
-    const buttons = ['Popular', 'Eat', 'People'];
+    const buttons = ['Popular', 'Eat'];
     const { selectedIndex } = this.state;
     return (
       <View style={{ flex: 1 }}>
@@ -107,30 +108,6 @@ class MapScreen extends React.Component {
           buttons={buttons}
           containerStyle={{ height: 70 }}
         />
-        <View
-          style={{
-            height: 40,
-            alignItems: 'center',
-            flex: 0.2,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            backgroundColor: 'white',
-          }}
-        >
-          {/* <View> */}
-          <Text style={{ fontSize: 17, marginLeft: 30, marginTop: 15 }}>
-            Popular
-          </Text>
-          {/* </View> */}
-          {/* <View> */}
-          <Text style={{ fontSize: 17, marginTop: 15 }}>Eat</Text>
-          {/* </View> */}
-          {/* <View> */}
-          <Text style={{ fontSize: 17, marginRight: 30, marginTop: 15 }}>
-            People
-          </Text>
-          {/* </View> */}
-        </View>
         <MapView style={{ flex: 1 }} region={this.state.region}>
           {this.props.userCurrentLandmark && (
             <MapView.Marker
