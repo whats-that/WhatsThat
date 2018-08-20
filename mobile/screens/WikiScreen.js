@@ -65,6 +65,7 @@ class WikiScreen extends React.Component {
   }
 
   render() {
+    console.log("this dot props dot searchString", this.props.searchString)
     // var searchString = '';
     // if (this.props.navigation.state.params === 'no data') {
     //   searchString = 'no data';

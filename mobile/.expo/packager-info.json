@@ -1,1 +1,8 @@
-{}
+{
+  "expoServerPort": 19000,
+  "packagerPort": 19002,
+  "packagerPid": 6217,
+  "expoServerNgrokUrl": "https://pf-xng.mkrepp.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.pf-xng.mkrepp.mobile.exp.direct",
+  "ngrokPid": 6231
+}

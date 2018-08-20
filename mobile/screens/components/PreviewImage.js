@@ -9,8 +9,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { createLandmark } from '../../reducers/landmark';
-import { createThing } from '../../reducers/thing'
-import Loader from '../Loader'
+import { createThing } from '../../reducers/thing';
+import Loader from '../Loader';
+import { setSearchString } from '../../reducers/searchString'
 
 class PreviewImage extends Component {
 	constructor () {
@@ -26,7 +27,6 @@ class PreviewImage extends Component {
 		await this.setState({
 			...this.props.state
 		});
-		console.log(this.state)
 	}
 
 	async textDetection () {
@@ -72,6 +72,7 @@ class PreviewImage extends Component {
 		};
 		thingObj.userId = Number(this.state.userId);
 		this.setState({ loading: false });
+		console.log("****RESULT DATA NAME********", result.data.name)
 		if (result.data.name) {
 			console.log('landmark exists');
 			this.props.createLandmark(landmarkObj);
@@ -97,7 +98,8 @@ class PreviewImage extends Component {
   }
 
 	goToWiki = passingData => {
-    console.log('hit gotoWiki....');
+		console.log('hit gotoWiki....');
+		this.props.setSearchString(passingData);
     this.props.navigation.navigate('Wiki', { keyword: passingData });
 	};
 
@@ -155,9 +157,14 @@ class PreviewImage extends Component {
 	}
 }
 
+const mapState = state => ({
+
+})
+
 const mapDispatch = dispatch => ({
 	createLandmark: landmark => dispatch(createLandmark(landmark)),
-	createThing: thing => dispatch(createThing(thing))
+	createThing: thing => dispatch(createThing(thing)),
+	setSearchString: searchString => dispatch(setSearchString(searchString))
 });
 
 export default connect(
