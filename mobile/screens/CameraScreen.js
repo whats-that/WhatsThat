@@ -132,15 +132,11 @@ class CameraScreen extends React.Component {
   };
 
   goToWiki = passingData => {
-<<<<<<< HEAD
     console.log('hit gotoWiki....');
     // this.props.navigation.navigate('Wiki', { keyword: passingData });
 
     this.props.searchString(passingData);
     this.props.navigation.navigate('Wiki');
-=======
-    this.props.navigation.navigate('Wiki', { keyword: passingData });
->>>>>>> master
   };
 
   goToAnalysis = data => {
@@ -162,26 +158,6 @@ class CameraScreen extends React.Component {
     }, 5000);
     console.log(this.state.textDetection);
     // const imageFile = new File(this.state.previewSource)
-<<<<<<< HEAD
-    // console.log(this.state.photoBlob.base64.length)
-    // const result = await axios.post('http://172.16.21.118:8080/api/server', this.state.photoBlob)
-    const result = await axios.post(
-      'http://172.16.21.174:8080/api/server/getDataFromGoogleAPI',
-      this.state.photoBlob
-    );
-    console.log('this props... ', this.props);
-    var landmarkObj = result.data;
-    landmarkObj.userId = console.log(
-      landmarkObj.name,
-      landmarkObj.coordinates,
-      landmarkObj.userId
-    );
-
-    landmarkObj.userId = Number(this.state.userId);
-
-    this.props.createLandmark(landmarkObj);
-    this.goToWiki(result.data.name);
-=======
     if (!this.state.textDetection) {
       console.log('2use picture for landmark detection....');
       const result = await axios.post(
@@ -235,7 +211,6 @@ class CameraScreen extends React.Component {
       this.setState({ loading: false });
       this.goToTextAnalysis(text);
     }
->>>>>>> master
   }
 
   render() {
