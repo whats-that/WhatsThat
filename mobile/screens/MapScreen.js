@@ -15,6 +15,7 @@ import {
 import { MapView } from 'expo';
 import { connect } from 'react-redux';
 import { fetchUserLandmark } from '../reducers/landmark';
+import LandmarksNearMe from '../Components/LandmarksNearMe';
 
 class MapScreen extends React.Component {
   static navigationOptions = {
@@ -35,21 +36,21 @@ class MapScreen extends React.Component {
   }
 
   async componentDidMount() {
-    const userId = await AsyncStorage.getItem('userId');
-    console.log('userId is... ', userId);
-    this.setState({ userId });
-    await this.props.fetchUserLandmark(Number(this.state.userId));
+    // const userId = await AsyncStorage.getItem('userId');
+    // console.log('userId is... ', userId);
+    // this.setState({ userId });
+    // await this.props.fetchUserLandmark(Number(this.state.userId));
     // console.log('user current landmark.. ', this.props.userCurrentLandmark);
-    if (this.props.userCurrentLandmark.coordinates) {
-      this.setState({
-        region: {
-          latitude: this.props.userCurrentLandmark.coordinates[0],
-          longitude: this.props.userCurrentLandmark.coordinates[1],
-          latitudeDelta: 0.09,
-          longitudeDelta: 0.04,
-        },
-      });
-    }
+    // if (this.props.userCurrentLandmark.coordinates) {
+    //   this.setState({
+    //     region: {
+    //       latitude: this.props.userCurrentLandmark.coordinates[0],
+    //       longitude: this.props.userCurrentLandmark.coordinates[1],
+    //       latitudeDelta: 0.09,
+    //       longitudeDelta: 0.04,
+    //     },
+    //   });
+    // }
 
   }
 
@@ -77,7 +78,9 @@ class MapScreen extends React.Component {
             <Text style={{ fontSize: 17, marginRight: 30, marginTop: 15 }}>People</Text>
           {/* </View> */}
         </View>
-        <MapView style={{ flex: 1 }} region={this.state.region} />
+        {/* <MapView style={{ flex: 1 }} region={this.state.region} />
+       */}
+       <LandmarksNearMe navigation={this.props.navigation} />
       </View>
     );
   }

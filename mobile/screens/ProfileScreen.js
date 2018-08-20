@@ -26,7 +26,7 @@ export default class LoginScreen extends React.Component {
 
   login = evt => {
     console.log("login start")
-    fetch('http://172.16.23.255:8080/api/users/login', {
+    fetch('http://172.16.21.174:8080/api/users/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -53,7 +53,7 @@ export default class LoginScreen extends React.Component {
   };
 
   login = evt => {
-    fetch('http://172.16.23.255:8080/api/users/login', {
+    fetch('http://172.16.21.174:8080/api/users/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -80,7 +80,7 @@ export default class LoginScreen extends React.Component {
   };
 
   signup = evt => {
-    fetch('http://172.16.23.255:8080/api/users/signup', {
+    fetch('http://172.16.21.174:8080/api/users/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

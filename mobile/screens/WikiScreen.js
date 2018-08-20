@@ -6,8 +6,9 @@ import {
   View,
   Alert,
 } from 'react-native';
+import {connect} from 'react-redux';
 
-export default class WikiScreen extends React.Component {
+class WikiScreen extends React.Component {
   static navigationOptions = {
     title: 'Wiki',
   };
@@ -64,7 +65,8 @@ export default class WikiScreen extends React.Component {
   }
 
   appropriateStringForWikipediaSearch() {
-    const wordsWithoutSpacesArray = this.state.searchString.split(' ');
+    console.warn('searchString', this.props.searchString);
+    const wordsWithoutSpacesArray = this.props.searchString.split(' ');
 
     const capitalizedFirstLetterForWordsArray = this.capitalizeFirstLetterOfWord(
       wordsWithoutSpacesArray
@@ -91,6 +93,15 @@ export default class WikiScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  console.warn('state', state);
+  return {
+    searchString: state.searchString.searchString
+  };
+}
+
+export default connect(mapStateToProps, null)(WikiScreen);
 
 const styles = StyleSheet.create({
   container: {

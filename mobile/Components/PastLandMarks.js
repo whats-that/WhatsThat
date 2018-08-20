@@ -9,9 +9,9 @@ export default class PastLandMarks extends React.Component {
       landmarks: []
     }
   }
-  
+
   async componentDidMount() {
-    const res = await axios.get('http://172.16.23.255:8080/api/server/history')
+    const res = await axios.get('http://172.16.21.174:8080/api/server/history')
     console.log('res', res.data)
     this.setState({landmarks: res.data})
   }
@@ -21,11 +21,11 @@ export default class PastLandMarks extends React.Component {
       <Text>{landmark.name}</ Text>
       <Text>{landmark.rating} Stars</ Text>
       <Button title={
-          landmark.comment ? 
-          'Edit review' : 
+          landmark.comment ?
+          'Edit review' :
           'Review'
         } onPress={() => console.log(landmark)}> {/* will redirect to singlelandmark*/}
-        
+
       </Button>
     </ View>
   }

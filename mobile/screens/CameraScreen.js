@@ -8,6 +8,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { connect } from 'react-redux';
+import {get_searchString} from '../reducers/searchString';
 import { Camera, Permissions, FileSystem } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
@@ -76,7 +77,10 @@ class CameraScreen extends React.Component {
 
   goToWiki = passingData => {
     console.log('hit gotoWiki....');
-    this.props.navigation.navigate('Wiki', { keyword: passingData });
+    // this.props.navigation.navigate('Wiki', { keyword: passingData });
+
+    this.props.searchString(passingData);
+    this.props.navigation.navigate('Wiki');
   };
 
   async usePicture() {
@@ -85,7 +89,7 @@ class CameraScreen extends React.Component {
     // console.log(this.state.photoBlob.base64.length)
     // const result = await axios.post('http://172.16.21.118:8080/api/server', this.state.photoBlob)
     const result = await axios.post(
-      'http://172.16.23.255:8080/api/server/getDataFromGoogleAPI',
+      'http://172.16.21.174:8080/api/server/getDataFromGoogleAPI',
       this.state.photoBlob
     );
     console.log('this props... ', this.props);
@@ -190,6 +194,7 @@ const mapState = state => ({});
 
 const mapDispatch = dispatch => ({
   createLandmark: landmark => dispatch(createLandmark(landmark)),
+  searchString: (searchString) => dispatch(get_searchString(searchString)),
 });
 
 export default connect(

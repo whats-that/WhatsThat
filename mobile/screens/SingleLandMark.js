@@ -12,9 +12,9 @@ export default class SingleLandMark extends React.Component {
     }
     this.update = this.update.bind(this)
   }
-  
+
   async componentDidMount() {
-    const res = await axios.get(`http://172.16.23.255:8080/api/server/${this.props.id}`)
+    const res = await axios.get(`http://172.16.21.174:8080/api/server/${this.props.id}`)
     this.setState({
       landmark: res.data,
       rating: res.data.rating,
@@ -42,9 +42,9 @@ export default class SingleLandMark extends React.Component {
           source={{uri:`data:image/png;base64,${this.state.landmark.base64}`}}/> */}
         <Text>{this.state.landmark.name}</Text>
         <Text>Stars</Text>
-        <TextInput 
-          style={{ height: 40, width: 40, borderColor: 'black', borderWidth: 1, textAlign: "center" }} 
-          onChangeText={rating => this.setState({rating: Number(rating)})} 
+        <TextInput
+          style={{ height: 40, width: 40, borderColor: 'black', borderWidth: 1, textAlign: "center" }}
+          onChangeText={rating => this.setState({rating: Number(rating)})}
           value={'' + this.state.rating} />
         {/* <Picker
           selectedValue={this.state.rating}
@@ -58,9 +58,9 @@ export default class SingleLandMark extends React.Component {
           <Picker.Item label='5' value='5' />
         </Picker> */}
         <Text>Comment</Text>
-        <TextInput 
-          style={{ height: 40, width: 300, borderColor: 'black', borderWidth: 1, textAlign: "center" }} 
-          onChangeText={comment => this.setState({comment})} 
+        <TextInput
+          style={{ height: 40, width: 300, borderColor: 'black', borderWidth: 1, textAlign: "center" }}
+          onChangeText={comment => this.setState({comment})}
           value={this.state.comment} />
         <Button onPress={this.update} title='Submit review'/>
       </View>
