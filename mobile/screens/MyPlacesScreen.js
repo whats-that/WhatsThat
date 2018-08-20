@@ -24,7 +24,7 @@ class MyPlacesScreen extends React.Component {
   }
 
   async componentDidMount() {
-    const res = await axios.get('http://192.168.0.101:8080/api/server/history');
+    const res = await axios.get('http://172.16.21.118:8080/api/server/history');
     console.log('res', res.data);
     this.setState({ landmarks: res.data });
   }

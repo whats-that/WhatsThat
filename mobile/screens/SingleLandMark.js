@@ -15,7 +15,7 @@ export default class SingleLandMark extends React.Component {
 
   async componentDidMount() {
     console.log('this is what we ar elooing for  ', this.props.navigation.state.params.id)
-    const res = await axios.get(`http://192.168.0.101:8080/api/server/history/${this.props.navigation.state.params.id}`)
+    const res = await axios.get(`http://172.16.21.118:8080/api/server/history/${this.props.navigation.state.params.id}`)
     this.setState({
       landmark: res.data,
       rating: res.data.rating,
