@@ -19,7 +19,7 @@ export default class SingleLandMark extends React.Component {
       this.props.navigation.state.params.id
     );
     const res = await axios.get(
-      `http://172.16.21.118:8080/api/server/history/${
+      `http://172.16.21.174:8080/api/server/history/${
         this.props.navigation.state.params.id
       }`
     );
