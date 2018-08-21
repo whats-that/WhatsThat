@@ -1,19 +1,14 @@
 import React from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Button,
   AsyncStorage
 } from 'react-native';
-import { connect } from 'react-redux';
 import axios from 'axios';
 
-class MyPlacesScreen extends React.Component {
+export default class MyPlacesScreen extends React.Component {
   static navigationOptions = {
     title: 'My Places',
   };
@@ -26,14 +21,11 @@ class MyPlacesScreen extends React.Component {
 
   async componentDidMount() {
     const id = await AsyncStorage.getItem('userId')
-    console.log('userID:', id)
     const res = await axios.get(`http://whatsthat-capstone.herokuapp.com/api/users/${id}/history`)
-    console.log('res', res.data)
     this.setState({landmarks: res.data})
   }
 
   landmarkRender(landmark) {
-    console.log('this props we are looking for', this.props);
     return (
       <View key={landmark.id}>
         <Text>{landmark.name}</Text>
@@ -49,10 +41,9 @@ class MyPlacesScreen extends React.Component {
   }
 
   render() {
-    console.log('landmarks', this.state.landmarks);
     if (this.state.landmarks.length) {
       return (
-        <View
+        <ScrollView
           style={{
             flex: 1,
             flexDirection: 'column',
@@ -63,11 +54,11 @@ class MyPlacesScreen extends React.Component {
           {this.state.landmarks.map(landmark => {
             return this.landmarkRender(landmark);
           })}
-        </View>
+        </ScrollView>
       );
     } else {
       return (
-        <View
+        <ScrollView
           style={{
             flex: 1,
             flexDirection: 'column',
@@ -79,17 +70,8 @@ class MyPlacesScreen extends React.Component {
             You have not visited any landmarks. Maybe you should travel some
             more.
           </Text>
-        </View>
+        </ScrollView>
       );
     }
   }
 }
-
-const mapState = state => ({});
-
-const mapDispatch = dispatch => ({});
-
-export default connect(
-  mapState,
-  mapDispatch
-)(MyPlacesScreen);

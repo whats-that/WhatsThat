@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import MapView from 'react-native-maps';
-import {setSearchString} from '../reducers/searchString';
-import {connect} from 'react-redux';
+import { setSearchString } from '../reducers/searchString';
+import { connect } from 'react-redux';
 
-import {View, Text, TouchableOpacity} from 'react-native'
+import { View, Text } from 'react-native'
 
 class LandmarksNearMe extends React.Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             landmarks: [],
@@ -22,12 +22,12 @@ class LandmarksNearMe extends React.Component {
         this.landmarkWasPressed = this.landmarkWasPressed.bind(this);
     }
 
-    landmarkWasPressed(event){
+    landmarkWasPressed(event) {
         this.props.setSearchString(event.name);
         this.props.navigation.navigate('Wiki');
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
         navigator.geolocation.getCurrentPosition(async success => {
             const latitude = success.coords.latitude;
@@ -47,7 +47,7 @@ class LandmarksNearMe extends React.Component {
                 }
             });
 
-            let results = await axios.post('http://172.16.21.174:8080/api/geocoder', this.state.geocoderBody);
+            let results = await axios.post('http://172.16.23.112:8080/api/geocoder', this.state.geocoderBody);
 
             let locationObjects = [];
 
@@ -58,7 +58,7 @@ class LandmarksNearMe extends React.Component {
                     longitude: locationObject.Location.DisplayPosition.Longitude,
                 };
 
-                    locationObjects.push(locationToAdd);
+                locationObjects.push(locationToAdd);
             });
 
             this.setState({
@@ -67,24 +67,24 @@ class LandmarksNearMe extends React.Component {
         });
     }
 
-    render(){
+    render() {
         return (
-        <MapView style={{height: '100%', width: '100%'}} initialRegion={this.state.region} region={this.state.region} zoomEnabled={true}>
+            <MapView style={{ height: '100%', width: '100%' }} initialRegion={this.state.region} region={this.state.region} zoomEnabled={true}>
 
-        {this.state.landmarks.map((landmark) => (
-           <MapView.Marker
-            coordinate={{latitude: landmark.latitude, longitude: landmark.longitude}}
-              title={landmark.name}
-            key={landmark.name} description={'clickable text'}>
-            <MapView.Callout>
-        <View>
-            <Text>{landmark.name}</Text>
-            <Text onPress={() => this.landmarkWasPressed(landmark)} style={{color: 'blue'}}>more...</Text>
-        </View>
-    </MapView.Callout>
-    </MapView.Marker>
-          ))}
-          </MapView>
+                {this.state.landmarks.map((landmark) => (
+                    <MapView.Marker
+                        coordinate={{ latitude: landmark.latitude, longitude: landmark.longitude }}
+                        title={landmark.name}
+                        key={landmark.name} description={'clickable text'}>
+                        <MapView.Callout>
+                            <View>
+                                <Text>{landmark.name}</Text>
+                                <Text onPress={() => this.landmarkWasPressed(landmark)} style={{ color: 'blue' }}>more...</Text>
+                            </View>
+                        </MapView.Callout>
+                    </MapView.Marker>
+                ))}
+            </MapView>
         )
     }
 }

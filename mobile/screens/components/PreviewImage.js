@@ -33,9 +33,8 @@ class PreviewImage extends Component {
 	}
 
 	async textDetection () {
-		console.log('use picture for text detection....');
 		const result = await axios.post(
-			'http://172.16.21.174:8080/api/server/textToVoice',
+			'http://172.16.23.112:8080/api/server/textToVoice',
 			this.state.photoBlob
 		);
 		var text = result.data;
@@ -61,13 +60,11 @@ class PreviewImage extends Component {
 	}
 
 	async landmarkDetection () {
-		console.log('2use picture for landmark detection....');
 		const result = await axios.post(
-			'http://172.16.21.174:8080/api/server/getDataFromGoogleAPI',
+			'http://172.16.23.112:8080/api/server/getDataFromGoogleAPI',
 			this.state.photoBlob
 		);
 		var apiData = result.data;
-		// console.log(apiData)
 		var landmarkObj = {
 			name: apiData.name,
 			image: apiData.image,
@@ -91,15 +88,12 @@ class PreviewImage extends Component {
 		};
 		thingObj.userId = Number(this.state.userId);
 		this.setState({ loading: false });
-		console.log("****RESULT DATA NAME********", result.data.name)
 		if (result.data.name) {
-			console.log('landmark exists');
 			this.props.createLandmark(landmarkObj);
 			this.props.createThing(thingObj);
 			this.goToAnalysis(thingObj);
 			this.goToWiki(result.data.name);
 		} else {
-			console.log('no landmark exists');
 			this.setState({
 				loading: false
 			});
@@ -118,34 +112,28 @@ class PreviewImage extends Component {
         loading: false,
       });
     }, 5000);
-    console.log(this.state.textDetection, this.state.restaurantDetection);
 		if (this.state.restaurantDetection) await this.restaurantDetection()
 		else if(this.state.textDetection) await this.textDetection();
 		else await this.landmarkDetection();
   }
 
 	goToWiki = passingData => {
-		console.log('hit gotoWiki....');
 		this.props.setSearchString(passingData);
 		this.props.setRestaurantUrl('');
-		console.log("passingData", passingData)
     this.props.navigation.navigate('Web');
 	};
 
 	goToRestaurant = passingData => {
-		console.log('hit gotoRestaurant...')
 		this.props.setRestaurantUrl(passingData)
 		this.props.setSearchString('');
 		this.props.navigation.navigate('Web', { keyword: passingData })
 	}
 
 	goToAnalysis = data => {
-    console.log('go to analysis... ');
     this.props.navigation.navigate('Analysis', { data });
   };
 
   goToTextAnalysis = text => {
-    console.log('go to text analysis... ');
     this.props.navigation.navigate('Analysis', { text });
 	};
 

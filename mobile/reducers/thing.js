@@ -27,7 +27,7 @@ const getUserThing = things => ({
 
 export const fetchThings = () => async dispatch => {
   try {
-    const res = await axios.get('http://172.16.21.174:8080/api/thing');
+    const res = await axios.get('http://172.16.23.112:8080/api/thing');
     const things = res.data;
     dispatch(getThings(things));
   } catch (err) {
@@ -37,12 +37,10 @@ export const fetchThings = () => async dispatch => {
 
 export const fetchUserThing = userId => async dispatch => {
   try {
-    console.log('fetch user things thunk start.. ');
     const res = await axios.get(
-      `http://172.16.21.174:8080/api/thing/${userId}`
+      `http://172.16.23.112:8080/api/thing/${userId}`
     );
     const things = res.data;
-    console.log('in thunk, my things... ', things);
     dispatch(getUserThing(things));
   } catch (err) {
     console.error('error in thunk creator: ', err);
@@ -51,7 +49,7 @@ export const fetchUserThing = userId => async dispatch => {
 
 export const createThing = thing => async dispatch => {
   try {
-    const res = await axios.post(`http://172.16.21.174:8080/api/thing`, thing);
+    const res = await axios.post(`http://172.16.23.112:8080/api/thing`, thing);
     const newthing = res.data;
     dispatch(addThing(newthing));
   } catch (err) {

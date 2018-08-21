@@ -1,20 +1,14 @@
 import React from 'react';
 import {
-  Image,
   ImageBackground,
-  Platform,
-  ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Button,
   AsyncStorage,
 } from 'react-native';
 import { connect } from 'react-redux';
 import UserAvatar from 'react-native-user-avatar';
 import { List, ListItem } from 'react-native-elements';
-import { TabBarIOS } from 'react-native';
 
 const list = [
   {
@@ -50,8 +44,6 @@ class Userhome extends React.Component {
   }
 
   render() {
-    console.log('Userhome this.props', this.props);
-    console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <ImageBackground
@@ -87,12 +79,11 @@ class Userhome extends React.Component {
   }
 }
 
-const mapState = state => ({});
 const mapDispatch = dispatch => ({
   createLandmark: landmark => dispatch(createLandmark(landmark)),
 });
 
 export default connect(
-  mapState,
+  null,
   mapDispatch
 )(Userhome);

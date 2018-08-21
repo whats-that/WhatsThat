@@ -47,7 +47,6 @@ class AnalysisScreen extends React.Component {
   }
 
   async makeVoice(soundObject) {
-    // var soundObject = new Audio.Sound();
     try {
       await soundObject.unloadAsync();
       await soundObject.loadAsync(require('./out.mp3'));
@@ -327,8 +326,4 @@ const mapState = (state, ownProps) => {
     return {};
   }
 };
-const mapDispatch = dispatch => ({});
-export default connect(
-  mapState,
-  mapDispatch
-)(AnalysisScreen);
+export default connect(mapState)(AnalysisScreen);

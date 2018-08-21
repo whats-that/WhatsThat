@@ -17,10 +17,6 @@ export default class SingleLandMark extends React.Component {
   }
 
   async componentDidMount() {
-    console.log(
-      'this is what we ar elooing for  ',
-      this.props.navigation.state.params.id
-    );
     const res = await axios.get(
       `http://whatsthat-capstone.herokuapp.com/api/landmark/id/${
         this.props.navigation.state.params.id
