@@ -75,7 +75,10 @@ class CameraScreen extends React.Component {
                 <Text style={{ color: 'red', fontSize: 25 }}>Text</Text>
               </MenuOption>
               <MenuOption onSelect={() => params.setToggle('noText')}>
-                <Text style={{ color: 'blue', fontSize: 25 }}>Plain</Text>
+                <Text style={{ color: 'blue', fontSize: 25 }}>Landmark</Text>
+              </MenuOption>
+              <MenuOption onSelect={() => params.setToggle('restaurant')}>
+                <Text style={{ color: 'blue', fontSize: 25 }}>Restaurant</Text>
               </MenuOption>
             </MenuOptions>
           </Menu>
