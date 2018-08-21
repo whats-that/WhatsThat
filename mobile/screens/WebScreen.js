@@ -7,5 +7,13 @@ class WebScreen extends React.Component {
     title: 'Web',
   }
 
-
+  render() {
+    if(this.props.restaurantDetection){
+      return (
+        <WikiScreen />
+      )
+    } else {
+      return <Restaurant />
+    }
+  }
 }

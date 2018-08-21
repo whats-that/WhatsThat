@@ -49,7 +49,14 @@ class PreviewImage extends Component {
 		);
 		var text = result.data;
 		this.setState({ loading: false });
-		this.goToRestaurant(text)
+		let latitude
+		let longitude
+		navigator.geolocation.getCurrentPosition(position => {
+			latitude = position.coords.latitude
+			longitude = position.coords.longitude
+		})
+		const url = await axios.post('http://whatsthat-capstone.herokuapp.com/api/yelp', {text, latitude, longitude})
+		this.goToRestaurant(url)
 	}
 
 	async landmarkDetection () {
