@@ -10,6 +10,10 @@ import {
 import {connect} from 'react-redux';
 
 class WikiScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Web',
+  }
+
   constructor() {
     super(...arguments);
     this.state = {

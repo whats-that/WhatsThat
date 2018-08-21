@@ -16,6 +16,7 @@ import MyPeopleScreen from '../screens/MyPeopleScreen'
 import SingleLandMark from '../screens/SingleLandMark'
 import LandmarksNearMe from '../screens/LandmarksNearMe'
 import WebScreen from '../screens/WebScreen'
+import WikiScreen from '../screens/WikiScreen'
 
 const HomeStack = createStackNavigator({
   Home: CameraScreen,
@@ -38,7 +39,7 @@ MapStack.navigationOptions = {
 }
 
 const WebStack = createStackNavigator({
-  Web: WebScreen,
+  Web: WikiScreen,
 })
 
 WebStack.navigationOptions = {
