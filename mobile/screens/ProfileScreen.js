@@ -2,10 +2,8 @@ import React from 'react';
 import {
   Text,
   View,
-  TouchableOpacity,
   ImageBackground,
   KeyboardAvoidingView,
-  StyleSheet,
   Button,
   TextInput,
   AsyncStorage,
@@ -20,7 +18,6 @@ export default class LoginScreen extends React.Component {
     this.state = {
       email: '',
       password: '',
-      // password2: '',
     };
   }
 
@@ -133,7 +130,6 @@ export default class LoginScreen extends React.Component {
               style={{ height: 40, width: 300, textAlign: 'center' }}
               placeholder="Password"
               secureTextEntry={true}
-              // returnKeyType="go"
               ref={input => {
                 this.passwordInput = input;
               }}
