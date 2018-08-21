@@ -3,6 +3,7 @@ import {
 	View,
 	ImageBackground,
 	TouchableOpacity,
+	Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -27,14 +28,14 @@ class PreviewImage extends Component {
 
 	async UNSAFE_componentWillMount () {
 		await this.setState({
-			...this.props.state
+			...this.props.state,
 		});
 	}
 
 	async textDetection () {
 		console.log('use picture for text detection....');
 		const result = await axios.post(
-			'http://172.16.23.112:8080/api/server/textToVoice',
+			'http://172.16.21.174:8080/api/server/textToVoice',
 			this.state.photoBlob
 		);
 		var text = result.data;
@@ -55,14 +56,14 @@ class PreviewImage extends Component {
 			latitude = position.coords.latitude
 			longitude = position.coords.longitude
 		})
-		const url = await axios.post('http://whatsthat-capstone.herokuapp.com/api/yelp', {text, latitude, longitude})
+		const url = await axios.post('http://172.16.23.112:8080/api/yelp', {text, latitude, longitude})
 		this.goToRestaurant(url)
 	}
 
 	async landmarkDetection () {
 		console.log('2use picture for landmark detection....');
 		const result = await axios.post(
-			'http://172.16.23.112:8080/api/server/getDataFromGoogleAPI',
+			'http://172.16.21.174:8080/api/server/getDataFromGoogleAPI',
 			this.state.photoBlob
 		);
 		var apiData = result.data;
@@ -100,11 +101,18 @@ class PreviewImage extends Component {
 			this.goToWiki(result.data.name);
 		} else {
 			console.log('no landmark exists');
-			this.props.createThing(thingObj);
-			this.goToAnalysis(thingObj);
+			this.setState({
+				loading: false
+			});
+
+			Alert.alert('Oops!', 'Could not confidently recognize the image. Please take another photo and try again or see our closest results!',[{text: 'Try Again'}, {text: 'Go To Analysis', onPress:()=>{
+				this.props.createThing(thingObj);
+				this.goToAnalysis(thingObj);
+			}}]);
 		}
 	}
   async usePicture() {
+
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({
@@ -112,9 +120,9 @@ class PreviewImage extends Component {
       });
     }, 5000);
     console.log(this.state.textDetection, this.state.restaurantDetection);
-		if (!this.state.restaurantDetection) await this.restaurantDetection()
-		else if(!this.state.textDetection) await this.landmarkDetection();
-		else await this.textDetection();
+		if (this.state.restaurantDetection) await this.restaurantDetection()
+		else if(this.state.textDetection) await this.textDetection();
+		else await this.landmarkDetection();
   }
 
 	goToWiki = passingData => {
@@ -149,7 +157,7 @@ class PreviewImage extends Component {
 					resizeMode="cover"
 					style={{ flex: 1, width: undefined, height: undefined }}
 				>
-					<Loader loading={this.state.loading} />
+					{this.state.loading ? <Loader /> : null}
 					<View
 						style={{
 							position: "absolute",
