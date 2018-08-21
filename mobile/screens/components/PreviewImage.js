@@ -13,7 +13,7 @@ import { createLandmark } from '../../reducers/landmark';
 import { createThing } from '../../reducers/thing';
 import Loader from '../Loader';
 import { setSearchString } from '../../reducers/searchString'
-import { restaurantUrl } from '../../reducers/restaurantUrl'
+import { setRestaurantUrl } from '../../reducers/restaurantUrl'
 
 class PreviewImage extends Component {
 	constructor () {
@@ -80,7 +80,6 @@ class PreviewImage extends Component {
 		const label_r = apiData.label.score;
 		const keywords = apiData.webEntities.map(el => el.description);
 		const keywords_r = apiData.webEntities.map(el => el.score);
-		console.log(apiData);
 		const images = apiData.webImages.map(el => el.url);
 
 		var thingObj = {
@@ -128,8 +127,9 @@ class PreviewImage extends Component {
 	goToWiki = passingData => {
 		console.log('hit gotoWiki....');
 		this.props.setSearchString(passingData);
-		this.props.setRestaurantUrl('')
-    this.props.navigation.navigate('Web', { keyword: passingData });
+		this.props.setRestaurantUrl('');
+		console.log("passingData", passingData)
+    this.props.navigation.navigate('Web');
 	};
 
 	goToRestaurant = passingData => {
@@ -201,7 +201,7 @@ const mapDispatch = dispatch => ({
 	createLandmark: landmark => dispatch(createLandmark(landmark)),
 	createThing: thing => dispatch(createThing(thing)),
 	setSearchString: searchString => dispatch(setSearchString(searchString)),
-	setRestaurantUrl: url => dispatch(restaurantUrl(url))
+	setRestaurantUrl: url => dispatch(setRestaurantUrl(url))
 });
 
 export default connect(

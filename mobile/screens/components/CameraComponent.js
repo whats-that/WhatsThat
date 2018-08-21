@@ -17,6 +17,7 @@ export default class CameraComponent extends Component {
 		await this.setState({...this.props.state});
 	}
   async takePicture() {
+		console.log("structural console.log, don't remove")
     if (this.camera) {
       const blob = await this.camera.takePictureAsync({
         onPictureSaved: this.onPictureSaved,
