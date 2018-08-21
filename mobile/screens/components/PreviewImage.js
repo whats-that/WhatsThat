@@ -56,7 +56,7 @@ class PreviewImage extends Component {
 			latitude = position.coords.latitude
 			longitude = position.coords.longitude
 		})
-		const url = await axios.post('http://whatsthat-capstone.herokuapp.com/api/yelp', {text, latitude, longitude})
+		const url = await axios.post('http://172.16.23.112:8080/api/yelp', {text, latitude, longitude})
 		this.goToRestaurant(url)
 	}
 
