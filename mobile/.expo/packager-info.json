@@ -1,1 +1,8 @@
-{}
+{
+  "expoServerPort": 19008,
+  "packagerPort": 19009,
+  "packagerPid": 9541,
+  "expoServerNgrokUrl": "https://pf-xng.jlangsam89.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.pf-xng.jlangsam89.mobile.exp.direct",
+  "ngrokPid": 9556
+}

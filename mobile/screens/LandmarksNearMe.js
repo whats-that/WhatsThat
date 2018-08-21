@@ -23,9 +23,7 @@ class LandmarksNearMe extends React.Component {
     }
 
     landmarkWasPressed(event){
-        // console.warn(event);
         this.props.setSearchString(event.name);
-        // this.props.navigation.navigate('Wiki', { keyword: event.name });
         this.props.navigation.navigate('Wiki');
     }
 
@@ -49,7 +47,7 @@ class LandmarksNearMe extends React.Component {
                 }
             });
 
-            let results = await axios.post('http://172.16.21.118:8080/api/geocoder', this.state.geocoderBody);
+            let results = await axios.post('http://172.16.21.174:8080/api/geocoder', this.state.geocoderBody);
 
             let locationObjects = [];
 
@@ -66,8 +64,6 @@ class LandmarksNearMe extends React.Component {
             this.setState({
                 landmarks: locationObjects,
             });
-
-            // console.warn(this.state.landmarks);
         });
     }
 
