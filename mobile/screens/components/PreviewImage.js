@@ -112,8 +112,8 @@ class PreviewImage extends Component {
       });
     }, 5000);
     console.log(this.state.textDetection, this.state.restaurantDetection);
-		if (!this.state.textDetection) await this.landmarkDetection();
-		else if(!this.state.restaurantDetection) await this.restaurantDetection()
+		if (!this.state.restaurantDetection) await this.restaurantDetection()
+		else if(!this.state.textDetection) await this.landmarkDetection();
 		else await this.textDetection();
   }
 
