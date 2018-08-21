@@ -5,7 +5,6 @@ import {
 } from 'react-navigation'
 
 import TabBarIcon from '../Components/TabBarIcon'
-import WikiScreen from '../screens/WikiScreen'
 import AnalysisScreen from '../screens/AnalysisScreen'
 import MapScreen from '../screens/MapScreen'
 import ProfileScreen from '../screens/ProfileScreen'

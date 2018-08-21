@@ -71,3 +71,11 @@ export default class Restaurant extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    restaurantUrl: state.restaurantUrl,
+  }
+}
+
+export default connect(mapStateToProps, null)(Restaurant);

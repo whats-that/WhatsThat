@@ -38,6 +38,7 @@ class CameraScreen extends React.Component {
       photoBlob: {},
       userId: '',
       textDetection: false,
+      restaurantDetection: false,
       loading: false,
     };
     this.exitPicture = this.exitPicture.bind(this);
@@ -94,8 +95,9 @@ class CameraScreen extends React.Component {
   }
 
   setToggle(key) {
-    if (key === 'text') this.setState({ textDetection: true });
-    else this.setState({ textDetection: false });
+    if (key === 'text') this.setState({ textDetection: true, restaurantDetection: false });
+    else if(key === 'restaurant') this.setState({textDetection: false, restaurantDetection: true})
+    else this.setState({ textDetection: false, restaurantDetection: false });
   }
   
   async exitPicture() {
