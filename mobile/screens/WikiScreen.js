@@ -10,10 +10,6 @@ import {
 import {connect} from 'react-redux';
 
 class WikiScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Wiki',
-  };
-
   constructor() {
     super(...arguments);
     this.state = {
@@ -65,6 +61,7 @@ class WikiScreen extends React.Component {
   }
 
   render() {
+    console.log("this dot props dot searchString", this.props.searchString)
     // var searchString = '';
     // if (this.props.navigation.state.params === 'no data') {
     //   searchString = 'no data';

@@ -16,7 +16,7 @@ import MyThingsScreen from '../screens/MyThingsScreen'
 import MyPeopleScreen from '../screens/MyPeopleScreen'
 import SingleLandMark from '../screens/SingleLandMark'
 import LandmarksNearMe from '../screens/LandmarksNearMe'
-import Restaurant from '../screens/Restaurant'
+import WebScreen from '../screens/WebScreen'
 
 const HomeStack = createStackNavigator({
   Home: CameraScreen,
@@ -38,12 +38,12 @@ MapStack.navigationOptions = {
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={'md-map'} />,
 }
 
-const WikiStack = createStackNavigator({
-  Wiki: WikiScreen,
+const WebStack = createStackNavigator({
+  Web: WebScreen,
 })
 
-WikiStack.navigationOptions = {
-  tabBarLabel: 'Wiki',
+WebStack.navigationOptions = {
+  tabBarLabel: 'Web',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={'md-keypad'} />
   ),
@@ -68,7 +68,6 @@ const ProfileStack = createStackNavigator({
   MyPeople: MyPeopleScreen,
   MyLandmark: SingleLandMark,
   NearMe: LandmarksNearMe,
-  Restaurant: Restaurant
 })
 
 ProfileStack.navigationOptions = {
@@ -81,7 +80,7 @@ ProfileStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack, // default view
   MapStack,
-  WikiStack,
+  WebStack,
   AnalysisStack,
   ProfileStack,
 })
