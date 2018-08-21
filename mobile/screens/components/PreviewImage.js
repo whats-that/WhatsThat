@@ -34,7 +34,7 @@ class PreviewImage extends Component {
 
 	async textDetection () {
 		const result = await axios.post(
-			'http://172.16.21.174:8080/api/server/textToVoice',
+			'http://172.16.23.112:8080/api/server/textToVoice',
 			this.state.photoBlob
 		);
 		var text = result.data;
@@ -61,7 +61,7 @@ class PreviewImage extends Component {
 
 	async landmarkDetection () {
 		const result = await axios.post(
-			'http://172.16.21.174:8080/api/server/getDataFromGoogleAPI',
+			'http://172.16.23.112:8080/api/server/getDataFromGoogleAPI',
 			this.state.photoBlob
 		);
 		var apiData = result.data;
