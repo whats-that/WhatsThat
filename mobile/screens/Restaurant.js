@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import {connect} from 'react-redux'
 
-export default class Restaurant extends React.Component {
+class Restaurant extends React.Component {
   // constructor(props) {
   //   super(props)
   //   this.state = {
@@ -71,3 +71,11 @@ export default class Restaurant extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    restaurantUrl: state.restaurantUrl,
+  }
+}
+
+export default connect(mapStateToProps, null)(Restaurant);
