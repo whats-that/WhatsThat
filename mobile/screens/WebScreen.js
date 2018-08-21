@@ -1,8 +1,9 @@
 import React from 'react'
 import WikiScreen from './WikiScreen'
 import Restaurant from './Restaurant'
+import { connect } from 'react-redux';
 
-export default class WebScreen extends React.Component {
+class WebScreen extends React.Component {
   static navigationOptions = {
     title: 'Web',
   }
@@ -17,3 +18,11 @@ export default class WebScreen extends React.Component {
     }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    restaurantDetection: state.restaurantDetection
+  }
+}
+
+export default connect(mapStateToProps)(WebScreen)
