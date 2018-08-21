@@ -111,7 +111,7 @@ class PreviewImage extends Component {
         loading: false,
       });
     }, 5000);
-    console.log(this.state.textDetection);
+    console.log(this.state.textDetection, this.state.restaurantDetection);
 		if (!this.state.textDetection) await this.landmarkDetection();
 		else if(!this.state.restaurantDetection) await this.restaurantDetection()
 		else await this.textDetection();
@@ -120,13 +120,13 @@ class PreviewImage extends Component {
 	goToWiki = passingData => {
 		console.log('hit gotoWiki....');
 		this.props.setSearchString(passingData);
-		this.props.restaurantUrl('')
+		this.props.setRestaurantUrl('')
     this.props.navigation.navigate('Web', { keyword: passingData });
 	};
 
 	goToRestaurant = passingData => {
 		console.log('hit gotoRestaurant...')
-		this.props.restaurantUrl(passingData)
+		this.props.setRestaurantUrl(passingData)
 		this.props.setSearchString('');
 		this.props.navigation.navigate('Web', { keyword: passingData })
 	}
