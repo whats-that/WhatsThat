@@ -38,6 +38,7 @@ class CameraScreen extends React.Component {
       photoBlob: {},
       userId: '',
       textDetection: false,
+      restaurantDetection: false,
       loading: false,
     };
     this.exitPicture = this.exitPicture.bind(this);

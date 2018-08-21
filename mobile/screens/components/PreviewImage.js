@@ -12,6 +12,7 @@ import { createLandmark } from '../../reducers/landmark';
 import { createThing } from '../../reducers/thing';
 import Loader from '../Loader';
 import { setSearchString } from '../../reducers/searchString'
+import { restaurantUrl } from '../../reducers/restaurantUrl'
 
 class PreviewImage extends Component {
 	constructor () {
@@ -21,6 +22,7 @@ class PreviewImage extends Component {
 		this.goToAnalysis = this.goToAnalysis.bind(this);
 		this.goToTextAnalysis = this.goToTextAnalysis.bind(this);
 		this.textDetection = this.textDetection.bind(this);
+		this.restaurantDetection = this.restaurantDetection.bind(this)
 	}
 
 	async UNSAFE_componentWillMount () {
@@ -38,6 +40,16 @@ class PreviewImage extends Component {
 		var text = result.data;
 		this.setState({ loading: false });
 		this.goToTextAnalysis(text);
+	}
+
+	async restaurantDetection () {
+		const result = await axios.post(
+			'http://172.16.23.112:8080/api/server/textToVoice',
+			this.state.photoBlob
+		);
+		var text = result.data;
+		this.setState({ loading: false });
+		this.goToRestaurant(text)
 	}
 
 	async landmarkDetection () {
@@ -94,14 +106,23 @@ class PreviewImage extends Component {
     }, 5000);
     console.log(this.state.textDetection);
 		if (!this.state.textDetection) await this.landmarkDetection();
+		else if(!this.state.restaurantDetection) await this.restaurantDetection()
 		else await this.textDetection();
   }
 
 	goToWiki = passingData => {
 		console.log('hit gotoWiki....');
 		this.props.setSearchString(passingData);
-    this.props.navigation.navigate('Wiki', { keyword: passingData });
+		this.props.restaurantUrl('')
+    this.props.navigation.navigate('Web', { keyword: passingData });
 	};
+
+	goToRestaurant = passingData => {
+		console.log('hit gotoRestaurant...')
+		this.props.restaurantUrl(passingData)
+		this.props.setSearchString('');
+		this.props.navigation.navigate('Web', { keyword: passingData })
+	}
 
 	goToAnalysis = data => {
     console.log('go to analysis... ');
@@ -164,7 +185,8 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
 	createLandmark: landmark => dispatch(createLandmark(landmark)),
 	createThing: thing => dispatch(createThing(thing)),
-	setSearchString: searchString => dispatch(setSearchString(searchString))
+	setSearchString: searchString => dispatch(setSearchString(searchString)),
+	setRestaurantUrl: url => dispatch(restaurantUrl(url))
 });
 
 export default connect(
