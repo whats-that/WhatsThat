@@ -24,6 +24,28 @@ class AnalysisScreen extends React.Component {
     title: 'WhatsThat Analysis',
   };
 
+  constructor() {
+    super();
+    this.state = {
+      thingData: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      thingData: this.props.fetchedData,
+    });
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.fetchedData !== prevState.thingData) {
+      return {
+        thingData: nextProps.fetchedData,
+      };
+    }
+    return null;
+  }
+
   async makeVoice(soundObject) {
     // var soundObject = new Audio.Sound();
     try {
@@ -38,7 +60,7 @@ class AnalysisScreen extends React.Component {
     try {
       await soundObject.stopAsync();
     } catch (err) {
-      console.error(err); 
+      console.error(err);
     }
   }
 
@@ -46,7 +68,7 @@ class AnalysisScreen extends React.Component {
     try {
       await soundObject.pauseAsync();
     } catch (err) {
-      console.error(err); 
+      console.error(err);
     }
   }
 
@@ -176,7 +198,7 @@ class AnalysisScreen extends React.Component {
                 textDecorationLine: 'underline',
               }}
             >
-              {this.props.thingData.label}
+              {this.state.thingData.label}
             </Text>
             <View style={{ flex: 3, flexDirection: 'row' }}>
               <Text
@@ -192,13 +214,13 @@ class AnalysisScreen extends React.Component {
               </Text>
               <ProgressCircle
                 style={{ height: 120, width: 120, marginLeft: 12 + '%' }}
-                progress={this.props.thingData.label_r}
+                progress={this.state.thingData.label_r}
                 progressColor="red"
               />
               <Text
                 style={{ fontSize: 24, color: 'white', top: 40, left: -90 }}
               >
-                {Number(this.props.thingData.label_r.toFixed(2))}%
+                {Number(this.state.thingData.label_r.toFixed(2))}%
               </Text>
             </View>
             <View style={{ flex: 10 }}>
@@ -213,7 +235,7 @@ class AnalysisScreen extends React.Component {
                 [Keywords]
               </Text>
               <View style={{ marginTop: 10 }}>
-                {this.props.thingData.keywords.map((keyword, idx) => (
+                {this.state.thingData.keywords.map((keyword, idx) => (
                   <View key={idx}>
                     {keyword !== '' && (
                       <View>
@@ -230,7 +252,7 @@ class AnalysisScreen extends React.Component {
                         </Text>
                         <View
                           style={{
-                            width: this.props.thingData.keywords_r[idx] * 130,
+                            width: this.state.thingData.keywords_r[idx] * 130,
                             height: 25,
                             marginLeft: 13 + '%',
                             margin: 5,
@@ -244,7 +266,7 @@ class AnalysisScreen extends React.Component {
                               marginTop: 4,
                             }}
                           >
-                            {this.props.thingData.keywords_r[idx].toFixed(2)}
+                            {this.state.thingData.keywords_r[idx].toFixed(2)}
                           </Text>
                         </View>
                       </View>
@@ -259,7 +281,6 @@ class AnalysisScreen extends React.Component {
                     fontFamily: 'AlNile-Bold',
                     color: 'rgb(255, 255, 158)',
                     marginLeft: 15 + '%',
-
                   }}
                 >
                   [Similar Images]
@@ -276,8 +297,11 @@ class AnalysisScreen extends React.Component {
                 }}
                 horizontal={true}
               >
-                {this.props.thingData.images.map(image => (
-                  <TouchableOpacity key={image} onPress={() => Linking.openURL(image)}>
+                {this.state.thingData.images.map(image => (
+                  <TouchableOpacity
+                    key={image}
+                    onPress={() => Linking.openURL(image)}
+                  >
                     <Image
                       style={{ flex: 3, width: 200, height: 200, margin: 3 }}
                       source={{
@@ -297,7 +321,7 @@ class AnalysisScreen extends React.Component {
 const mapState = (state, ownProps) => {
   if (ownProps.navigation.state.params) {
     return {
-      thingData: ownProps.navigation.state.params.data,
+      fetchedData: ownProps.navigation.state.params.data,
     };
   } else {
     return {};
