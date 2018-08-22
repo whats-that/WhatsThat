@@ -12,8 +12,8 @@ import axios from 'axios';
 import { createLandmark } from '../../reducers/landmark';
 import { createThing } from '../../reducers/thing';
 import Loader from '../Loader';
-import { setSearchString } from '../../reducers/searchString'
-import { setRestaurantUrl } from '../../reducers/restaurantUrl'
+import { setSearchString } from '../../reducers/searchString';
+import { setRestaurantUrl } from '../../reducers/restaurantUrl';
 
 class PreviewImage extends Component {
 	constructor () {
@@ -23,13 +23,22 @@ class PreviewImage extends Component {
 		this.goToAnalysis = this.goToAnalysis.bind(this);
 		this.goToTextAnalysis = this.goToTextAnalysis.bind(this);
 		this.textDetection = this.textDetection.bind(this);
-		this.restaurantDetection = this.restaurantDetection.bind(this)
+		this.restaurantDetection = this.restaurantDetection.bind(this);
 	}
 
 	async UNSAFE_componentWillMount () {
 		await this.setState({
 			...this.props.state,
 		});
+		Alert.alert(
+			'What are we looking at here?',
+			'Choose an option',
+      [
+        {text: 'Landmark', onPress: this.props.setToggle('landmark')},
+        {text: 'Restaurant', onPress: this.props.setToggle('restaurant')},
+      ],
+      { cancelable: false }
+    );
 	}
 
 	async textDetection () {
@@ -49,14 +58,14 @@ class PreviewImage extends Component {
 		);
 		var text = result.data;
 		this.setState({ loading: false });
-		let latitude
-		let longitude
+		let latitude;
+		let longitude;
 		navigator.geolocation.getCurrentPosition(position => {
-			latitude = position.coords.latitude
-			longitude = position.coords.longitude
-		})
-		const url = await axios.post('http://172.16.21.174:8080/api/yelp', {text, latitude, longitude})
-		this.goToRestaurant(url)
+			latitude = position.coords.latitude;
+			longitude = position.coords.longitude;
+		});
+		const url = await axios.post('http://172.16.21.174:8080/api/yelp', {text, latitude, longitude});
+		this.goToRestaurant(url);
 	}
 
 	async landmarkDetection () {
@@ -98,7 +107,7 @@ class PreviewImage extends Component {
 				loading: false
 			});
 
-			Alert.alert('Oops!', 'Could not confidently recognize the image. Please take another photo and try again or see our closest results!',[{text: 'Try Again'}, {text: 'Go To Analysis', onPress:()=>{
+			Alert.alert('Oops!', 'Could not confidently recognize the image. Please take another photo and try again or see our closest results!', [{text: 'Try Again'}, {text: 'Go To Analysis', onPress: () => {
 				this.props.createThing(thingObj);
 				this.goToAnalysis(thingObj);
 			}}]);
@@ -112,8 +121,8 @@ class PreviewImage extends Component {
         loading: false,
       });
     }, 5000);
-		if (this.state.restaurantDetection) await this.restaurantDetection()
-		else if(this.state.textDetection) await this.textDetection();
+		if (this.state.restaurantDetection) await this.restaurantDetection();
+		else if (this.state.textDetection) await this.textDetection();
 		else await this.landmarkDetection();
   }
 
@@ -124,9 +133,9 @@ class PreviewImage extends Component {
 	};
 
 	goToRestaurant = passingData => {
-		this.props.setRestaurantUrl(passingData)
+		this.props.setRestaurantUrl(passingData);
 		this.props.setSearchString('');
-		this.props.navigation.navigate('Web', { keyword: passingData })
+		this.props.navigation.navigate('Web', { keyword: passingData });
 	}
 
 	goToAnalysis = data => {
@@ -148,25 +157,25 @@ class PreviewImage extends Component {
 					{this.state.loading ? <Loader /> : null}
 					<View
 						style={{
-							position: "absolute",
+							position: 'absolute',
 							right: 0,
 							bottom: 0,
 							left: 0,
-							backgroundColor: "transparent",
+							backgroundColor: 'transparent',
 							flex: 1,
-							flexDirection: "row",
-							justifyContent: "space-between"
+							flexDirection: 'row',
+							justifyContent: 'space-between'
 						}}
 					>
 						<TouchableOpacity
 							onPress={this.props.exitPicture}
-							style={{ alignSelf: "flex-end", paddingLeft: 10 }}
+							style={{ alignSelf: 'flex-end', paddingLeft: 10 }}
 						>
 							<Ionicons name="md-close-circle" size={60} color="#cc0000" />
 						</TouchableOpacity>
 						<TouchableOpacity
 							onPress={this.usePicture}
-							style={{ alignSelf: "flex-end", paddingRight: 10 }}
+							style={{ alignSelf: 'flex-end', paddingRight: 10 }}
 						>
 							<Ionicons
 								name="ios-arrow-dropright-circle"
@@ -183,7 +192,7 @@ class PreviewImage extends Component {
 
 const mapState = state => ({
 
-})
+});
 
 const mapDispatch = dispatch => ({
 	createLandmark: landmark => dispatch(createLandmark(landmark)),
