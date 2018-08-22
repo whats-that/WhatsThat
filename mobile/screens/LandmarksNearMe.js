@@ -33,7 +33,6 @@ class LandmarksNearMe extends React.Component {
         }
 
         const currentLandmark = nextProps.currentLandmark;
-        // console.warn('currentLandmark', currentLandmark);
 
         if (!currentLandmark || nextProps.currentLandmark === this.props.currentLandmark){
             return;
