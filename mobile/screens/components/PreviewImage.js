@@ -31,18 +31,22 @@ class PreviewImage extends Component {
 		Alert.alert(
 			'What are we looking at here?',
 			'Choose an option',
-      [
-        {text: 'Landmark', onPress: () => { 
-					this.props.setToggle('landmark')
-					this.setState({restaurantDetection: false})
-				}},
-        {text: 'Restaurant', onPress: () => {
-					this.props.setToggle('restaurant')
-					this.setState({restaurantDetection: true})
-				}},
-      ],
-      { cancelable: false }
-    )
+			[
+				{
+					text: 'Landmark', onPress: () => {
+						this.props.setToggle('landmark')
+						this.setState({ restaurantDetection: false })
+					}
+				},
+				{
+					text: 'Restaurant', onPress: () => {
+						this.props.setToggle('restaurant')
+						this.setState({ restaurantDetection: true })
+					}
+				},
+			],
+			{ cancelable: false }
+		)
 	}
 
 	async restaurantDetection() {
@@ -52,21 +56,35 @@ class PreviewImage extends Component {
 			this.state.photoBlob
 		);
 		var text = result.data
-		console.log('text', text)
-		this.setState({ loading: false })
-		let latitude
-		let longitude
-		navigator.geolocation.getCurrentPosition(position => {
-			latitude = position.coords.latitude
-			longitude = position.coords.longitude
-		})
-
-		Alert.alert(`Is this ${text}?`, [{
-			text: 'Yes', onPress: async () => {
-				const url = await axios.post('http://whatsthat-capstone.herokuapp.com/api/yelp', { text, latitude, longitude })
-				this.goToRestaurant(url)
-			}
-		}, { text: 'Try Again' }])
+		if(text === 'Bad image'){
+			Alert.alert(
+				`Please take a better image`,
+				[{ text: 'Try Again' }],
+				{ cancelable: false })
+		} else {
+			console.log('text', text)
+			this.setState({ loading: false })
+			let latitude
+			let longitude
+			navigator.geolocation.getCurrentPosition(position => {
+				latitude = position.coords.latitude
+				longitude = position.coords.longitude
+			})
+	
+			Alert.alert(
+				`Is this ${text}?`,
+				'Choose!',
+				[
+					{
+						text: 'Yes', onPress: async () => {
+							const url = await axios.post('http://whatsthat-capstone.herokuapp.com/api/yelp', { text, latitude, longitude })
+							this.goToRestaurant(url)
+						}
+					},
+					{ text: 'Try Again' }
+				],
+				{ cancelable: false })
+		}
 	}
 
 	async landmarkDetection() {
