@@ -35,7 +35,7 @@ class PreviewImage extends Component {
 	async textDetection () {
 		console.log('use picture for text detection....');
 		const result = await axios.post(
-			'http://172.16.21.174:8080/api/server/textToVoice',
+			'http://whatsthat-capstone.herokuapp.com/api/server/textToVoice',
 			this.state.photoBlob
 		);
 		var text = result.data;
@@ -63,7 +63,7 @@ class PreviewImage extends Component {
 	async landmarkDetection () {
 		console.log('2use picture for landmark detection....');
 		const result = await axios.post(
-			'http://172.16.21.174:8080/api/server/getDataFromGoogleAPI',
+			'http://whatsthat-capstone.herokuapp.com/api/server/getDataFromGoogleAPI',
 			this.state.photoBlob
 		);
 		var apiData = result.data;

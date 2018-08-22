@@ -47,7 +47,7 @@ class LandmarksNearMe extends React.Component {
                 }
             });
 
-            let results = await axios.post('http://172.16.21.174:8080/api/geocoder', this.state.geocoderBody);
+            let results = await axios.post('http://whatsthat-capstone.herokuapp.com/api/geocoder', this.state.geocoderBody);
 
             let locationObjects = [];
 

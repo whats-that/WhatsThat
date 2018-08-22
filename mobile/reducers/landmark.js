@@ -27,7 +27,7 @@ const getUserLandmark = landmarks => ({
 
 export const fetchLandmarks = () => async dispatch => {
   try {
-    const res = await axios.get('http://172.16.21.174:8080/api/landmark');
+    const res = await axios.get('http://whatsthat-capstone.herokuapp.com/api/landmark');
     const landmarks = res.data;
     dispatch(getLandmarks(landmarks));
   } catch (err) {
@@ -49,7 +49,7 @@ export const fetchUserLandmark = userId => async dispatch => {
   try {
     console.log('fetch user landmark thunk start.. ');
     const res = await axios.get(
-      `http://172.16.21.174:8080/api/landmark/${userId}`
+      `http://whatsthat-capstone.herokuapp.com/api/landmark/${userId}`
     );
     const landmarks = res.data;
     dispatch(getUserLandmark(landmarks));
@@ -61,7 +61,7 @@ export const fetchUserLandmark = userId => async dispatch => {
 export const createLandmark = landmark => async dispatch => {
   try {
     const res = await axios.post(
-      `http://172.16.21.174:8080/api/landmark`,
+      `http://whatsthat-capstone.herokuapp.com/api/landmark`,
       landmark
     );
     const newlandmark = res.data;

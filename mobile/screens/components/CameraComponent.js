@@ -19,9 +19,10 @@ export default class CameraComponent extends Component {
   async takePicture() {
 		console.log("structural console.log, don't remove")
     if (this.camera) {
-      const blob = await this.camera.takePictureAsync({
+      await this.camera.takePictureAsync({
         onPictureSaved: this.onPictureSaved,
-        base64: true,
+				base64: true,
+				exif: true,
         quality: 0.1,
 			});
     }
