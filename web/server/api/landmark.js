@@ -17,7 +17,7 @@ router.get('/id/:id', async (req, res, next) => {
       req.params.id, 
       { attributes: ['name', 'rating', 'comment', 'createdAt', 'image'] }
     )
-    res.json(landmarks)
+    res.json(landmark)
   } catch (err) {
     next(err)
   }
