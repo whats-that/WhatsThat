@@ -4,8 +4,10 @@ import {
   Text,
   View,
   Button,
-  AsyncStorage
+  AsyncStorage,
+  ImageBackground
 } from 'react-native';
+import { Rating } from 'react-native-elements'
 import axios from 'axios';
 
 export default class MyPlacesScreen extends React.Component {
@@ -27,9 +29,21 @@ export default class MyPlacesScreen extends React.Component {
 
   landmarkRender(landmark) {
     return (
-      <View key={landmark.id}>
+      <View 
+        key={landmark.id}
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Text>{landmark.name}</Text>
-        <Text>{landmark.rating} Stars</Text>
+        <Rating 
+          readonly
+          type='star'
+          startingValue={landmark.rating}
+        />
         <Button
           title={landmark.comment ? 'Edit review' : 'Review'}
           onPress={() =>
@@ -43,33 +57,38 @@ export default class MyPlacesScreen extends React.Component {
   render() {
     if (this.state.landmarks.length) {
       return (
-        <ScrollView
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {this.state.landmarks.map(landmark => {
-            return this.landmarkRender(landmark);
-          })}
+        <ScrollView style={{backgroundColor: 'white'}}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            {this.state.landmarks.map(landmark => {
+              return this.landmarkRender(landmark);
+            })}
+          </View>
         </ScrollView>
       );
     } else {
       return (
-        <ScrollView
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Text>
-            You have not visited any landmarks. Maybe you should travel some
-            more.
-          </Text>
+        <ScrollView>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'white'
+            }}
+          >
+            <Text>
+              You have not visited any landmarks. Maybe you should travel some
+              more.
+            </Text>
+          </View>
         </ScrollView>
       );
     }
