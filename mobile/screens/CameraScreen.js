@@ -2,10 +2,8 @@ import React from 'react';
 import {
   Text,
   View,
-  StyleSheet,
   AsyncStorage,
 } from 'react-native';
-import { connect } from 'react-redux';
 import { Permissions} from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import {
@@ -17,13 +15,11 @@ import {
   renderers,
 } from 'react-native-popup-menu';
 const { SlideInMenu } = renderers;
-import { createLandmark } from '../reducers/landmark';
-import { createThing } from '../reducers/thing';
 import CameraComponent from './components/CameraComponent';
 import PreviewImage from './components/PreviewImage';
 import NoPermission from './components/NoPermission';
 
-class CameraScreen extends React.Component {
+export default class CameraScreen extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -125,14 +121,3 @@ class CameraScreen extends React.Component {
     }
   }
 }
-
-const mapDispatch = dispatch => ({
-  createLandmark: landmark => dispatch(createLandmark(landmark)),
-  createThing: thing => dispatch(createThing(thing)),
-  setSearchString: (searchString) => dispatch(setSearchString(searchString)),
-});
-
-export default connect(
-  null,
-  mapDispatch
-)(CameraScreen);
