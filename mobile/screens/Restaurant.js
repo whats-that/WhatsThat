@@ -1,27 +1,15 @@
 import React from 'react'
 import {
-  StyleSheet,
   WebView,
   ActivityIndicator,
   View,
-  Alert,
 } from 'react-native'
 import {connect} from 'react-redux'
 
 class Restaurant extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     rating: props.rating,
-  //     price: props.price,
-  //     image: props.image,
-  //     name: props.name
-  //   }
-  // }
   constructor() {
     super(...arguments);
     this.state = {
-      // searchString: '',
       acitivityIndicatorIsVisible: true,
     }
     this.hideActivityIndicator = this.hideActivityIndicator.bind(this)
@@ -43,20 +31,6 @@ class Restaurant extends React.Component {
 
   render() {
     return (
-      // <View style={{
-      //   flex: 1,
-      //   flexDirection: "column",
-      //   justifyContent: "center",
-      //   alignItems: "center"
-      // }}>
-      //   <Image
-      //     style={{width: 250, height: 250}}
-      //     source={{uri: this.state.image}}
-      //   />
-      //   <Text>{this.state.name}</Text>
-      //   <Text>{this.state.rating} Stars</Text>
-      //   <Text>Price: {this.state.price}</Text>
-      // </View>
       <View style={{ flex: 1 }}>
         <WebView
           onLoad={this.hideActivityIndicator}
@@ -78,4 +52,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Restaurant);
+export default connect(mapStateToProps)(Restaurant);

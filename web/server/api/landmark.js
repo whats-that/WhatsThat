@@ -27,7 +27,6 @@ router.get('/id/:id', async (req, res, next) => {
 
 router.get('/:userId', async (req, res, next) => {
   try {
-    console.log('server... userId', req.params.userId)
     const landmarks = await Landmark.findAll({
       where: {
         userId: req.params.userId
@@ -42,7 +41,6 @@ router.get('/:userId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('start create landmark thunk... ')
     const landmark = await Landmark.create({
       name: req.body.name,
       image: req.body.image,

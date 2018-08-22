@@ -1,13 +1,8 @@
 import React from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
-  Button,
   ImageBackground,
   AsyncStorage,
 } from 'react-native';
@@ -21,12 +16,10 @@ class MyThingsScreen extends React.Component {
   };
   async componentDidMount() {
     const userId = await AsyncStorage.getItem('userId');
-    console.log('in my thing screen, userid', userId);
     await this.props.fetchUserThing(Number(userId));
   }
 
   render() {
-    // console.log(this.props.myThing);
     const { myThings } = this.props;
     return (
       !myThings || (

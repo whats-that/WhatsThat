@@ -2,16 +2,12 @@ import React from 'react';
 import {
   Text,
   View,
-  TouchableOpacity,
-  ImageBackground,
   StyleSheet,
   AsyncStorage,
-  Button,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Camera, Permissions, FileSystem } from 'expo';
+import { Permissions} from 'expo';
 import { Ionicons } from '@expo/vector-icons';
-import axios from 'axios';
 import {
   Menu,
   MenuOptions,
@@ -46,7 +42,6 @@ class CameraScreen extends React.Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    // header: null,
     const { params = {} } = navigation.state;
     return {
       headerStyle: {
@@ -131,7 +126,6 @@ class CameraScreen extends React.Component {
   }
 }
 
-const mapState = state => ({});
 const mapDispatch = dispatch => ({
   createLandmark: landmark => dispatch(createLandmark(landmark)),
   createThing: thing => dispatch(createThing(thing)),
@@ -139,14 +133,6 @@ const mapDispatch = dispatch => ({
 });
 
 export default connect(
-  mapState,
+  null,
   mapDispatch
 )(CameraScreen);
-
-const styles = StyleSheet.create({
-  textToggle: {
-    alignSelf: 'flex-start',
-    marginTop: 50,
-    marginLeft: 90 + '%',
-  },
-});

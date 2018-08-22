@@ -4,7 +4,6 @@ import {
   WebView,
   ActivityIndicator,
   View,
-  Alert,
 } from 'react-native';
 
 import {connect} from 'react-redux';
@@ -17,7 +16,6 @@ class WikiScreen extends React.Component {
   constructor() {
     super(...arguments);
     this.state = {
-      // searchString: '',
       acitivityIndicatorIsVisible: true,
     };
     this.capitalizeFirstLetterOfWord = this.capitalizeFirstLetterOfWord.bind(
@@ -54,7 +52,6 @@ class WikiScreen extends React.Component {
   }
 
   appropriateStringForWikipediaSearch() {
-    // const wordsWithoutSpacesArray = keyword.split(' ');
     const wordsWithoutSpacesArray = this.props.searchString.split(' ');
 
     const capitalizedFirstLetterForWordsArray = this.capitalizeFirstLetterOfWord(
@@ -65,16 +62,6 @@ class WikiScreen extends React.Component {
   }
 
   render() {
-    console.log("this dot props dot searchString", this.props.searchString)
-    // var searchString = '';
-    // if (this.props.navigation.state.params === 'no data') {
-    //   searchString = 'no data';
-    //   Alert.alert('No data found!');
-    // } else if (this.props.navigation.state.params) {
-    //   searchString = this.props.navigation.state.params.keyword;
-    // } else {
-    //   searchString = 'computer vision';
-    // }
     return (
       <View style={{ flex: 1 }}>
         <WebView
@@ -99,12 +86,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(WikiScreen);
+export default connect(mapStateToProps)(WikiScreen);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
-});
