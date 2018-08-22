@@ -77,8 +77,9 @@ class PreviewImage extends Component {
 				[
 					{
 						text: 'Yes', onPress: async () => {
-							const url = await axios.post('http://whatsthat-capstone.herokuapp.com/api/yelp', { text, latitude, longitude })
-							this.goToRestaurant(url)
+							const res = await axios.post('http://whatsthat-capstone.herokuapp.com/api/yelp', { text, latitude, longitude })
+							console.log('res', res.data)
+							this.goToRestaurant(res.data)
 						}
 					},
 					{ text: 'Try Again' }
@@ -155,7 +156,7 @@ class PreviewImage extends Component {
 	goToRestaurant = passingData => {
 		this.props.setRestaurantUrl(passingData);
 		this.props.setSearchString('');
-		this.props.navigation.navigate('Web', { keyword: passingData });
+		this.props.navigation.navigate('Yelp', { keyword: passingData });
 	}
 
 	goToAnalysis = data => {
