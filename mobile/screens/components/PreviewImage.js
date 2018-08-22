@@ -16,35 +16,23 @@ import { setSearchString } from '../../reducers/searchString'
 import { setRestaurantUrl } from '../../reducers/restaurantUrl'
 
 class PreviewImage extends Component {
-	constructor () {
+	constructor() {
 		super();
 		this.usePicture = this.usePicture.bind(this);
 		this.goToWiki = this.goToWiki.bind(this);
 		this.goToAnalysis = this.goToAnalysis.bind(this);
-		this.goToTextAnalysis = this.goToTextAnalysis.bind(this);
-		this.textDetection = this.textDetection.bind(this);
 		this.restaurantDetection = this.restaurantDetection.bind(this)
 	}
 
-	async UNSAFE_componentWillMount () {
+	async UNSAFE_componentWillMount() {
 		await this.setState({
 			...this.props.state,
 		});
 	}
 
-	async textDetection () {
+	async restaurantDetection() {
 		const result = await axios.post(
-			'http://whatsthat-capstone.herokuapp.com/api/server/textToVoice',
-			this.state.photoBlob
-		);
-		var text = result.data;
-		this.setState({ loading: false });
-		this.goToTextAnalysis(text);
-	}
-
-	async restaurantDetection () {
-		const result = await axios.post(
-			'http://172.16.21.174:8080/api/server/textToVoice',
+			'http://whatsthat-capstone.herokuapp.com/api/server/text',
 			this.state.photoBlob
 		);
 		var text = result.data;
@@ -55,11 +43,16 @@ class PreviewImage extends Component {
 			latitude = position.coords.latitude
 			longitude = position.coords.longitude
 		})
-		const url = await axios.post('http://172.16.21.174:8080/api/yelp', {text, latitude, longitude})
-		this.goToRestaurant(url)
+
+		Alert.alert(`Is this ${text}?`, [{
+			text: 'Yes', onPress: async () => {
+				const url = await axios.post('http://whatsthat-capstone.herokuapp.com/api/yelp', { text, latitude, longitude })
+				this.goToRestaurant(url)
+			}
+		}, { text: 'Try Again' }]);
 	}
 
-	async landmarkDetection () {
+	async landmarkDetection() {
 		const result = await axios.post(
 			'http://whatsthat-capstone.herokuapp.com/api/server/getDataFromGoogleAPI',
 			this.state.photoBlob
@@ -98,29 +91,30 @@ class PreviewImage extends Component {
 				loading: false
 			});
 
-			Alert.alert('Oops!', 'Could not confidently recognize the image. Please take another photo and try again or see our closest results!',[{text: 'Try Again'}, {text: 'Go To Analysis', onPress:()=>{
-				this.props.createThing(thingObj);
-				this.goToAnalysis(thingObj);
-			}}]);
+			Alert.alert('Oops!', 'Could not confidently recognize the image. Please take another photo and try again or see our closest results!', [{ text: 'Try Again' }, {
+				text: 'Go To Analysis', onPress: () => {
+					this.props.createThing(thingObj);
+					this.goToAnalysis(thingObj);
+				}
+			}]);
 		}
 	}
-  async usePicture() {
+	async usePicture() {
 
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({
-        loading: false,
-      });
-    }, 5000);
+		this.setState({ loading: true });
+		setTimeout(() => {
+			this.setState({
+				loading: false,
+			});
+		}, 5000);
 		if (this.state.restaurantDetection) await this.restaurantDetection()
-		else if(this.state.textDetection) await this.textDetection();
 		else await this.landmarkDetection();
-  }
+	}
 
 	goToWiki = passingData => {
 		this.props.setSearchString(passingData);
 		this.props.setRestaurantUrl('');
-    this.props.navigation.navigate('Web');
+		this.props.navigation.navigate('Web');
 	};
 
 	goToRestaurant = passingData => {
@@ -130,11 +124,11 @@ class PreviewImage extends Component {
 	}
 
 	goToAnalysis = data => {
-    this.props.navigation.navigate('Analysis', { data });
-  };
+		this.props.navigation.navigate('Analysis', { data });
+	};
 
-  goToTextAnalysis = text => {
-    this.props.navigation.navigate('Analysis', { text });
+	goToTextAnalysis = text => {
+		this.props.navigation.navigate('Analysis', { text });
 	};
 
 	render() {
@@ -181,10 +175,6 @@ class PreviewImage extends Component {
 	}
 }
 
-const mapState = state => ({
-
-})
-
 const mapDispatch = dispatch => ({
 	createLandmark: landmark => dispatch(createLandmark(landmark)),
 	createThing: thing => dispatch(createThing(thing)),
@@ -193,6 +183,6 @@ const mapDispatch = dispatch => ({
 });
 
 export default connect(
-  null,
-  mapDispatch
+	null,
+	mapDispatch
 )(PreviewImage);

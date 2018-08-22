@@ -219,7 +219,7 @@ class AnalysisScreen extends React.Component {
               <Text
                 style={{ fontSize: 24, color: 'white', top: 40, left: -90 }}
               >
-                {Number(this.state.thingData.label_r.toFixed(2))}%
+                {Number(this.state.thingData.label_r.toFixed(4))*100}%
               </Text>
             </View>
             <View style={{ flex: 10 }}>
