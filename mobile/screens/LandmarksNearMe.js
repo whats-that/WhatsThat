@@ -28,9 +28,14 @@ class LandmarksNearMe extends React.Component {
     }
 
     async componentWillReceiveProps(nextProps){
-        const currentLandmark = nextProps.currentLandmark;
+        if (this.props.searchString.length === 0){
+            return;
+        }
 
-        if (!currentLandmark){
+        const currentLandmark = nextProps.currentLandmark;
+        // console.warn('currentLandmark', currentLandmark);
+
+        if (!currentLandmark || nextProps.currentLandmark === this.props.currentLandmark){
             return;
         }
 
@@ -45,6 +50,7 @@ class LandmarksNearMe extends React.Component {
         let results = await axios.post('http://172.16.21.174:8080/api/geocoder', this.state.geocoderBody);
 
         let locationObjects = [];
+        let namesSet = new Set()
 
         results.data.forEach(locationObject => {
             const locationToAdd = {
@@ -53,7 +59,10 @@ class LandmarksNearMe extends React.Component {
                 longitude: locationObject.Location.DisplayPosition.Longitude,
             };
 
-            locationObjects.push(locationToAdd);
+            if (!namesSet.has(locationToAdd.name)){
+                namesSet.add(locationToAdd.name);
+                locationObjects.push(locationToAdd);
+            }
         });
 
         this.setState({
@@ -85,6 +94,9 @@ class LandmarksNearMe extends React.Component {
                 longitude = this.props.currentLandmark.coordinates[1];
             }
 
+            latitude = success.coords.latitude;
+                longitude = success.coords.longitude;
+
             this.setState({
                 geocoderBody: {
                     latitude: latitude,
@@ -102,6 +114,7 @@ class LandmarksNearMe extends React.Component {
             let results = await axios.post('http://172.16.21.174:8080/api/geocoder', this.state.geocoderBody);
 
             let locationObjects = [];
+            let namesSet = new Set();
 
             results.data.forEach(locationObject => {
                 const locationToAdd = {
@@ -109,8 +122,11 @@ class LandmarksNearMe extends React.Component {
                     latitude: locationObject.Location.DisplayPosition.Latitude,
                     longitude: locationObject.Location.DisplayPosition.Longitude,
                 };
+                if (!namesSet.has(locationToAdd.name)){
+                    namesSet.add(locationToAdd.name);
+                    locationObjects.push(locationToAdd);
+                }
 
-                locationObjects.push(locationToAdd);
             });
 
             this.setState({
@@ -120,6 +136,22 @@ class LandmarksNearMe extends React.Component {
     }
 
     render() {
+        let currentLandmark;
+
+        if (this.props.currentLandmark && this.props.searchString.length > 0){
+            currentLandmark = {
+                latitude: this.props.currentLandmark.coordinates[0],
+                longitude: this.props.currentLandmark.coordinates[1],
+                name: this.props.currentLandmark.name,
+            }
+        } else {
+            currentLandmark = {
+                latitude: this.state.geocoderBody.latitude,
+                longitude: this.state.geocoderBody.longitude,
+                name: 'YOU ARE HERE'
+            }
+        }
+
         return (
             <MapView style={{ height: '100%', width: '100%' }} initialRegion={this.state.region} region={this.state.region} zoomEnabled={true}>
 
@@ -137,18 +169,19 @@ class LandmarksNearMe extends React.Component {
                     </MapView.Marker>
                 ))}
 
-                {this.props.currentLandmark ?
+                {currentLandmark.latitude ?
                 <MapView.Marker
                     pinColor={'#66CD00'}
-                    coordinate={{ latitude: this.props.currentLandmark.coordinates[0], longitude: this.props.currentLandmark.coordinates[1] }}>
+                    coordinate={{ latitude: currentLandmark.latitude, longitude: currentLandmark.longitude }}>
                     <MapView.Callout>
                             <View>
-                                <Text>{this.props.currentLandmark.name}</Text>
-                                <Text onPress={() => this.landmarkWasPressed(this.props.currentLandmark)} style={{ color: 'blue' }}>more...</Text>
+                                <Text>{currentLandmark.name}</Text>
+                                {currentLandmark.name !== 'YOU ARE HERE' ?
+                                <Text onPress={() => this.landmarkWasPressed(currentLandmark)} style={{ color: 'blue' }}>more...</Text> : null}
                             </View>
                         </MapView.Callout>
                         </MapView.Marker>
-                    : null}
+                        : null}
             </MapView>
         )
     }
@@ -157,6 +190,7 @@ class LandmarksNearMe extends React.Component {
 const mapStateToProps = (state) => {
     return {
         currentLandmark: state.landmark[state.landmark.length - 1],
+        searchString: state.searchString,
     }
 }
 
