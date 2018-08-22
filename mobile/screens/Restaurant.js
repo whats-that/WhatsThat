@@ -7,6 +7,10 @@ import {
 import {connect} from 'react-redux'
 
 class Restaurant extends React.Component {
+  static navigationOptions = {
+    title: 'Yelp',
+  }
+  
   constructor() {
     super(...arguments);
     this.state = {

@@ -83,6 +83,8 @@ class WikiScreen extends React.Component {
 const mapStateToProps = (state) => {
   return {
     searchString: state.searchString,
+    restaurantUrl: state.restaurantUrl,
+
   }
 }
 

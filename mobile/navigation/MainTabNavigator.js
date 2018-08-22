@@ -17,6 +17,7 @@ import SingleLandMark from '../screens/SingleLandMark'
 import LandmarksNearMe from '../screens/LandmarksNearMe'
 import WebScreen from '../screens/WebScreen'
 import WikiScreen from '../screens/WikiScreen'
+import Restaurant from '../screens/Restaurant'
 
 const HomeStack = createStackNavigator({
   Home: CameraScreen,
@@ -48,6 +49,18 @@ WebStack.navigationOptions = {
     <TabBarIcon focused={focused} name={'md-keypad'} />
   ),
 }
+
+const YelpStack = createStackNavigator({
+  Yelp: Restaurant,
+})
+
+YelpStack.navigationOptions = {
+  tabBarLabel: 'Yelp',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={'md-keypad'} />
+  ),
+}
+
 
 const AnalysisStack = createStackNavigator({
   Analysis: AnalysisScreen,
@@ -81,6 +94,7 @@ export default createBottomTabNavigator({
   HomeStack, // default view
   MapStack,
   WebStack,
+  YelpStack,
   AnalysisStack,
   ProfileStack,
 })
