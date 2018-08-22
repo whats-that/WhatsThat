@@ -41,6 +41,7 @@ class CameraScreen extends React.Component {
 		header: null
 	};
 
+
 	async componentDidMount() {
 		const { status } = await Permissions.askAsync(Permissions.CAMERA);
 		this.setState({ hasCameraPermission: status === "granted" });
@@ -95,6 +96,7 @@ class CameraScreen extends React.Component {
 	}
 }
 
+
 const mapDispatch = dispatch => ({
 	createLandmark: landmark => dispatch(createLandmark(landmark)),
 	createThing: thing => dispatch(createThing(thing)),
@@ -105,3 +107,4 @@ export default connect(
 	null,
 	mapDispatch
 )(CameraScreen);
+
