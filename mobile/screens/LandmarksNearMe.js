@@ -139,7 +139,7 @@ class LandmarksNearMe extends React.Component {
 
                 {this.props.currentLandmark ?
                 <MapView.Marker
-                    pinColor='#000000'
+                    pinColor={'#66CD00'}
                     coordinate={{ latitude: this.props.currentLandmark.coordinates[0], longitude: this.props.currentLandmark.coordinates[1] }}>
                     <MapView.Callout>
                             <View>
