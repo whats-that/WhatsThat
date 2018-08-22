@@ -34,7 +34,7 @@ class PreviewImage extends Component {
 
 	async textDetection () {
 		const result = await axios.post(
-			'http://172.16.23.112:8080/api/server/textToVoice',
+			'http://whatsthat-capstone.herokuapp.com/api/server/textToVoice',
 			this.state.photoBlob
 		);
 		var text = result.data;
@@ -44,7 +44,7 @@ class PreviewImage extends Component {
 
 	async restaurantDetection () {
 		const result = await axios.post(
-			'http://172.16.23.112:8080/api/server/textToVoice',
+			'http://172.16.21.174:8080/api/server/textToVoice',
 			this.state.photoBlob
 		);
 		var text = result.data;
@@ -55,13 +55,13 @@ class PreviewImage extends Component {
 			latitude = position.coords.latitude
 			longitude = position.coords.longitude
 		})
-		const url = await axios.post('http://172.16.23.112:8080/api/yelp', {text, latitude, longitude})
+		const url = await axios.post('http://172.16.21.174:8080/api/yelp', {text, latitude, longitude})
 		this.goToRestaurant(url)
 	}
 
 	async landmarkDetection () {
 		const result = await axios.post(
-			'http://172.16.23.112:8080/api/server/getDataFromGoogleAPI',
+			'http://whatsthat-capstone.herokuapp.com/api/server/getDataFromGoogleAPI',
 			this.state.photoBlob
 		);
 		var apiData = result.data;

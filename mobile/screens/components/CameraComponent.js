@@ -21,7 +21,8 @@ export default class CameraComponent extends Component {
     if (this.camera) {
       await this.camera.takePictureAsync({
         onPictureSaved: this.onPictureSaved,
-        base64: true,
+				base64: true,
+				exif: true,
         quality: 0.1,
 			});
     }

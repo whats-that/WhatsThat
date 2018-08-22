@@ -79,17 +79,8 @@ class MapScreen extends React.Component {
           buttons={buttons}
           containerStyle={{ height: 70 }}
         />
-        <MapView style={{ flex: 1 }} region={this.state.region}>
-          {this.props.userCurrentLandmark && (
-            <MapView.Marker
-              coordinate={{
-                latitude: this.state.region.latitude,
-                longitude: this.state.region.longitude,
-              }}
-              title={this.props.userCurrentLandmark.name}
-            />
-          )}
-        </MapView>
+
+         <LandmarksNearMe navigation={this.props.navigation}/>}
       </View>
     );
   }
