@@ -14,7 +14,7 @@ export default class SingleLandMark extends React.Component {
 
   async componentDidMount() {
     const res = await axios.get(
-      `http://172.16.23.112:8080/api/landmark/id/${
+      `http://whatsthat-capstone.herokuapp.com/api/landmark/id/${
       this.props.navigation.state.params.id
       }`
     );
@@ -29,7 +29,7 @@ export default class SingleLandMark extends React.Component {
   }
 
   async update() {
-    axios.put(`http://172.16.23.112:8080/api/landmark/id/${
+    axios.put(`http://whatsthat-capstone.herokuapp.com/api/landmark/id/${
       this.props.navigation.state.params.id
     }`)
   }

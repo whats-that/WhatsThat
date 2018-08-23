@@ -8,7 +8,7 @@ router.post('/', async (req, res, next) => {
       baseURL: 'https://api.yelp.com/v3/businesses/',
       headers: {Authorization: `Bearer ${process.env.Yelp_API_Key}`}
     })
-    const response = await instance.get(`/search?term=${text}&latitude=${latitude}&longitude=${longitude}&limit=10`)
+    const response = await instance.get(`/search?term=${text}&latitude=${latitude}&longitude=${longitude}&limit=1`)
     const restaurant = response.data.businesses[0].url
     res.json(restaurant)
   } catch (error) {

@@ -27,7 +27,7 @@ const getUserThing = things => ({
 
 export const fetchThings = () => async dispatch => {
   try {
-    const res = await axios.get('http://172.16.23.112:8080/api/thing');
+    const res = await axios.get('http://whatsthat-capstone.herokuapp.com/api/thing');
     const things = res.data;
     dispatch(getThings(things));
   } catch (err) {
@@ -38,7 +38,7 @@ export const fetchThings = () => async dispatch => {
 export const fetchUserThing = userId => async dispatch => {
   try {
     const res = await axios.get(
-      `http://172.16.23.112:8080/api/thing/${userId}`
+      `http://whatsthat-capstone.herokuapp.com/api/thing/${userId}`
     );
     const things = res.data;
     dispatch(getUserThing(things));
@@ -49,7 +49,7 @@ export const fetchUserThing = userId => async dispatch => {
 
 export const createThing = thing => async dispatch => {
   try {
-    const res = await axios.post(`http://172.16.23.112:8080/api/thing`, thing);
+    const res = await axios.post(`http://whatsthat-capstone.herokuapp.com/api/thing`, thing);
     const newthing = res.data;
     dispatch(addThing(newthing));
   } catch (err) {
