@@ -57,7 +57,7 @@ const YelpStack = createStackNavigator({
 YelpStack.navigationOptions = {
   tabBarLabel: 'Yelp',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={'md-keypad'} />
+    <TabBarIcon focused={focused} name={'md-pizza'} />
   ),
 }
 
