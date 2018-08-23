@@ -23,7 +23,7 @@ export default class MyPlacesScreen extends React.Component {
 
   async componentDidMount() {
     const id = await AsyncStorage.getItem('userId')
-    const res = await axios.get(`http://whatsthat-capstone.herokuapp.com/api/users/${id}/history`)
+    const res = await axios.get(`http://172.16.23.112:8080/api/users/${id}/history`)
     this.setState({landmarks: res.data})
   }
 

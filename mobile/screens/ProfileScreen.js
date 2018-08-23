@@ -22,7 +22,7 @@ export default class LoginScreen extends React.Component {
   }
 
   login = evt => {
-    fetch('http://whatsthat-capstone.herokuapp.com/api/users/login', {
+    fetch('http://172.16.23.112:8080/api/users/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -49,7 +49,7 @@ export default class LoginScreen extends React.Component {
   };
 
   signup = evt => {
-    fetch('http://whatsthat-capstone.herokuapp.com/api/users/signup', {
+    fetch('http://172.16.23.112:8080/api/users/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

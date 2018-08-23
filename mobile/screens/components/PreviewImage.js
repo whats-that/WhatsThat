@@ -52,7 +52,7 @@ class PreviewImage extends Component {
 	async restaurantDetection() {
 		console.log('hello')
 		const result = await axios.post(
-			'http://whatsthat-capstone.herokuapp.com/api/server/text',
+			'http://172.16.23.112:8080/api/server/text',
 			this.state.photoBlob
 		);
 		var text = result.data
@@ -69,6 +69,7 @@ class PreviewImage extends Component {
 			navigator.geolocation.getCurrentPosition(position => {
 				latitude = position.coords.latitude
 				longitude = position.coords.longitude
+				console.log("from navigator lat: ", position.coords.latitude, "lon: ", position.coords.longitude)
 			})
 	
 			Alert.alert(
@@ -77,8 +78,7 @@ class PreviewImage extends Component {
 				[
 					{
 						text: 'Yes', onPress: async () => {
-							const res = await axios.post('http://whatsthat-capstone.herokuapp.com/api/yelp', { text, latitude, longitude })
-							console.log('res', res.data)
+							const res = await axios.post('http://172.16.23.112:8080/api/yelp', { text, latitude, longitude })
 							this.goToRestaurant(res.data)
 						}
 					},
@@ -90,7 +90,7 @@ class PreviewImage extends Component {
 
 	async landmarkDetection() {
 		const result = await axios.post(
-			'http://whatsthat-capstone.herokuapp.com/api/server/getDataFromGoogleAPI',
+			'http://172.16.23.112:8080/api/server/getDataFromGoogleAPI',
 			this.state.photoBlob
 		);
 		var apiData = result.data
