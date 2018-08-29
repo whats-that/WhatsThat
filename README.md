@@ -19,7 +19,10 @@ Users also have the ability to view their location on a map, along with other ne
 
 Although you're not required to create an account, doing so allows you to rate and comment on landmarks, and to view the images you previously took (along with ratings and comments). We are currently building out a social functionality, which will allow you to view what other users had to say about landmarks around town. 
 
-<img src="https://i.imgur.com/ByhObyk.jpg" width="250" />
+<p float="left">
+  <img src="https://i.imgur.com/ByhObyk.jpg" width="250" />
+  <img src="https://i.imgur.com/x7xij4f.jpg" width="250" />
+</p>
 
 ## Setup
 Download and install the Expo Desktop Client or Command Line Tools, as well as the Expo mobile app. Select the "mobile" directory as the directory to load within Expo. Using the mobile app, connect to the Expo desktop client; the app should be running properly at this point. The backend server is hosted on Heroku, and requires no setup. 
